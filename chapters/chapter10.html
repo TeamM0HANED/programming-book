@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل العاشر: Git و GitHub - كتاب البرمجة</title>
+    <meta name="description" content="تعلم إدارة الإصدارات والتعاون في المشاريع">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .git-demo {
+            background: #f8f9fa;
+            border: 2px solid #f14e32;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .git-demo h4 {
+            color: #f14e32;
+            margin-bottom: 1rem;
+        }
+        
+        .terminal-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            border-right: 4px solid #f14e32;
+        }
+        
+        .terminal-output::before {
+            content: "$ ";
+            color: #4ade80;
+            font-weight: bold;
+        }
+        
+        .github-visual {
+            background: white;
+            border: 2px solid #24292e;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            background: white;
+            border: 2px solid #f14e32;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            background: #f14e32;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .git-commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .command-card {
+            background: white;
+            border: 2px solid #24292e;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .command-title {
+            background: #24292e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .branch-visual {
+            background: #f8f9fa;
+            border: 2px solid #6f42c1;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .branch-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .commit-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        
+        .branch-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6f42c1;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        
+        .merge-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fd7e14;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        
+        .github-profile {
+            background: linear-gradient(135deg, #24292e 0%, #586069 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .collaboration-demo {
+            background: #e3f2fd;
+            border-right: 4px solid #2196f3;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .project-structure {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        
+        .folder-icon {
+            color: #4fc3f7;
+            margin-left: 0.5rem;
+        }
+        
+        .file-icon {
+            color: #ffd700;
+            margin-left: 0.5rem;
+        }
+        
+        .git-icon {
+            color: #f14e32;
+            margin-left: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .workflow-steps,
+            .git-commands {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter10.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل العاشر</div>
+            <h1 class="chapter-title">Git و GitHub</h1>
+            <p class="chapter-description">تعلم إدارة الإصدارات والتعاون في المشاريع</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو Git ولماذا نحتاجه</li>
+                    <li>تعلم أساسيات إدارة الإصدارات</li>
+                    <li>إتقان أوامر Git الأساسية</li>
+                    <li>فهم GitHub والتعاون في المشاريع</li>
+                    <li>تعلم Branches والـ Merging</li>
+                    <li>نشر المشاريع على GitHub</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة Git -->
+            <div class="chapter-content fade-in">
+                <h2>🔄 ما هو Git؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">Git</h3>
+                    <p class="definition-text">
+                        نظام إدارة الإصدارات الموزع - يتتبع التغييرات في ملفاتك عبر الزمن
+                    </p>
+                </div>
+
+                <p>
+                    تخيل أنك تكتب مقالاً مهماً، وتريد حفظ نسخة من كل تعديل تقوم به. 
+                    Git يفعل هذا تلقائياً لكودك! يحفظ كل تغيير، ويمكنك الرجوع لأي إصدار سابق.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>مثال من الحياة:</strong> مثل آلة الزمن لكودك! يمكنك السفر للماضي ورؤية كيف كان كودك قبل أسبوع أو شهر.
+                </div>
+
+                <h3>لماذا نحتاج Git؟</h3>
+                <ul>
+                    <li><strong>تتبع التغييرات:</strong> معرفة ماذا تغير ومتى وبواسطة من</li>
+                    <li><strong>النسخ الاحتياطية:</strong> لن تفقد كودك أبداً</li>
+                    <li><strong>التعاون:</strong> عدة مطورين يعملون على نفس المشروع</li>
+                    <li><strong>التجريب الآمن:</strong> جرب أفكار جديدة دون خوف</li>
+                    <li><strong>إدارة الإصدارات:</strong> v1.0, v2.0, v3.0...</li>
+                </ul>
+
+                <div class="github-visual">
+                    <h4>🕰️ مثال: تطور مشروع عبر الزمن</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 2rem 0;">
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 2rem;">📝</div>
+                            <strong>الإصدار 1.0</strong><br>
+                            <small>الفكرة الأولى</small>
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 2rem;">➡️</div>
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 2rem;">✨</div>
+                            <strong>الإصدار 2.0</strong><br>
+                            <small>إضافة ميزات</small>
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 2rem;">➡️</div>
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 2rem;">🚀</div>
+                            <strong>الإصدار 3.0</strong><br>
+                            <small>المنتج النهائي</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تثبيت Git -->
+            <div class="chapter-content fade-in">
+                <h2>⚙️ تثبيت Git</h2>
+
+                <div class="git-demo">
+                    <h4>خطوات التثبيت:</h4>
+                    <ol>
+                        <li>اذهب إلى <a href="https://git-scm.com" target="_blank">git-scm.com</a></li>
+                        <li>حمل Git لنظام التشغيل الخاص بك</li>
+                        <li>شغل ملف التثبيت واتبع التعليمات</li>
+                        <li>افتح Terminal أو Command Prompt</li>
+                    </ol>
+                </div>
+
+                <h3>التحقق من التثبيت:</h3>
+                <div class="git-demo">
+                    <h4>في Terminal:</h4>
+                    <div class="terminal-output">git --version
+git version 2.40.0</div>
+                </div>
+
+                <h3>الإعداد الأولي:</h3>
+                <div class="git-demo">
+                    <h4>تعيين اسمك وبريدك الإلكتروني:</h4>
+                    <div class="terminal-output">git config --global user.name "اسمك"
+git config --global user.email "email@example.com"
+
+# التحقق من الإعدادات
+git config --list</div>
+                </div>
+            </div>
+
+            <!-- أساسيات Git -->
+            <div class="chapter-content fade-in">
+                <h2>📚 أساسيات Git</h2>
+
+                <h3>المفاهيم الأساسية:</h3>
+                <div class="workflow-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">📁</div>
+                        <h4>Repository</h4>
+                        <p>مستودع يحتوي على مشروعك وتاريخ التغييرات</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">📸</div>
+                        <h4>Commit</h4>
+                        <p>لقطة من حالة مشروعك في لحظة معينة</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">🌿</div>
+                        <h4>Branch</h4>
+                        <p>فرع منفصل للعمل على ميزة جديدة</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">🔄</div>
+                        <h4>Merge</h4>
+                        <p>دمج التغييرات من فرع إلى آخر</p>
+                    </div>
+                </div>
+
+                <h3>إنشاء مستودع جديد:</h3>
+                <div class="git-demo">
+                    <h4>إنشاء مجلد جديد وتهيئة Git:</h4>
+                    <div class="terminal-output">mkdir my-project
+cd my-project
+git init
+
+# إنشاء ملف README
+echo "# مشروعي الأول" > README.md</div>
+                </div>
+
+                <div class="project-structure">
+my-project/
+├── <span class="git-icon">📁</span> .git/          # مجلد Git (مخفي)
+└── <span class="file-icon">📄</span> README.md     # ملف المشروع
+                </div>
+            </div>
+
+            <!-- أوامر Git الأساسية -->
+            <div class="chapter-content fade-in">
+                <h2>⌨️ أوامر Git الأساسية</h2>
+
+                <div class="git-commands">
+                    <div class="command-card">
+                        <div class="command-title">git status</div>
+                        <p><strong>الوظيفة:</strong> عرض حالة الملفات</p>
+                        <div class="terminal-output">git status
+On branch main
+Untracked files:
+  README.md</div>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-title">git add</div>
+                        <p><strong>الوظيفة:</strong> إضافة ملفات للتتبع</p>
+                        <div class="terminal-output">git add README.md
+# أو إضافة جميع الملفات
+git add .</div>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-title">git commit</div>
+                        <p><strong>الوظيفة:</strong> حفظ التغييرات</p>
+                        <div class="terminal-output">git commit -m "إضافة ملف README"</div>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-title">git log</div>
+                        <p><strong>الوظيفة:</strong> عرض تاريخ التغييرات</p>
+                        <div class="terminal-output">git log --oneline
+a1b2c3d إضافة ملف README</div>
+                    </div>
+                </div>
+
+                <h3>سير العمل الأساسي:</h3>
+                <div class="git-demo">
+                    <h4>مثال كامل:</h4>
+                    <div class="terminal-output"># 1. إنشاء ملف جديد
+echo "console.log('مرحباً بالعالم!');" > app.js
+
+# 2. فحص الحالة
+git status
+
+# 3. إضافة الملف للتتبع
+git add app.js
+
+# 4. حفظ التغييرات
+git commit -m "إضافة ملف JavaScript الأساسي"
+
+# 5. عرض التاريخ
+git log --oneline</div>
+                </div>
+            </div>
+
+            <!-- Branches -->
+            <div class="chapter-content fade-in">
+                <h2>🌿 الفروع (Branches)</h2>
+
+                <p>الفروع تتيح لك العمل على ميزات مختلفة دون التأثير على الكود الأساسي:</p>
+
+                <div class="branch-visual">
+                    <h4>🌳 مثال على الفروع</h4>
+                    <div class="branch-line">
+                        <span>main:</span>
+                        <span class="commit-dot"></span>
+                        <span>─</span>
+                        <span class="commit-dot"></span>
+                        <span>─</span>
+                        <span class="merge-dot"></span>
+                        <span>─</span>
+                        <span class="commit-dot"></span>
+                    </div>
+                    <div class="branch-line">
+                        <span>feature:</span>
+                        <span style="margin-left: 60px;"></span>
+                        <span class="branch-dot"></span>
+                        <span>─</span>
+                        <span class="branch-dot"></span>
+                        <span style="margin-left: 20px;"></span>
+                    </div>
+                    <p><strong>الأخضر:</strong> commits عادية | <strong>البنفسجي:</strong> فرع جديد | <strong>البرتقالي:</strong> دمج</p>
+                </div>
+
+                <h3>أوامر الفروع:</h3>
+                <div class="git-demo">
+                    <h4>إنشاء والتنقل بين الفروع:</h4>
+                    <div class="terminal-output"># عرض الفروع الحالية
+git branch
+
+# إنشاء فرع جديد
+git branch feature-login
+
+# الانتقال للفرع الجديد
+git checkout feature-login
+
+# إنشاء والانتقال في أمر واحد
+git checkout -b feature-signup
+
+# العودة للفرع الرئيسي
+git checkout main
+
+# حذف فرع
+git branch -d feature-login</div>
+                </div>
+
+                <h3>دمج الفروع (Merge):</h3>
+                <div class="git-demo">
+                    <h4>دمج فرع في الفرع الرئيسي:</h4>
+                    <div class="terminal-output"># الانتقال للفرع الرئيسي
+git checkout main
+
+# دمج الفرع
+git merge feature-signup
+
+# حذف الفرع بعد الدمج
+git branch -d feature-signup</div>
+                </div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="chapter-content fade-in">
+                <h2>🐙 ما هو GitHub؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">GitHub</h3>
+                    <p class="definition-text">
+                        منصة استضافة للمشاريع البرمجية باستخدام Git - مثل فيسبوك للمطورين!
+                    </p>
+                </div>
+
+                <div class="github-profile">
+                    <div class="profile-avatar">🐙</div>
+                    <h3>GitHub = Git + Hub</h3>
+                    <p>مكان لحفظ ومشاركة والتعاون في المشاريع البرمجية</p>
+                </div>
+
+                <h3>مميزات GitHub:</h3>
+                <ul>
+                    <li><strong>استضافة مجانية:</strong> لمشاريعك العامة والخاصة</li>
+                    <li><strong>التعاون:</strong> عمل جماعي على نفس المشروع</li>
+                    <li><strong>المتابعة:</strong> تتبع المشاكل والطلبات</li>
+                    <li><strong>النشر:</strong> GitHub Pages لنشر المواقع</li>
+                    <li><strong>المجتمع:</strong> ملايين المطورين والمشاريع</li>
+                </ul>
+
+                <h3>إنشاء حساب GitHub:</h3>
+                <div class="collaboration-demo">
+                    <ol>
+                        <li>اذهب إلى <a href="https://github.com" target="_blank">github.com</a></li>
+                        <li>اضغط "Sign up" وأنشئ حساب جديد</li>
+                        <li>تحقق من بريدك الإلكتروني</li>
+                        <li>أكمل إعداد الملف الشخصي</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ربط Git بـ GitHub -->
+            <div class="chapter-content fade-in">
+                <h2>🔗 ربط Git بـ GitHub</h2>
+
+                <h3>إنشاء مستودع على GitHub:</h3>
+                <div class="git-demo">
+                    <h4>خطوات إنشاء Repository:</h4>
+                    <ol>
+                        <li>اضغط "New repository" في GitHub</li>
+                        <li>اختر اسماً للمستودع</li>
+                        <li>اختر عام (Public) أو خاص (Private)</li>
+                        <li>اضغط "Create repository"</li>
+                    </ol>
+                </div>
+
+                <h3>ربط المشروع المحلي بـ GitHub:</h3>
+                <div class="git-demo">
+                    <h4>الأوامر:</h4>
+                    <div class="terminal-output"># إضافة رابط GitHub
+git remote add origin https://github.com/username/my-project.git
+
+# رفع الكود لأول مرة
+git push -u origin main
+
+# للرفع في المرات القادمة
+git push</div>
+                </div>
+
+                <h3>تحميل مشروع من GitHub:</h3>
+                <div class="git-demo">
+                    <h4>استنساخ مستودع:</h4>
+                    <div class="terminal-output"># تحميل مشروع
+git clone https://github.com/username/project-name.git
+
+# الدخول للمجلد
+cd project-name
+
+# عرض الملفات
+ls -la</div>
+                </div>
+            </div>
+
+            <!-- التعاون في المشاريع -->
+            <div class="chapter-content fade-in">
+                <h2>🤝 التعاون في المشاريع</h2>
+
+                <h3>سير العمل الجماعي:</h3>
+                <div class="workflow-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">🍴</div>
+                        <h4>Fork</h4>
+                        <p>نسخ المشروع لحسابك</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">📥</div>
+                        <h4>Clone</h4>
+                        <p>تحميل النسخة لجهازك</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">🌿</div>
+                        <h4>Branch</h4>
+                        <p>إنشاء فرع للميزة الجديدة</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">💾</div>
+                        <h4>Commit</h4>
+                        <p>حفظ التغييرات</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <div class="step-icon">📤</div>
+                        <h4>Push</h4>
+                        <p>رفع التغييرات</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <div class="step-icon">🔄</div>
+                        <h4>Pull Request</h4>
+                        <p>طلب دمج التغييرات</p>
+                    </div>
+                </div>
+
+                <h3>Pull Request:</h3>
+                <div class="collaboration-demo">
+                    <h4>ما هو Pull Request؟</h4>
+                    <p>طلب لمراجعة ودمج تغييراتك في المشروع الأساسي. مثل طلب إذن لإضافة شيء جديد!</p>
+                    
+                    <h4>خطوات إنشاء Pull Request:</h4>
+                    <ol>
+                        <li>ادفع تغييراتك لفرعك على GitHub</li>
+                        <li>اذهب لصفحة المستودع على GitHub</li>
+                        <li>اضغط "Compare & pull request"</li>
+                        <li>اكتب وصفاً للتغييرات</li>
+                        <li>اضغط "Create pull request"</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- مشروع عملي -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشروع عملي: نشر موقعك على GitHub</h2>
+
+                <div class="git-demo">
+                    <h4>سننشر موقع Portfolio الذي بنيناه سابقاً:</h4>
+                    
+                    <h4>1. إعداد المشروع:</h4>
+                    <div class="terminal-output"># إنشاء مجلد المشروع
+mkdir my-portfolio
+cd my-portfolio
+
+# تهيئة Git
+git init
+
+# إنشاء ملفات الموقع
+touch index.html style.css script.js</div>
+                    
+                    <h4>2. إضافة المحتوى وحفظه:</h4>
+                    <div class="terminal-output"># إضافة جميع الملفات
+git add .
+
+# أول commit
+git commit -m "إضافة ملفات الموقع الأساسية"
+
+# إضافة المزيد من المحتوى
+git add .
+git commit -m "إضافة تصميم CSS"
+
+git add .
+git commit -m "إضافة تفاعل JavaScript"</div>
+                    
+                    <h4>3. رفع المشروع لـ GitHub:</h4>
+                    <div class="terminal-output"># ربط بـ GitHub
+git remote add origin https://github.com/username/my-portfolio.git
+
+# رفع الكود
+git push -u origin main</div>
+                    
+                    <h4>4. تفعيل GitHub Pages:</h4>
+                    <ol>
+                        <li>اذهب لإعدادات المستودع في GitHub</li>
+                        <li>انزل لقسم "Pages"</li>
+                        <li>اختر "Deploy from a branch"</li>
+                        <li>اختر "main" branch</li>
+                        <li>احفظ الإعدادات</li>
+                    </ol>
+                    
+                    <div class="alert alert-success">
+                        <strong>مبروك!</strong> موقعك الآن متاح على: https://username.github.io/my-portfolio
+                    </div>
+                </div>
+            </div>
+
+            <!-- نصائح مهمة -->
+            <div class="chapter-content fade-in">
+                <h2>💡 نصائح مهمة</h2>
+
+                <h3>أفضل الممارسات:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📝 رسائل Commit واضحة</h4>
+                        <ul>
+                            <li>✅ "إضافة نموذج تسجيل الدخول"</li>
+                            <li>✅ "إصلاح خطأ في حساب المجموع"</li>
+                            <li>❌ "تحديث"</li>
+                            <li>❌ "إصلاح"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🌿 استخدام الفروع</h4>
+                        <ul>
+                            <li>فرع منفصل لكل ميزة</li>
+                            <li>أسماء واضحة للفروع</li>
+                            <li>دمج منتظم مع main</li>
+                            <li>حذف الفروع المكتملة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📁 ملف .gitignore</h4>
+                        <p>لتجاهل ملفات معينة:</p>
+                        <div class="terminal-output"># ملفات النظام
+.DS_Store
+Thumbs.db
+
+# مجلدات
+node_modules/
+.env</div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📖 ملف README.md</h4>
+                        <p>وصف مشروعك:</p>
+                        <ul>
+                            <li>ما يفعله المشروع</li>
+                            <li>كيفية تشغيله</li>
+                            <li>كيفية المساهمة</li>
+                            <li>معلومات الاتصال</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو الأمر لحفظ التغييرات في Git؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">git save</li>
+                        <li data-correct="true">git commit</li>
+                        <li data-correct="false">git push</li>
+                        <li data-correct="false">git store</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما هو GitHub؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من أنواع Git</li>
+                        <li data-correct="true">منصة استضافة للمشاريع</li>
+                        <li data-correct="false">لغة برمجة</li>
+                        <li data-correct="false">محرر نصوص</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هو Branch؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من الملفات</li>
+                        <li data-correct="true">فرع منفصل للعمل</li>
+                        <li data-correct="false">أمر Git</li>
+                        <li data-correct="false">نوع من البيانات</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. ما هو Pull Request؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">تحميل ملف</li>
+                        <li data-correct="true">طلب دمج التغييرات</li>
+                        <li data-correct="false">حذف فرع</li>
+                        <li data-correct="false">إنشاء مستودع</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter9.html" class="nav-button">
+                    ← الفصل السابق: قواعد البيانات - SQL
+                </a>
+                <a href="chapter11.html" class="nav-button">
+                    الفصل التالي: VS Code →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

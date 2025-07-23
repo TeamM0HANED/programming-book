@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل السابع: مشروع ويب بسيط - كتاب البرمجة</title>
+    <meta name="description" content="بناء موقع ويب كامل باستخدام HTML و CSS و JavaScript">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .project-demo {
+            background: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .project-demo h4 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+        
+        .file-structure {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        
+        .file-icon {
+            color: #ffd700;
+            margin-left: 0.5rem;
+        }
+        
+        .folder-icon {
+            color: #4fc3f7;
+            margin-left: 0.5rem;
+        }
+        
+        .step-by-step {
+            background: #e8f5e8;
+            border-right: 4px solid #28a745;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .step-number {
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+        
+        .live-preview {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: white;
+        }
+        
+        .preview-header {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .preview-content {
+            padding: 0;
+            min-height: 400px;
+        }
+        
+        .portfolio-site {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .portfolio-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .portfolio-nav {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .portfolio-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .portfolio-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .portfolio-nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .portfolio-hero {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .portfolio-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 2rem;
+        }
+        
+        .portfolio-main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-section {
+            margin: 3rem 0;
+        }
+        
+        .portfolio-section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .contact-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .portfolio-footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background: #5a67d8;
+            color: white;
+        }
+        
+        .enhancement-demo {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .tabs {
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter7.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل السابع</div>
+            <h1 class="chapter-title">مشروع ويب بسيط</h1>
+            <p class="chapter-description">بناء موقع ويب كامل باستخدام HTML و CSS و JavaScript</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>تطبيق ما تعلمناه من HTML و CSS و JavaScript</li>
+                    <li>بناء موقع شخصي (Portfolio) كامل</li>
+                    <li>تعلم تنظيم ملفات المشروع</li>
+                    <li>إضافة التفاعل والحركات</li>
+                    <li>جعل الموقع متجاوب لجميع الأجهزة</li>
+                    <li>نشر الموقع على الإنترنت</li>
+                </ul>
+            </div>
+
+            <!-- نظرة عامة على المشروع -->
+            <div class="chapter-content fade-in">
+                <h2>🌟 نظرة عامة على المشروع</h2>
+                
+                <p>
+                    في هذا الفصل، سنبني موقع شخصي (Portfolio) كامل يعرض مهاراتك ومشاريعك. 
+                    هذا المشروع سيجمع كل ما تعلمناه في الفصول السابقة.
+                </p>
+
+                <h3>ما سنبنيه:</h3>
+                <ul>
+                    <li><strong>صفحة رئيسية:</strong> مع معلومات شخصية وصورة</li>
+                    <li><strong>قسم المهارات:</strong> عرض مهاراتك التقنية</li>
+                    <li><strong>قسم المشاريع:</strong> معرض لأعمالك</li>
+                    <li><strong>قسم التواصل:</strong> نموذج للتواصل معك</li>
+                    <li><strong>تصميم متجاوب:</strong> يعمل على جميع الأجهزة</li>
+                </ul>
+
+                <div class="alert alert-success">
+                    <strong>هدف المشروع:</strong> بناء موقع احترافي يمكنك استخدامه فعلياً لعرض أعمالك!
+                </div>
+            </div>
+
+            <!-- هيكل المشروع -->
+            <div class="chapter-content fade-in">
+                <h2>📁 هيكل المشروع</h2>
+                <p>أولاً، دعنا ننظم ملفات مشروعنا بطريقة احترافية:</p>
+
+                <div class="file-structure">
+my-portfolio/
+├── <span class="file-icon">📄</span> index.html
+├── <span class="folder-icon">📁</span> css/
+│   └── <span class="file-icon">🎨</span> style.css
+├── <span class="folder-icon">📁</span> js/
+│   └── <span class="file-icon">⚡</span> script.js
+├── <span class="folder-icon">📁</span> images/
+│   ├── <span class="file-icon">🖼️</span> profile.jpg
+│   └── <span class="file-icon">🖼️</span> project1.jpg
+└── <span class="file-icon">📄</span> README.md
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>نصيحة:</strong> تنظيم الملفات مهم جداً في المشاريع الكبيرة. يجعل الكود أسهل للفهم والصيانة.
+                </div>
+            </div>
+
+            <!-- بناء HTML -->
+            <div class="chapter-content fade-in">
+                <h2>🏗️ بناء الهيكل الأساسي (HTML)</h2>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">1</span>إنشاء ملف index.html</h3>
+                    <p>هذا هو الملف الرئيسي لموقعنا:</p>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>index.html</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;أحمد محمد - مطور ويب&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- الرأس --&gt;
+    &lt;header class="header"&gt;
+        &lt;nav class="nav"&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#home"&gt;الرئيسية&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;عني&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#skills"&gt;مهاراتي&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#projects"&gt;مشاريعي&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;تواصل معي&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+        
+        &lt;div class="hero" id="home"&gt;
+            &lt;div class="hero-content"&gt;
+                &lt;div class="avatar"&gt;👨‍💻&lt;/div&gt;
+                &lt;h1&gt;أحمد محمد&lt;/h1&gt;
+                &lt;p&gt;مطور ويب شغوف بالتكنولوجيا&lt;/p&gt;
+                &lt;button class="cta-button" onclick="scrollToSection('contact')"&gt;
+                    تواصل معي
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- المحتوى الرئيسي --&gt;
+    &lt;main&gt;
+        &lt;!-- قسم عني --&gt;
+        &lt;section class="section" id="about"&gt;
+            &lt;div class="container"&gt;
+                &lt;h2&gt;عني&lt;/h2&gt;
+                &lt;p&gt;
+                    مرحباً! أنا أحمد، مطور ويب مع خبرة 3 سنوات في بناء مواقع ويب 
+                    حديثة ومتجاوبة. أحب التعلم المستمر ومواكبة أحدث التقنيات.
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;!-- قسم المهارات --&gt;
+        &lt;section class="section" id="skills"&gt;
+            &lt;div class="container"&gt;
+                &lt;h2&gt;مهاراتي&lt;/h2&gt;
+                &lt;div class="skills-grid"&gt;
+                    &lt;div class="skill-item"&gt;
+                        &lt;h3&gt;HTML&lt;/h3&gt;
+                        &lt;div class="skill-bar"&gt;
+                            &lt;div class="skill-progress" data-width="90"&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="skill-item"&gt;
+                        &lt;h3&gt;CSS&lt;/h3&gt;
+                        &lt;div class="skill-bar"&gt;
+                            &lt;div class="skill-progress" data-width="85"&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="skill-item"&gt;
+                        &lt;h3&gt;JavaScript&lt;/h3&gt;
+                        &lt;div class="skill-bar"&gt;
+                            &lt;div class="skill-progress" data-width="80"&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;!-- قسم المشاريع --&gt;
+        &lt;section class="section" id="projects"&gt;
+            &lt;div class="container"&gt;
+                &lt;h2&gt;مشاريعي&lt;/h2&gt;
+                &lt;div class="projects-grid"&gt;
+                    &lt;div class="project-card"&gt;
+                        &lt;div class="project-image"&gt;🌐&lt;/div&gt;
+                        &lt;div class="project-info"&gt;
+                            &lt;h3&gt;موقع شركة&lt;/h3&gt;
+                            &lt;p&gt;موقع ويب متجاوب لشركة تقنية&lt;/p&gt;
+                            &lt;a href="#" class="project-link"&gt;عرض المشروع&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="project-card"&gt;
+                        &lt;div class="project-image"&gt;📱&lt;/div&gt;
+                        &lt;div class="project-info"&gt;
+                            &lt;h3&gt;تطبيق ويب&lt;/h3&gt;
+                            &lt;p&gt;تطبيق إدارة المهام بـ JavaScript&lt;/p&gt;
+                            &lt;a href="#" class="project-link"&gt;عرض المشروع&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;!-- قسم التواصل --&gt;
+        &lt;section class="section" id="contact"&gt;
+            &lt;div class="container"&gt;
+                &lt;h2&gt;تواصل معي&lt;/h2&gt;
+                &lt;form class="contact-form" id="contactForm"&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="name"&gt;الاسم:&lt;/label&gt;
+                        &lt;input type="text" id="name" name="name" required&gt;
+                    &lt;/div&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="email"&gt;البريد الإلكتروني:&lt;/label&gt;
+                        &lt;input type="email" id="email" name="email" required&gt;
+                    &lt;/div&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="message"&gt;الرسالة:&lt;/label&gt;
+                        &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    &lt;button type="submit" class="submit-btn"&gt;إرسال الرسالة&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;!-- التذييل --&gt;
+    &lt;footer class="footer"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="social-links"&gt;
+                &lt;a href="#" class="social-link"&gt;📧&lt;/a&gt;
+                &lt;a href="#" class="social-link"&gt;🐦&lt;/a&gt;
+                &lt;a href="#" class="social-link"&gt;💼&lt;/a&gt;
+                &lt;a href="#" class="social-link"&gt;🐙&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;p&gt;&copy; 2024 أحمد محمد. جميع الحقوق محفوظة.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="js/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- تصميم CSS -->
+            <div class="chapter-content fade-in">
+                <h2>🎨 تصميم الموقع (CSS)</h2>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">2</span>إنشاء ملف css/style.css</h3>
+                    <p>الآن سنضيف التنسيقات لجعل موقعنا جميلاً:</p>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('css-basic')">CSS الأساسي</button>
+                    <button class="tab-button" onclick="showTab('css-layout')">التخطيط</button>
+                    <button class="tab-button" onclick="showTab('css-responsive')">التجاوب</button>
+                </div>
+
+                <div id="css-basic" class="tab-content active">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>css/style.css - الأساسيات</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>/* إعادة تعيين الأنماط */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    direction: rtl;
+    text-align: right;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* الرأس والتنقل */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    padding: 1rem 0;
+    background: rgba(255,255,255,0.1);
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* القسم الرئيسي */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.avatar {
+    font-size: 6rem;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    background: white;
+    color: #667eea;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div id="css-layout" class="tab-content">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>css/style.css - التخطيط</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>/* الأقسام */
+.section {
+    padding: 4rem 0;
+}
+
+.section:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #667eea;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 50px;
+    height: 3px;
+    background: #667eea;
+}
+
+/* شبكة المهارات */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.skill-item h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.skill-bar {
+    background: #e0e0e0;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 5px;
+    transition: width 2s ease;
+}
+
+/* شبكة المشاريع */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.project-image {
+    height: 200px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+}
+
+.project-info {
+    padding: 2rem;
+}
+
+.project-info h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.project-info p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.project-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.project-link:hover {
+    border-bottom-color: #667eea;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div id="css-responsive" class="tab-content">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>css/style.css - التجاوب</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>/* نموذج التواصل */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* التذييل */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-link {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.social-link:hover {
+    background: #5a67d8;
+    transform: translateY(-3px);
+    color: white;
+}
+
+/* التصميم المتجاوب */
+@media (max-width: 768px) {
+    .nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .avatar {
+        font-size: 4rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .skills-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 2rem 0;
+    }
+    
+    .section h2 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إضافة JavaScript -->
+            <div class="chapter-content fade-in">
+                <h2>⚡ إضافة التفاعل (JavaScript)</h2>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">3</span>إنشاء ملف js/script.js</h3>
+                    <p>الآن سنضيف التفاعل والحركات:</p>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>js/script.js</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// تشغيل الكود عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    // تحريك أشرطة المهارات
+    animateSkillBars();
+    
+    // إضافة تأثير التمرير السلس
+    addSmoothScrolling();
+    
+    // إضافة تأثيرات الظهور عند التمرير
+    addScrollAnimations();
+    
+    // معالجة نموذج التواصل
+    handleContactForm();
+});
+
+// تحريك أشرطة المهارات
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('data-width');
+                entry.target.style.width = width + '%';
+            }
+        });
+    });
+    
+    skillBars.forEach(bar => {
+        observer.observe(bar);
+    });
+}
+
+// التمرير السلس
+function addSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.nav a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// دالة التمرير إلى قسم معين
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+}
+
+// تأثيرات الظهور عند التمرير
+function addScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.section, .project-card, .skill-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(50px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
+    });
+}
+
+// معالجة نموذج التواصل
+function handleContactForm() {
+    const form = document.getElementById('contactForm');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // جمع بيانات النموذج
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+        
+        // التحقق من صحة البيانات
+        if (validateForm(name, email, message)) {
+            // محاكاة إرسال الرسالة
+            showSuccessMessage();
+            form.reset();
+        }
+    });
+}
+
+// التحقق من صحة النموذج
+function validateForm(name, email, message) {
+    if (name.trim() === '') {
+        showErrorMessage('يرجى إدخال الاسم');
+        return false;
+    }
+    
+    if (!isValidEmail(email)) {
+        showErrorMessage('يرجى إدخال بريد إلكتروني صحيح');
+        return false;
+    }
+    
+    if (message.trim() === '') {
+        showErrorMessage('يرجى إدخال الرسالة');
+        return false;
+    }
+    
+    return true;
+}
+
+// التحقق من صحة البريد الإلكتروني
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// عرض رسالة نجاح
+function showSuccessMessage() {
+    const message = document.createElement('div');
+    message.className = 'success-message';
+    message.textContent = 'تم إرسال رسالتك بنجاح! سأرد عليك قريباً.';
+    message.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        z-index: 1000;
+        animation: slideIn 0.5s ease;
+    `;
+    
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.remove();
+    }, 5000);
+}
+
+// عرض رسالة خطأ
+function showErrorMessage(text) {
+    const message = document.createElement('div');
+    message.className = 'error-message';
+    message.textContent = text;
+    message.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #dc3545;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        z-index: 1000;
+        animation: slideIn 0.5s ease;
+    `;
+    
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.remove();
+    }, 3000);
+}
+
+// إضافة الحركات في CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+`;
+document.head.appendChild(style);</code></pre>
+                </div>
+            </div>
+
+            <!-- معاينة المشروع -->
+            <div class="chapter-content fade-in">
+                <h2>👀 معاينة المشروع</h2>
+                <p>هذا كيف سيبدو موقعنا النهائي:</p>
+
+                <div class="live-preview">
+                    <div class="preview-header">
+                        <span>🌐</span> معاينة الموقع
+                    </div>
+                    <div class="preview-content">
+                        <div class="portfolio-site">
+                            <!-- رأس الموقع -->
+                            <div class="portfolio-header">
+                                <div class="portfolio-nav">
+                                    <ul>
+                                        <li><a href="#home">الرئيسية</a></li>
+                                        <li><a href="#about">عني</a></li>
+                                        <li><a href="#skills">مهاراتي</a></li>
+                                        <li><a href="#projects">مشاريعي</a></li>
+                                        <li><a href="#contact">تواصل معي</a></li>
+                                    </ul>
+                                </div>
+                                <div class="portfolio-hero">
+                                    <div class="portfolio-avatar">👨‍💻</div>
+                                    <h1>أحمد محمد</h1>
+                                    <p>مطور ويب شغوف بالتكنولوجيا</p>
+                                    <button class="cta-button">تواصل معي</button>
+                                </div>
+                            </div>
+                            
+                            <!-- المحتوى -->
+                            <div class="portfolio-main">
+                                <!-- قسم المهارات -->
+                                <div class="portfolio-section">
+                                    <h2>مهاراتي</h2>
+                                    <div class="skills-grid">
+                                        <div class="skill-item">
+                                            <h3>HTML</h3>
+                                            <p>بناء هياكل ويب قوية</p>
+                                        </div>
+                                        <div class="skill-item">
+                                            <h3>CSS</h3>
+                                            <p>تصميم واجهات جميلة</p>
+                                        </div>
+                                        <div class="skill-item">
+                                            <h3>JavaScript</h3>
+                                            <p>إضافة التفاعل والحركة</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- قسم المشاريع -->
+                                <div class="portfolio-section">
+                                    <h2>مشاريعي</h2>
+                                    <div class="projects-grid">
+                                        <div class="project-card">
+                                            <div class="project-image">🌐</div>
+                                            <div class="project-info">
+                                                <h3>موقع شركة</h3>
+                                                <p>موقع ويب متجاوب لشركة تقنية</p>
+                                            </div>
+                                        </div>
+                                        <div class="project-card">
+                                            <div class="project-image">📱</div>
+                                            <div class="project-info">
+                                                <h3>تطبيق ويب</h3>
+                                                <p>تطبيق إدارة المهام</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- التذييل -->
+                            <div class="portfolio-footer">
+                                <div class="social-links">
+                                    <a href="#" class="social-link">📧</a>
+                                    <a href="#" class="social-link">🐦</a>
+                                    <a href="#" class="social-link">💼</a>
+                                    <a href="#" class="social-link">🐙</a>
+                                </div>
+                                <p>&copy; 2024 أحمد محمد. جميع الحقوق محفوظة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تحسينات إضافية -->
+            <div class="chapter-content fade-in">
+                <h2>✨ تحسينات إضافية</h2>
+
+                <h3>1. إضافة الأيقونات</h3>
+                <div class="enhancement-demo">
+                    <p>يمكنك استخدام مكتبة أيقونات مثل Font Awesome:</p>
+                    <div class="code-container">
+                        <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"&gt;
+
+&lt;!-- استخدام الأيقونات --&gt;
+&lt;i class="fas fa-envelope"&gt;&lt;/i&gt; البريد الإلكتروني
+&lt;i class="fab fa-twitter"&gt;&lt;/i&gt; تويتر
+&lt;i class="fab fa-github"&gt;&lt;/i&gt; جيت هاب</code></pre>
+                    </div>
+                </div>
+
+                <h3>2. إضافة الصور</h3>
+                <div class="enhancement-demo">
+                    <p>استبدل الرموز التعبيرية بصور حقيقية:</p>
+                    <div class="code-container">
+                        <pre><code>&lt;img src="images/profile.jpg" alt="صورتي الشخصية" class="profile-image"&gt;
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>3. إضافة المزيد من التأثيرات</h3>
+                <div class="enhancement-demo">
+                    <p>تأثيرات CSS متقدمة:</p>
+                    <div class="code-container">
+                        <pre><code>/* تأثير الكتابة */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-left: 3px solid #667eea;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end);
+}
+
+/* تأثير التحويم على البطاقات */
+.card:hover {
+    transform: rotateY(10deg) rotateX(10deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نشر الموقع -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 نشر الموقع</h2>
+
+                <h3>خيارات النشر المجانية:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>GitHub Pages</h4>
+                        <ol>
+                            <li>أنشئ حساب على GitHub</li>
+                            <li>أنشئ مستودع جديد</li>
+                            <li>ارفع ملفات موقعك</li>
+                            <li>فعل GitHub Pages من الإعدادات</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Netlify</h4>
+                        <ol>
+                            <li>اذهب إلى netlify.com</li>
+                            <li>اسحب مجلد موقعك إلى الصفحة</li>
+                            <li>انتظر النشر التلقائي</li>
+                            <li>احصل على رابط موقعك</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>مبروك!</strong> لقد أنشأت موقعك الأول! الآن يمكنك مشاركته مع العالم.
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو الهدف من تنظيم ملفات المشروع؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">لا يوجد فائدة</li>
+                        <li data-correct="true">سهولة الصيانة والفهم</li>
+                        <li data-correct="false">تسريع الموقع فقط</li>
+                        <li data-correct="false">توفير المساحة</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما هو CSS Grid؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من أنواع الخطوط</li>
+                        <li data-correct="true">نظام تخطيط ثنائي الأبعاد</li>
+                        <li data-correct="false">لغة برمجة</li>
+                        <li data-correct="false">مكتبة JavaScript</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما فائدة التصميم المتجاوب؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="true">يعمل على جميع أحجام الشاشات</li>
+                        <li data-correct="false">يجعل الموقع أسرع فقط</li>
+                        <li data-correct="false">يحسن الأمان</li>
+                        <li data-correct="false">يقلل حجم الملفات</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. أي من هذه منصات النشر المجانية؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">AWS فقط</li>
+                        <li data-correct="true">GitHub Pages و Netlify</li>
+                        <li data-correct="false">لا توجد منصات مجانية</li>
+                        <li data-correct="false">Google Cloud فقط</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter6.html" class="nav-button">
+                    ← الفصل السابق: JavaScript - التفاعل
+                </a>
+                <a href="chapter8.html" class="nav-button">
+                    الفصل التالي: Python - البرمجة البسيطة →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // دالة تبديل التبويبات
+        function showTab(tabId) {
+            // إخفاء جميع التبويبات
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // إزالة الفئة النشطة من جميع الأزرار
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // إظهار التبويب المحدد
+            document.getElementById(tabId).classList.add('active');
+            
+            // إضافة الفئة النشطة للزر المحدد
+            event.target.classList.add('active');
+        }
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الثالث: كيف تعمل الحواسيب؟ - كتاب البرمجة</title>
+    <meta name="description" content="فهم الهاردوير والسوفتوير وكيفية تفاعلهما">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .component-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-right: 4px solid #667eea;
+        }
+        
+        .component-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .binary-demo {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 2rem 0;
+        }
+        
+        .memory-visualization {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .memory-cell {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .process-step {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            flex: 1;
+            margin: 0.5rem;
+            min-width: 150px;
+        }
+        
+        .arrow {
+            font-size: 2rem;
+            color: #667eea;
+            margin: 0 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .memory-visualization {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter3.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الثالث</div>
+            <h1 class="chapter-title">كيف تعمل الحواسيب؟</h1>
+            <p class="chapter-description">فهم الهاردوير والسوفتوير وكيفية تفاعلهما</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم مكونات الحاسوب الأساسية</li>
+                    <li>معرفة كيف يعمل المعالج والذاكرة</li>
+                    <li>فهم النظام الثنائي وكيف يخزن الحاسوب البيانات</li>
+                    <li>التعرف على أنواع الذاكرة المختلفة</li>
+                    <li>فهم كيف تتفاعل البرامج مع الهاردوير</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة -->
+            <div class="chapter-content fade-in">
+                <h2>🖥️ الحاسوب: آلة عجيبة</h2>
+                <p>
+                    الحاسوب في الأساس آلة بسيطة جداً! كل ما يفعله هو تنفيذ عمليات بسيطة بسرعة هائلة. 
+                    لفهم البرمجة بشكل أفضل، نحتاج لفهم كيف يعمل هذا الجهاز العجيب.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>حقيقة مذهلة:</strong> المعالج الحديث يمكنه تنفيذ أكثر من 3 مليار عملية في الثانية الواحدة!
+                </div>
+            </div>
+
+            <!-- مكونات الحاسوب -->
+            <div class="chapter-content fade-in">
+                <h2>🔧 مكونات الحاسوب الأساسية</h2>
+                
+                <div class="grid-2">
+                    <div class="component-card">
+                        <div class="component-icon">🧠</div>
+                        <h3>المعالج (CPU)</h3>
+                        <p><strong>الوظيفة:</strong> "دماغ" الحاسوب الذي ينفذ التعليمات</p>
+                        <ul>
+                            <li>يقرأ التعليمات من الذاكرة</li>
+                            <li>ينفذ العمليات الحسابية والمنطقية</li>
+                            <li>يتحكم في باقي مكونات الحاسوب</li>
+                            <li>يعمل بسرعة تُقاس بالجيجاهرتز</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-icon">💾</div>
+                        <h3>الذاكرة (RAM)</h3>
+                        <p><strong>الوظيفة:</strong> تخزين مؤقت للبيانات والبرامج</p>
+                        <ul>
+                            <li>سريعة جداً في القراءة والكتابة</li>
+                            <li>تفقد محتوياتها عند إغلاق الحاسوب</li>
+                            <li>يستخدمها المعالج لتخزين البيانات المؤقتة</li>
+                            <li>كلما زادت، كان الحاسوب أسرع</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-icon">💿</div>
+                        <h3>التخزين (Storage)</h3>
+                        <p><strong>الوظيفة:</strong> تخزين دائم للبيانات والبرامج</p>
+                        <ul>
+                            <li>يحتفظ بالبيانات حتى بعد إغلاق الحاسوب</li>
+                            <li>أبطأ من الذاكرة لكن أكبر حجماً</li>
+                            <li>أنواع: HDD (بطيء ورخيص)، SSD (سريع وغالي)</li>
+                            <li>يخزن نظام التشغيل والبرامج والملفات</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-icon">🔌</div>
+                        <h3>الإدخال والإخراج</h3>
+                        <p><strong>الوظيفة:</strong> التواصل مع العالم الخارجي</p>
+                        <ul>
+                            <li><strong>الإدخال:</strong> لوحة المفاتيح، الفأرة، الميكروفون</li>
+                            <li><strong>الإخراج:</strong> الشاشة، السماعات، الطابعة</li>
+                            <li>تحويل الإشارات بين الإنسان والحاسوب</li>
+                            <li>تسمح للمستخدم بالتفاعل مع البرامج</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- النظام الثنائي -->
+            <div class="chapter-content fade-in">
+                <h2>🔢 النظام الثنائي: لغة الحاسوب</h2>
+                <p>
+                    الحاسوب لا يفهم إلا رقمين: 0 و 1. كل شيء في الحاسوب يُمثل بهذين الرقمين فقط!
+                </p>
+
+                <h3>لماذا 0 و 1 فقط؟</h3>
+                <p>
+                    لأن الحاسوب يعمل بالكهرباء، والكهرباء لها حالتان فقط:
+                </p>
+                <ul>
+                    <li><strong>0:</strong> لا يوجد تيار كهربائي (مفتوح)</li>
+                    <li><strong>1:</strong> يوجد تيار كهربائي (مغلق)</li>
+                </ul>
+
+                <div class="binary-demo">
+                    <h4>أمثلة على التمثيل الثنائي:</h4>
+                    <p>الرقم 5 في النظام العشري = 101 في النظام الثنائي</p>
+                    <p>الحرف 'A' = 01000001 في النظام الثنائي</p>
+                    <p>الكلمة "Hi" = 01001000 01101001</p>
+                </div>
+
+                <h3>كيف يخزن الحاسوب النصوص؟</h3>
+                <p>
+                    يستخدم الحاسوب جداول خاصة تربط كل حرف برقم، مثل جدول ASCII:
+                </p>
+                <ul>
+                    <li>A = 65 = 01000001</li>
+                    <li>B = 66 = 01000010</li>
+                    <li>a = 97 = 01100001</li>
+                    <li>1 = 49 = 00110001</li>
+                </ul>
+            </div>
+
+            <!-- كيف يعمل المعالج -->
+            <div class="chapter-content fade-in">
+                <h2>⚡ كيف يعمل المعالج؟</h2>
+                <p>
+                    المعالج يعمل في دورة مستمرة تُسمى "دورة التنفيذ":
+                </p>
+
+                <div class="process-flow">
+                    <div class="process-step">
+                        <strong>1. جلب</strong><br>
+                        (Fetch)
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <strong>2. فك التشفير</strong><br>
+                        (Decode)
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <strong>3. تنفيذ</strong><br>
+                        (Execute)
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="process-step">
+                        <strong>4. تخزين</strong><br>
+                        (Store)
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4 class="example-title">💡 مثال: جمع رقمين</h4>
+                    <ol>
+                        <li><strong>جلب:</strong> المعالج يقرأ تعليمة "اجمع 5 + 3" من الذاكرة</li>
+                        <li><strong>فك التشفير:</strong> يفهم أن هذه عملية جمع</li>
+                        <li><strong>تنفيذ:</strong> ينفذ عملية الجمع: 5 + 3 = 8</li>
+                        <li><strong>تخزين:</strong> يحفظ النتيجة (8) في الذاكرة</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- الذاكرة -->
+            <div class="chapter-content fade-in">
+                <h2>🗃️ كيف تعمل الذاكرة؟</h2>
+                <p>
+                    الذاكرة مثل خزانة ضخمة بها ملايين الأدراج، كل درج له عنوان فريد:
+                </p>
+
+                <div class="memory-visualization">
+                    <div class="memory-cell">
+                        <strong>العنوان:</strong><br>
+                        0x1000<br>
+                        <strong>القيمة:</strong><br>
+                        42
+                    </div>
+                    <div class="memory-cell">
+                        <strong>العنوان:</strong><br>
+                        0x1001<br>
+                        <strong>القيمة:</strong><br>
+                        'A'
+                    </div>
+                    <div class="memory-cell">
+                        <strong>العنوان:</strong><br>
+                        0x1002<br>
+                        <strong>القيمة:</strong><br>
+                        100
+                    </div>
+                    <div class="memory-cell">
+                        <strong>العنوان:</strong><br>
+                        0x1003<br>
+                        <strong>القيمة:</strong><br>
+                        'B'
+                    </div>
+                </div>
+
+                <h3>أنواع الذاكرة:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🏃‍♂️ ذاكرة سريعة (Cache)</h4>
+                        <ul>
+                            <li>صغيرة الحجم (بضعة ميجابايت)</li>
+                            <li>سريعة جداً</li>
+                            <li>داخل المعالج</li>
+                            <li>تخزن البيانات الأكثر استخداماً</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🚶‍♂️ ذاكرة متوسطة (RAM)</h4>
+                        <ul>
+                            <li>متوسطة الحجم (4-32 جيجابايت)</li>
+                            <li>سريعة</li>
+                            <li>تفقد البيانات عند إغلاق الحاسوب</li>
+                            <li>تخزن البرامج قيد التشغيل</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- كيف تعمل البرامج -->
+            <div class="chapter-content fade-in">
+                <h2>💻 كيف تعمل البرامج؟</h2>
+                <p>
+                    البرنامج هو مجموعة من التعليمات المكتوبة بلغة يفهمها الحاسوب:
+                </p>
+
+                <div class="example-box">
+                    <h4 class="example-title">💡 مثال: برنامج بسيط</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>برنامج Python بسيط</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># برنامج لحساب مساحة المستطيل
+length = 10
+width = 5
+area = length * width
+print(f"المساحة = {area}")</code></pre>
+                    </div>
+                    
+                    <h5>ما يحدث داخل الحاسوب:</h5>
+                    <ol>
+                        <li>يحجز مكان في الذاكرة للمتغير length ويضع فيه 10</li>
+                        <li>يحجز مكان آخر للمتغير width ويضع فيه 5</li>
+                        <li>يقرأ قيمتي length و width من الذاكرة</li>
+                        <li>ينفذ عملية الضرب: 10 × 5 = 50</li>
+                        <li>يحفظ النتيجة في متغير area</li>
+                        <li>يعرض النتيجة على الشاشة</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو "دماغ" الحاسوب؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="true">المعالج (CPU)</li>
+                        <li data-correct="false">الذاكرة (RAM)</li>
+                        <li data-correct="false">القرص الصلب</li>
+                        <li data-correct="false">الشاشة</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما هما الرقمان الوحيدان اللذان يفهمهما الحاسوب؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">1 و 2</li>
+                        <li data-correct="true">0 و 1</li>
+                        <li data-correct="false">0 و 10</li>
+                        <li data-correct="false">1 و 10</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما الفرق بين RAM والقرص الصلب؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">لا يوجد فرق</li>
+                        <li data-correct="true">RAM سريع ومؤقت، القرص الصلب بطيء ودائم</li>
+                        <li data-correct="false">القرص الصلب أسرع من RAM</li>
+                        <li data-correct="false">RAM دائم، القرص الصلب مؤقت</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter2.html" class="nav-button">
+                    ← الفصل السابق: لغات البرمجة وأنواعها
+                </a>
+                <a href="chapter4.html" class="nav-button">
+                    الفصل التالي: HTML - هيكل الويب →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

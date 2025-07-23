@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الخامس: CSS - تنسيق وتصميم - كتاب البرمجة</title>
+    <meta name="description" content="إتقان CSS لتصميم مواقع جميلة ومتجاوبة">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .css-demo {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .css-demo h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-result {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .selector-demo {
+            background: #e3f2fd;
+            border-right: 4px solid #2196f3;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .property-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .property-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+        }
+        
+        .property-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .color-demo {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 2px solid #ccc;
+        }
+        
+        .layout-demo {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        .flexbox-demo {
+            display: flex;
+            gap: 10px;
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .flex-item {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .grid-item {
+            background: #28a745;
+            color: white;
+            padding: 1rem;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .animation-demo {
+            width: 100px;
+            height: 100px;
+            background: #667eea;
+            border-radius: 50%;
+            margin: 2rem auto;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .responsive-demo {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .responsive-demo {
+                background: #f8d7da;
+                border-color: #dc3545;
+            }
+            
+            .responsive-demo::after {
+                content: " (عرض صغير)";
+                font-weight: bold;
+            }
+        }
+        
+        .css-editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .editor-panel {
+            padding: 1rem;
+        }
+        
+        .editor-header {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+        }
+        
+        .css-input {
+            width: 100%;
+            height: 200px;
+            border: none;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        
+        .preview-panel {
+            background: #f8f9fa;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .preview-content {
+            padding: 1rem;
+            min-height: 200px;
+            background: white;
+            margin: 1rem;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .css-editor {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter5.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الخامس</div>
+            <h1 class="chapter-title">CSS - تنسيق وتصميم</h1>
+            <p class="chapter-description">إتقان CSS لتصميم مواقع جميلة ومتجاوبة</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو CSS وكيفية ربطه بـ HTML</li>
+                    <li>تعلم المحددات (Selectors) والخصائص</li>
+                    <li>إتقان تنسيق النصوص والألوان</li>
+                    <li>فهم نموذج الصندوق (Box Model)</li>
+                    <li>تعلم التخطيط باستخدام Flexbox و Grid</li>
+                    <li>إنشاء تصميم متجاوب (Responsive)</li>
+                    <li>إضافة الحركات والتأثيرات</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة CSS -->
+            <div class="chapter-content fade-in">
+                <h2>🎨 ما هو CSS؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">CSS</h3>
+                    <p class="definition-text">
+                        <strong>Cascading Style Sheets</strong><br>
+                        أوراق الأنماط المتتالية - لغة تنسيق تُستخدم لتصميم وتنسيق صفحات HTML
+                    </p>
+                </div>
+
+                <p>
+                    إذا كان HTML هو الهيكل العظمي للموقع، فإن CSS هو الجلد والملابس والمكياج! 
+                    CSS يحول صفحة HTML العادية إلى تحفة فنية جميلة ومنسقة.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>تشبيه مفيد:</strong> تخيل أن HTML هو بيت من الطوب الأحمر العادي، و CSS هو الطلاء والديكور والأثاث الذي يجعل البيت جميلاً ومريحاً!
+                </div>
+
+                <h3>لماذا نحتاج CSS؟</h3>
+                <ul>
+                    <li><strong>الجمال:</strong> تحويل الصفحات من مملة إلى جذابة</li>
+                    <li><strong>التنظيم:</strong> ترتيب العناصر بشكل منطقي</li>
+                    <li><strong>التجاوب:</strong> جعل الموقع يعمل على جميع الأجهزة</li>
+                    <li><strong>التفاعل:</strong> إضافة حركات وتأثيرات</li>
+                    <li><strong>الاحترافية:</strong> إعطاء انطباع مهني</li>
+                </ul>
+            </div>
+
+            <!-- طرق ربط CSS -->
+            <div class="chapter-content fade-in">
+                <h2>🔗 طرق ربط CSS بـ HTML</h2>
+
+                <h3>1. CSS داخلي (Internal)</h3>
+                <div class="css-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>HTML مع CSS داخلي</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;head&gt;
+    &lt;style&gt;
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            color: green;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                    </div>
+                </div>
+
+                <h3>2. CSS خارجي (External)</h3>
+                <div class="css-demo">
+                    <h4>ملف HTML:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>ربط ملف CSS خارجي</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+                    </div>
+                    
+                    <h4>ملف style.css:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>style.css</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>h1 {
+    color: blue;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: green;
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>3. CSS مضمن (Inline)</h3>
+                <div class="css-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>CSS مضمن</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;h1 style="color: blue; text-align: center;"&gt;العنوان&lt;/h1&gt;
+&lt;p style="font-size: 18px; color: green;"&gt;الفقرة&lt;/p&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>أفضل ممارسة:</strong> استخدم CSS الخارجي دائماً! إنه أكثر تنظيماً وسهولة في الصيانة.
+                </div>
+            </div>
+
+            <!-- المحددات (Selectors) -->
+            <div class="chapter-content fade-in">
+                <h2>🎯 المحددات (Selectors)</h2>
+                <p>المحددات تخبر CSS أي عناصر HTML تريد تنسيقها:</p>
+
+                <h3>1. محدد العنصر (Element Selector)</h3>
+                <div class="selector-demo">
+                    <div class="code-container">
+                        <pre><code>h1 {
+    color: red;
+}
+
+p {
+    font-size: 16px;
+}</code></pre>
+                    </div>
+                    <p><strong>يؤثر على:</strong> جميع عناصر h1 و p في الصفحة</p>
+                </div>
+
+                <h3>2. محدد الفئة (Class Selector)</h3>
+                <div class="selector-demo">
+                    <div class="code-container">
+                        <pre><code>.highlight {
+    background-color: yellow;
+}
+
+.big-text {
+    font-size: 24px;
+}</code></pre>
+                    </div>
+                    <p><strong>HTML:</strong> <code>&lt;p class="highlight"&gt;نص مميز&lt;/p&gt;</code></p>
+                </div>
+
+                <h3>3. محدد المعرف (ID Selector)</h3>
+                <div class="selector-demo">
+                    <div class="code-container">
+                        <pre><code>#header {
+    background-color: blue;
+    color: white;
+}
+
+#footer {
+    text-align: center;
+}</code></pre>
+                    </div>
+                    <p><strong>HTML:</strong> <code>&lt;div id="header"&gt;الرأس&lt;/div&gt;</code></p>
+                </div>
+
+                <h3>4. المحددات المتقدمة</h3>
+                <table class="property-table">
+                    <thead>
+                        <tr>
+                            <th>المحدد</th>
+                            <th>المثال</th>
+                            <th>الوصف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>المحدد الشامل</td>
+                            <td><code>*</code></td>
+                            <td>يؤثر على جميع العناصر</td>
+                        </tr>
+                        <tr>
+                            <td>محدد الأطفال</td>
+                            <td><code>div p</code></td>
+                            <td>جميع p داخل div</td>
+                        </tr>
+                        <tr>
+                            <td>محدد الطفل المباشر</td>
+                            <td><code>div > p</code></td>
+                            <td>p المباشر داخل div</td>
+                        </tr>
+                        <tr>
+                            <td>محدد الأشقاء</td>
+                            <td><code>h1 + p</code></td>
+                            <td>p التي تأتي بعد h1 مباشرة</td>
+                        </tr>
+                        <tr>
+                            <td>محدد الخصائص</td>
+                            <td><code>[type="text"]</code></td>
+                            <td>عناصر لها خاصية معينة</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- الألوان -->
+            <div class="chapter-content fade-in">
+                <h2>🌈 الألوان في CSS</h2>
+
+                <h3>طرق تحديد الألوان:</h3>
+                
+                <h4>1. أسماء الألوان</h4>
+                <div class="css-demo">
+                    <div class="code-container">
+                        <pre><code>h1 {
+    color: red;
+    background-color: blue;
+}</code></pre>
+                    </div>
+                    <div class="demo-result">
+                        <span class="color-demo" style="background-color: red;"></span> red
+                        <span class="color-demo" style="background-color: blue;"></span> blue
+                        <span class="color-demo" style="background-color: green;"></span> green
+                        <span class="color-demo" style="background-color: yellow;"></span> yellow
+                    </div>
+                </div>
+
+                <h4>2. الألوان السادسة عشرية (Hex)</h4>
+                <div class="css-demo">
+                    <div class="code-container">
+                        <pre><code>h1 {
+    color: #FF0000;        /* أحمر */
+    background-color: #00FF00; /* أخضر */
+}</code></pre>
+                    </div>
+                    <div class="demo-result">
+                        <span class="color-demo" style="background-color: #FF0000;"></span> #FF0000
+                        <span class="color-demo" style="background-color: #00FF00;"></span> #00FF00
+                        <span class="color-demo" style="background-color: #0000FF;"></span> #0000FF
+                        <span class="color-demo" style="background-color: #FFFF00;"></span> #FFFF00
+                    </div>
+                </div>
+
+                <h4>3. RGB و RGBA</h4>
+                <div class="css-demo">
+                    <div class="code-container">
+                        <pre><code>h1 {
+    color: rgb(255, 0, 0);           /* أحمر */
+    background-color: rgba(0, 255, 0, 0.5); /* أخضر شفاف */
+}</code></pre>
+                    </div>
+                    <p><strong>RGB:</strong> Red, Green, Blue (0-255)</p>
+                    <p><strong>RGBA:</strong> مع إضافة الشفافية Alpha (0-1)</p>
+                </div>
+            </div>
+
+            <!-- تنسيق النصوص -->
+            <div class="chapter-content fade-in">
+                <h2>📝 تنسيق النصوص</h2>
+
+                <table class="property-table">
+                    <thead>
+                        <tr>
+                            <th>الخاصية</th>
+                            <th>القيم</th>
+                            <th>المثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>font-family</code></td>
+                            <td>اسم الخط</td>
+                            <td><code>font-family: Arial, sans-serif;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>font-size</code></td>
+                            <td>px, em, rem, %</td>
+                            <td><code>font-size: 18px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>font-weight</code></td>
+                            <td>normal, bold, 100-900</td>
+                            <td><code>font-weight: bold;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>text-align</code></td>
+                            <td>left, right, center, justify</td>
+                            <td><code>text-align: center;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>text-decoration</code></td>
+                            <td>none, underline, line-through</td>
+                            <td><code>text-decoration: underline;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>line-height</code></td>
+                            <td>رقم أو وحدة</td>
+                            <td><code>line-height: 1.5;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="css-demo">
+                    <h4>مثال شامل:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>تنسيق النص</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>.beautiful-text {
+    font-family: 'Cairo', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    line-height: 1.6;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}</code></pre>
+                    </div>
+                    <div class="demo-result">
+                        <p style="font-family: 'Cairo', Arial, sans-serif; font-size: 20px; font-weight: 600; color: #2c3e50; text-align: center; line-height: 1.6; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+                            هذا نص جميل ومنسق!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نموذج الصندوق -->
+            <div class="chapter-content fade-in">
+                <h2>📦 نموذج الصندوق (Box Model)</h2>
+                <p>كل عنصر في HTML هو عبارة عن صندوق له أربعة أجزاء:</p>
+
+                <div class="css-demo">
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div style="background: #f39c12; padding: 20px; display: inline-block; border-radius: 5px;">
+                            <strong>Margin (الهامش الخارجي)</strong>
+                            <div style="background: #e74c3c; padding: 15px; margin: 10px; border-radius: 5px;">
+                                <strong>Border (الحدود)</strong>
+                                <div style="background: #2ecc71; padding: 15px; margin: 10px; border-radius: 5px;">
+                                    <strong>Padding (الهامش الداخلي)</strong>
+                                    <div style="background: #3498db; padding: 15px; margin: 10px; border-radius: 5px; color: white;">
+                                        <strong>Content (المحتوى)</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>خصائص نموذج الصندوق:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Box Model Properties</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.box {
+    /* المحتوى */
+    width: 200px;
+    height: 100px;
+    
+    /* الهامش الداخلي */
+    padding: 20px;
+    
+    /* الحدود */
+    border: 2px solid #333;
+    
+    /* الهامش الخارجي */
+    margin: 10px;
+    
+    /* لون الخلفية */
+    background-color: lightblue;
+}</code></pre>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>مهم:</strong> العرض الإجمالي = width + padding + border + margin
+                </div>
+            </div>
+
+            <!-- محرر CSS تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>✏️ جرب CSS بنفسك!</h2>
+                <p>اكتب كود CSS وشاهد النتيجة مباشرة:</p>
+
+                <div class="css-editor">
+                    <div>
+                        <div class="editor-header">محرر CSS</div>
+                        <div class="editor-panel">
+                            <textarea class="css-input" id="cssEditor" placeholder="اكتب CSS هنا...">
+.demo-text {
+    color: #667eea;
+    font-size: 24px;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #667eea;
+}
+
+.demo-box {
+    width: 100px;
+    height: 100px;
+    background-color: #28a745;
+    margin: 20px auto;
+    border-radius: 50%;
+}</textarea>
+                        </div>
+                    </div>
+                    <div class="preview-panel">
+                        <div class="editor-header">المعاينة</div>
+                        <div class="preview-content" id="cssPreview">
+                            <style id="dynamicStyle">
+.demo-text {
+    color: #667eea;
+    font-size: 24px;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #667eea;
+}
+
+.demo-box {
+    width: 100px;
+    height: 100px;
+    background-color: #28a745;
+    margin: 20px auto;
+    border-radius: 50%;
+}
+                            </style>
+                            <div class="demo-text">نص تجريبي</div>
+                            <div class="demo-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flexbox -->
+            <div class="chapter-content fade-in">
+                <h2>🔄 Flexbox - التخطيط المرن</h2>
+                <p>Flexbox يجعل ترتيب العناصر سهلاً ومرناً:</p>
+
+                <h3>الأساسيات:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Flexbox Container</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.flex-container {
+    display: flex;
+    justify-content: center;    /* محاذاة أفقية */
+    align-items: center;        /* محاذاة عمودية */
+    gap: 20px;                  /* المسافة بين العناصر */
+}</code></pre>
+                </div>
+
+                <h3>مثال عملي:</h3>
+                <div class="css-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <pre><code>.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+}</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="flexbox-demo">
+                        <div class="flex-item">الشعار</div>
+                        <div class="flex-item">القائمة</div>
+                        <div class="flex-item">تسجيل الدخول</div>
+                    </div>
+                </div>
+
+                <h3>خصائص Flexbox المهمة:</h3>
+                <table class="property-table">
+                    <thead>
+                        <tr>
+                            <th>الخاصية</th>
+                            <th>القيم</th>
+                            <th>الوصف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>justify-content</code></td>
+                            <td>flex-start, center, space-between</td>
+                            <td>المحاذاة الأفقية</td>
+                        </tr>
+                        <tr>
+                            <td><code>align-items</code></td>
+                            <td>flex-start, center, stretch</td>
+                            <td>المحاذاة العمودية</td>
+                        </tr>
+                        <tr>
+                            <td><code>flex-direction</code></td>
+                            <td>row, column</td>
+                            <td>اتجاه العناصر</td>
+                        </tr>
+                        <tr>
+                            <td><code>flex-wrap</code></td>
+                            <td>nowrap, wrap</td>
+                            <td>التفاف العناصر</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CSS Grid -->
+            <div class="chapter-content fade-in">
+                <h2>🏗️ CSS Grid - الشبكة</h2>
+                <p>Grid يتيح إنشاء تخطيطات معقدة بسهولة:</p>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Grid Container</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}</code></pre>
+                </div>
+
+                <h3>مثال عملي:</h3>
+                <div class="css-demo">
+                    <h4>النتيجة:</h4>
+                    <div class="grid-demo">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التصميم المتجاوب -->
+            <div class="chapter-content fade-in">
+                <h2>📱 التصميم المتجاوب (Responsive Design)</h2>
+                <p>جعل موقعك يبدو رائعاً على جميع الأجهزة:</p>
+
+                <h3>Media Queries:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Responsive CSS</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>/* للشاشات الكبيرة */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* للأجهزة اللوحية */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* للهواتف */
+@media (max-width: 480px) {
+    .text {
+        font-size: 14px;
+    }
+    
+    .button {
+        width: 100%;
+    }
+}</code></pre>
+                </div>
+
+                <div class="responsive-demo">
+                    <strong>جرب تصغير نافذة المتصفح!</strong> هذا الصندوق سيغير لونه حسب حجم الشاشة.
+                </div>
+            </div>
+
+            <!-- الحركات والتأثيرات -->
+            <div class="chapter-content fade-in">
+                <h2>✨ الحركات والتأثيرات</h2>
+
+                <h3>Transitions:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS Transitions</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}</code></pre>
+                </div>
+
+                <h3>Animations:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS Animations</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.bouncing-ball {
+    animation: bounce 2s infinite;
+}</code></pre>
+                </div>
+
+                <div class="css-demo">
+                    <h4>مثال حي:</h4>
+                    <div class="animation-demo"></div>
+                    <p style="text-align: center;">كرة متحركة!</p>
+                </div>
+            </div>
+
+            <!-- CSS متقدم -->
+            <div class="chapter-content fade-in">
+                <h2>🎓 CSS متقدم</h2>
+
+                <h3>المتغيرات في CSS (CSS Variables)</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS Variables</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --text-color: #333;
+    --border-radius: 10px;
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+.card {
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+}</code></pre>
+                </div>
+
+                <h3>Pseudo-classes و Pseudo-elements</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Pseudo Selectors</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>/* Pseudo-classes */
+a:hover {
+    color: red;
+}
+
+li:first-child {
+    font-weight: bold;
+}
+
+input:focus {
+    border-color: blue;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Pseudo-elements */
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+p::before {
+    content: "📝 ";
+}
+
+p::after {
+    content: " ✨";
+}</code></pre>
+                </div>
+
+                <h3>Transform و 3D Effects</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS Transforms</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.rotate {
+    transform: rotate(45deg);
+}
+
+.scale {
+    transform: scale(1.2);
+}
+
+.translate {
+    transform: translateX(50px) translateY(20px);
+}
+
+.skew {
+    transform: skewX(20deg);
+}
+
+.flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}</code></pre>
+                </div>
+
+                <h3>CSS Filters</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS Filters</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.blur {
+    filter: blur(5px);
+}
+
+.brightness {
+    filter: brightness(150%);
+}
+
+.contrast {
+    filter: contrast(200%);
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}
+
+.sepia {
+    filter: sepia(100%);
+}
+
+.shadow {
+    filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.5));
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- أفضل الممارسات -->
+            <div class="chapter-content fade-in">
+                <h2>⭐ أفضل الممارسات في CSS</h2>
+
+                <h3>1. تنظيم الكود</h3>
+                <div class="alert alert-info">
+                    <ul>
+                        <li>استخدم تعليقات واضحة</li>
+                        <li>نظم CSS حسب الأقسام</li>
+                        <li>استخدم أسماء فئات وصفية</li>
+                        <li>تجنب الـ !important</li>
+                    </ul>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS منظم</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>/* ========== إعادة تعيين الأنماط ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== المتغيرات ========== */
+:root {
+    --primary-color: #667eea;
+    --font-size-large: 2rem;
+}
+
+/* ========== الأنماط العامة ========== */
+body {
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* ========== الرأس ========== */
+.header {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+}
+
+/* ========== المحتوى الرئيسي ========== */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ========== التذييل ========== */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}</code></pre>
+                </div>
+
+                <h3>2. تسمية الفئات (BEM Methodology)</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>BEM Naming</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>/* Block */
+.card { }
+
+/* Element */
+.card__header { }
+.card__body { }
+.card__footer { }
+
+/* Modifier */
+.card--large { }
+.card--featured { }
+.card__header--blue { }</code></pre>
+                </div>
+
+                <h3>3. الأداء والتحسين</h3>
+                <ul>
+                    <li><strong>تجنب المحددات المعقدة:</strong> <code>div > ul > li > a</code></li>
+                    <li><strong>استخدم فئات بدلاً من IDs:</strong> للتنسيق</li>
+                    <li><strong>قلل من استخدام @import:</strong> يبطئ التحميل</li>
+                    <li><strong>ضغط ملفات CSS:</strong> في الإنتاج</li>
+                </ul>
+            </div>
+
+            <!-- مشروع عملي -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشروع عملي: بطاقة شخصية</h2>
+                <p>سنصمم بطاقة شخصية جميلة باستخدام CSS:</p>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>&lt;div class="profile-card"&gt;
+    &lt;div class="profile-header"&gt;
+        &lt;div class="profile-avatar"&gt;👨‍💻&lt;/div&gt;
+        &lt;h2 class="profile-name"&gt;أحمد محمد&lt;/h2&gt;
+        &lt;p class="profile-title"&gt;مطور ويب&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="profile-body"&gt;
+        &lt;p class="profile-bio"&gt;مطور ويب شغوف بالتكنولوجيا وحل المشكلات&lt;/p&gt;
+        &lt;div class="profile-stats"&gt;
+            &lt;div class="stat"&gt;
+                &lt;span class="stat-number"&gt;50+&lt;/span&gt;
+                &lt;span class="stat-label"&gt;مشروع&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="stat"&gt;
+                &lt;span class="stat-number"&gt;3&lt;/span&gt;
+                &lt;span class="stat-label"&gt;سنوات خبرة&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button class="contact-btn"&gt;تواصل معي&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>CSS</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>.profile-card {
+    max-width: 300px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.profile-avatar {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.profile-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.profile-title {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.profile-body {
+    padding: 2rem;
+}
+
+.profile-bio {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.contact-btn {
+    width: 100%;
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: #5a67d8;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هي أفضل طريقة لربط CSS بـ HTML؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">CSS مضمن (Inline)</li>
+                        <li data-correct="false">CSS داخلي (Internal)</li>
+                        <li data-correct="true">CSS خارجي (External)</li>
+                        <li data-correct="false">جميع الطرق متساوية</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. أي محدد يؤثر على عنصر له id="header"؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">.header</li>
+                        <li data-correct="true">#header</li>
+                        <li data-correct="false">header</li>
+                        <li data-correct="false">*header</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هي أجزاء نموذج الصندوق (Box Model)؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">Content, Border فقط</li>
+                        <li data-correct="true">Content, Padding, Border, Margin</li>
+                        <li data-correct="false">Width, Height, Color</li>
+                        <li data-correct="false">HTML, CSS, JavaScript</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. ما هو Flexbox؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من أنواع الخطوط</li>
+                        <li data-correct="true">نظام تخطيط مرن للعناصر</li>
+                        <li data-correct="false">لغة برمجة جديدة</li>
+                        <li data-correct="false">نوع من أنواع الألوان</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter4.html" class="nav-button">
+                    ← الفصل السابق: HTML - هيكل الويب
+                </a>
+                <a href="chapter6.html" class="nav-button">
+                    الفصل التالي: JavaScript - التفاعل →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // المحرر التفاعلي لـ CSS
+        const cssEditor = document.getElementById('cssEditor');
+        const dynamicStyle = document.getElementById('dynamicStyle');
+        
+        cssEditor.addEventListener('input', function() {
+            dynamicStyle.textContent = this.value;
+        });
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

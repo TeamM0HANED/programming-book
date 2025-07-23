@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل التاسع: قواعد البيانات - SQL - كتاب البرمجة</title>
+    <meta name="description" content="تعلم أساسيات قواعد البيانات ولغة SQL">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sql-demo {
+            background: #f8f9fa;
+            border: 2px solid #007acc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .sql-demo h4 {
+            color: #007acc;
+            margin-bottom: 1rem;
+        }
+        
+        .sql-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            border-right: 4px solid #007acc;
+        }
+        
+        .database-visual {
+            background: white;
+            border: 2px solid #007acc;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .table-demo {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .table-header {
+            background: #007acc;
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .demo-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .demo-table th {
+            background: #007acc;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 2px solid #005a9e;
+        }
+        
+        .demo-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: right;
+        }
+        
+        .demo-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .demo-table tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .sql-editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .editor-panel {
+            padding: 1rem;
+        }
+        
+        .editor-header {
+            background: #007acc;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sql-input {
+            width: 100%;
+            height: 300px;
+            border: none;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        
+        .result-panel {
+            background: #f8f9fa;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .result-content {
+            padding: 1rem;
+            min-height: 300px;
+            background: white;
+            margin: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .run-sql-button {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .run-sql-button:hover {
+            background: #218838;
+        }
+        
+        .sql-commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .command-card {
+            background: white;
+            border: 2px solid #007acc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .command-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .command-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .command-name {
+            background: #007acc;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .database-project {
+            background: linear-gradient(135deg, #007acc 0%, #0056b3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .relationship-diagram {
+            background: white;
+            border: 2px solid #007acc;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .table-box {
+            background: #f8f9fa;
+            border: 2px solid #007acc;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem;
+            display: inline-block;
+            min-width: 200px;
+        }
+        
+        .table-title {
+            background: #007acc;
+            color: white;
+            padding: 0.5rem;
+            margin: -1rem -1rem 1rem -1rem;
+            border-radius: 6px 6px 0 0;
+            font-weight: 600;
+        }
+        
+        .field-list {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .primary-key {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .foreign-key {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .connection-line {
+            border-top: 2px solid #007acc;
+            width: 100px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        
+        .connection-line::before {
+            content: "1";
+            position: absolute;
+            right: -10px;
+            top: -15px;
+            background: white;
+            padding: 0 5px;
+        }
+        
+        .connection-line::after {
+            content: "∞";
+            position: absolute;
+            left: -10px;
+            top: -15px;
+            background: white;
+            padding: 0 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .sql-editor {
+                grid-template-columns: 1fr;
+            }
+            
+            .sql-commands {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter9.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل التاسع</div>
+            <h1 class="chapter-title">قواعد البيانات - SQL</h1>
+            <p class="chapter-description">تعلم أساسيات قواعد البيانات ولغة SQL</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هي قواعد البيانات ولماذا نحتاجها</li>
+                    <li>تعلم أساسيات لغة SQL</li>
+                    <li>إنشاء وإدارة الجداول</li>
+                    <li>إدراج وتحديث وحذف البيانات</li>
+                    <li>البحث والاستعلام عن البيانات</li>
+                    <li>فهم العلاقات بين الجداول</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة قواعد البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>🗄️ ما هي قواعد البيانات؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">قاعدة البيانات</h3>
+                    <p class="definition-text">
+                        مجموعة منظمة من البيانات المترابطة التي يمكن الوصول إليها وإدارتها بسهولة
+                    </p>
+                </div>
+
+                <p>
+                    تخيل قاعدة البيانات كخزانة ملفات ضخمة ومنظمة! بدلاً من البحث في آلاف الأوراق، 
+                    يمكنك العثور على أي معلومة في ثوانٍ معدودة.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>مثال من الحياة:</strong> فيسبوك يحتوي على قاعدة بيانات تضم معلومات مليارات المستخدمين، وتويتر يخزن مليارات التغريدات!
+                </div>
+
+                <h3>لماذا نحتاج قواعد البيانات؟</h3>
+                <ul>
+                    <li><strong>التنظيم:</strong> ترتيب البيانات بشكل منطقي</li>
+                    <li><strong>السرعة:</strong> البحث السريع في ملايين السجلات</li>
+                    <li><strong>الأمان:</strong> حماية البيانات من الفقدان</li>
+                    <li><strong>المشاركة:</strong> عدة مستخدمين يمكنهم الوصول للبيانات</li>
+                    <li><strong>التكامل:</strong> منع التكرار والتضارب</li>
+                </ul>
+
+                <div class="database-visual">
+                    <h4>🏢 مثال: نظام إدارة مدرسة</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 2rem 0;">
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 3rem;">👨‍🎓</div>
+                            <strong>الطلاب</strong><br>
+                            الأسماء، الأعمار، الصفوف
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 3rem;">👨‍🏫</div>
+                            <strong>المعلمون</strong><br>
+                            الأسماء، التخصصات، الخبرات
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 3rem;">📚</div>
+                            <strong>المواد</strong><br>
+                            أسماء المواد، الساعات، المستويات
+                        </div>
+                        <div style="text-align: center; margin: 1rem;">
+                            <div style="font-size: 3rem;">📊</div>
+                            <strong>الدرجات</strong><br>
+                            درجات الطلاب في كل مادة
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ما هو SQL -->
+            <div class="chapter-content fade-in">
+                <h2>💬 ما هو SQL؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">SQL</h3>
+                    <p class="definition-text">
+                        <strong>Structured Query Language</strong><br>
+                        لغة الاستعلام المهيكلة - لغة للتعامل مع قواعد البيانات
+                    </p>
+                </div>
+
+                <p>
+                    SQL هي اللغة التي نستخدمها للتحدث مع قواعد البيانات. مثل الإنجليزية للبشر، 
+                    SQL للحواسيب لفهم ما نريد من البيانات.
+                </p>
+
+                <h3>ما يمكن فعله بـ SQL:</h3>
+                <div class="sql-commands">
+                    <div class="command-card">
+                        <div class="command-icon">📝</div>
+                        <div class="command-name">CREATE</div>
+                        <h4>إنشاء</h4>
+                        <p>إنشاء جداول وقواعد بيانات جديدة</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-icon">➕</div>
+                        <div class="command-name">INSERT</div>
+                        <h4>إدراج</h4>
+                        <p>إضافة بيانات جديدة للجداول</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-icon">🔍</div>
+                        <div class="command-name">SELECT</div>
+                        <h4>استعلام</h4>
+                        <p>البحث واسترجاع البيانات</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-icon">✏️</div>
+                        <div class="command-name">UPDATE</div>
+                        <h4>تحديث</h4>
+                        <p>تعديل البيانات الموجودة</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-icon">🗑️</div>
+                        <div class="command-name">DELETE</div>
+                        <h4>حذف</h4>
+                        <p>حذف البيانات غير المرغوبة</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-icon">🔧</div>
+                        <div class="command-name">ALTER</div>
+                        <h4>تعديل</h4>
+                        <p>تعديل هيكل الجداول</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إنشاء الجداول -->
+            <div class="chapter-content fade-in">
+                <h2>🏗️ إنشاء الجداول</h2>
+
+                <h3>إنشاء جدول الطلاب:</h3>
+                <div class="sql-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>CREATE TABLE</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    grade VARCHAR(10),
+    email VARCHAR(100) UNIQUE,
+    enrollment_date DATE
+);</code></pre>
+                    </div>
+                    <h4>الشرح:</h4>
+                    <ul>
+                        <li><strong>id:</strong> رقم تعريفي فريد لكل طالب</li>
+                        <li><strong>name:</strong> اسم الطالب (نص حتى 100 حرف)</li>
+                        <li><strong>age:</strong> عمر الطالب (رقم صحيح)</li>
+                        <li><strong>grade:</strong> الصف الدراسي</li>
+                        <li><strong>email:</strong> البريد الإلكتروني (فريد)</li>
+                        <li><strong>enrollment_date:</strong> تاريخ التسجيل</li>
+                    </ul>
+                </div>
+
+                <div class="table-demo">
+                    <div class="table-header">جدول الطلاب (students)</div>
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>age</th>
+                                <th>grade</th>
+                                <th>email</th>
+                                <th>enrollment_date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>أحمد محمد</td>
+                                <td>20</td>
+                                <td>الثالث</td>
+                                <td>ahmed@email.com</td>
+                                <td>2024-01-15</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>فاطمة علي</td>
+                                <td>19</td>
+                                <td>الثاني</td>
+                                <td>fatima@email.com</td>
+                                <td>2024-01-16</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>محمد سالم</td>
+                                <td>21</td>
+                                <td>الرابع</td>
+                                <td>mohammed@email.com</td>
+                                <td>2024-01-17</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>أنواع البيانات الشائعة:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📝 النصوص</h4>
+                        <ul>
+                            <li><strong>VARCHAR(n):</strong> نص متغير الطول</li>
+                            <li><strong>CHAR(n):</strong> نص ثابت الطول</li>
+                            <li><strong>TEXT:</strong> نص طويل</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔢 الأرقام</h4>
+                        <ul>
+                            <li><strong>INT:</strong> أرقام صحيحة</li>
+                            <li><strong>DECIMAL(m,d):</strong> أرقام عشرية</li>
+                            <li><strong>FLOAT:</strong> أرقام عشرية مرنة</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📅 التواريخ</h4>
+                        <ul>
+                            <li><strong>DATE:</strong> تاريخ (YYYY-MM-DD)</li>
+                            <li><strong>TIME:</strong> وقت (HH:MM:SS)</li>
+                            <li><strong>DATETIME:</strong> تاريخ ووقت</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>✅ أخرى</h4>
+                        <ul>
+                            <li><strong>BOOLEAN:</strong> صحيح/خطأ</li>
+                            <li><strong>BLOB:</strong> بيانات ثنائية</li>
+                            <li><strong>JSON:</strong> بيانات JSON</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إدراج البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>➕ إدراج البيانات</h2>
+
+                <div class="sql-demo">
+                    <h4>إضافة طالب واحد:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>INSERT INTO</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>INSERT INTO students (name, age, grade, email, enrollment_date)
+VALUES ('أحمد محمد', 20, 'الثالث', 'ahmed@email.com', '2024-01-15');</code></pre>
+                    </div>
+
+                    <h4>إضافة عدة طلاب:</h4>
+                    <div class="code-container">
+                        <pre><code>INSERT INTO students (name, age, grade, email, enrollment_date)
+VALUES 
+    ('فاطمة علي', 19, 'الثاني', 'fatima@email.com', '2024-01-16'),
+    ('محمد سالم', 21, 'الرابع', 'mohammed@email.com', '2024-01-17'),
+    ('سارة أحمد', 18, 'الأول', 'sara@email.com', '2024-01-18');</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- استعلام البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>🔍 استعلام البيانات (SELECT)</h2>
+
+                <h3>الاستعلامات الأساسية:</h3>
+                <div class="sql-demo">
+                    <h4>عرض جميع الطلاب:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>SELECT جميع البيانات</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>SELECT * FROM students;</code></pre>
+                    </div>
+
+                    <h4>عرض أعمدة محددة:</h4>
+                    <div class="code-container">
+                        <pre><code>SELECT name, age, grade FROM students;</code></pre>
+                    </div>
+
+                    <h4>البحث بشروط:</h4>
+                    <div class="code-container">
+                        <pre><code>-- الطلاب الذين عمرهم أكبر من 19
+SELECT * FROM students WHERE age > 19;
+
+-- الطلاب في الصف الثالث
+SELECT * FROM students WHERE grade = 'الثالث';
+
+-- الطلاب الذين أسماؤهم تبدأ بـ "أحمد"
+SELECT * FROM students WHERE name LIKE 'أحمد%';</code></pre>
+                    </div>
+                </div>
+
+                <h3>الترتيب والتجميع:</h3>
+                <div class="sql-demo">
+                    <h4>ترتيب النتائج:</h4>
+                    <div class="code-container">
+                        <pre><code>-- ترتيب حسب العمر (تصاعدي)
+SELECT * FROM students ORDER BY age ASC;
+
+-- ترتيب حسب الاسم (تنازلي)
+SELECT * FROM students ORDER BY name DESC;</code></pre>
+                    </div>
+
+                    <h4>تحديد عدد النتائج:</h4>
+                    <div class="code-container">
+                        <pre><code>-- أول 5 طلاب
+SELECT * FROM students LIMIT 5;
+
+-- الطلاب من 6 إلى 10
+SELECT * FROM students LIMIT 5 OFFSET 5;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محرر SQL تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>✏️ جرب SQL بنفسك!</h2>
+                <p>اكتب استعلامات SQL وشاهد النتيجة (محاكاة):</p>
+
+                <div class="sql-editor">
+                    <div>
+                        <div class="editor-header">
+                            <span>🗄️</span> محرر SQL
+                        </div>
+                        <div class="editor-panel">
+                            <textarea class="sql-input" id="sqlEditor" placeholder="اكتب SQL هنا...">
+-- جرب هذه الاستعلامات
+SELECT * FROM students;
+
+-- البحث عن طالب معين
+SELECT name, age FROM students 
+WHERE age > 19;
+
+-- ترتيب حسب العمر
+SELECT * FROM students 
+ORDER BY age DESC;
+
+-- عدد الطلاب
+SELECT COUNT(*) as total_students 
+FROM students;
+</textarea>
+                            <button class="run-sql-button" onclick="runSQLQuery()">▶ تشغيل الاستعلام</button>
+                        </div>
+                    </div>
+                    <div class="result-panel">
+                        <div class="editor-header">النتيجة</div>
+                        <div class="result-content" id="sqlResult">
+اضغط "تشغيل الاستعلام" لرؤية النتيجة...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تحديث وحذف البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>✏️ تحديث وحذف البيانات</h2>
+
+                <h3>تحديث البيانات (UPDATE):</h3>
+                <div class="sql-demo">
+                    <h4>تحديث عمر طالب:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>UPDATE</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>UPDATE students 
+SET age = 21 
+WHERE name = 'أحمد محمد';</code></pre>
+                    </div>
+
+                    <h4>تحديث عدة أعمدة:</h4>
+                    <div class="code-container">
+                        <pre><code>UPDATE students 
+SET age = 22, grade = 'الرابع' 
+WHERE id = 1;</code></pre>
+                    </div>
+                </div>
+
+                <h3>حذف البيانات (DELETE):</h3>
+                <div class="sql-demo">
+                    <h4>حذف طالب معين:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>DELETE</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>DELETE FROM students 
+WHERE id = 3;</code></pre>
+                    </div>
+
+                    <h4>حذف بشروط:</h4>
+                    <div class="code-container">
+                        <pre><code>-- حذف الطلاب الذين عمرهم أقل من 18
+DELETE FROM students 
+WHERE age < 18;</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>تحذير:</strong> كن حذراً مع UPDATE و DELETE! استخدم دائماً WHERE لتحديد السجلات المطلوبة.
+                </div>
+            </div>
+
+            <!-- العلاقات بين الجداول -->
+            <div class="chapter-content fade-in">
+                <h2>🔗 العلاقات بين الجداول</h2>
+
+                <p>في قواعد البيانات الحقيقية، نحتاج عدة جداول مترابطة:</p>
+
+                <div class="relationship-diagram">
+                    <h4>مثال: نظام المكتبة</h4>
+                    
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                        <div class="table-box">
+                            <div class="table-title">الطلاب (students)</div>
+                            <div class="field-list">
+                                <div class="primary-key">id (PK)</div>
+                                <div>name</div>
+                                <div>email</div>
+                                <div>phone</div>
+                            </div>
+                        </div>
+                        
+                        <div class="table-box">
+                            <div class="table-title">الكتب (books)</div>
+                            <div class="field-list">
+                                <div class="primary-key">id (PK)</div>
+                                <div>title</div>
+                                <div>author</div>
+                                <div>isbn</div>
+                            </div>
+                        </div>
+                        
+                        <div class="table-box">
+                            <div class="table-title">الاستعارات (borrowings)</div>
+                            <div class="field-list">
+                                <div class="primary-key">id (PK)</div>
+                                <div class="foreign-key">student_id (FK)</div>
+                                <div class="foreign-key">book_id (FK)</div>
+                                <div>borrow_date</div>
+                                <div>return_date</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="connection-line"></div>
+                    
+                    <p><strong>PK:</strong> Primary Key (المفتاح الأساسي) | <strong>FK:</strong> Foreign Key (المفتاح الخارجي)</p>
+                </div>
+
+                <h3>الاستعلامات المتقدمة (JOIN):</h3>
+                <div class="sql-demo">
+                    <h4>عرض الاستعارات مع أسماء الطلاب والكتب:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>JOIN</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>SELECT 
+    s.name AS student_name,
+    b.title AS book_title,
+    br.borrow_date,
+    br.return_date
+FROM borrowings br
+JOIN students s ON br.student_id = s.id
+JOIN books b ON br.book_id = b.id
+ORDER BY br.borrow_date DESC;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مشروع عملي -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشروع عملي: نظام إدارة متجر</h2>
+
+                <div class="database-project">
+                    <h3>🛍️ سنبني قاعدة بيانات لمتجر إلكتروني</h3>
+                    <p>سنحتاج جداول للعملاء، المنتجات، والطلبات</p>
+                </div>
+
+                <div class="sql-demo">
+                    <h4>1. إنشاء جدول العملاء:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>جدول العملاء</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+                    </div>
+
+                    <h4>2. إنشاء جدول المنتجات:</h4>
+                    <div class="code-container">
+                        <pre><code>CREATE TABLE products (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    stock_quantity INT DEFAULT 0,
+    category VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+                    </div>
+
+                    <h4>3. إنشاء جدول الطلبات:</h4>
+                    <div class="code-container">
+                        <pre><code>CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending',
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);</code></pre>
+                    </div>
+
+                    <h4>4. إدراج بيانات تجريبية:</h4>
+                    <div class="code-container">
+                        <pre><code>-- إضافة عملاء
+INSERT INTO customers (name, email, phone, address) VALUES
+('أحمد محمد', 'ahmed@email.com', '0501234567', 'الرياض'),
+('فاطمة علي', 'fatima@email.com', '0507654321', 'جدة'),
+('محمد سالم', 'mohammed@email.com', '0509876543', 'الدمام');
+
+-- إضافة منتجات
+INSERT INTO products (name, description, price, stock_quantity, category) VALUES
+('لابتوب Dell', 'لابتوب للألعاب والعمل', 2500.00, 10, 'إلكترونيات'),
+('هاتف iPhone', 'أحدث إصدار من آيفون', 3500.00, 5, 'إلكترونيات'),
+('كتاب البرمجة', 'كتاب تعليم البرمجة', 50.00, 100, 'كتب');
+
+-- إضافة طلبات
+INSERT INTO orders (customer_id, total_amount, status) VALUES
+(1, 2500.00, 'completed'),
+(2, 3550.00, 'pending'),
+(3, 100.00, 'shipped');</code></pre>
+                    </div>
+
+                    <h4>5. استعلامات مفيدة:</h4>
+                    <div class="code-container">
+                        <pre><code>-- أفضل العملاء (أكثر إنفاقاً)
+SELECT 
+    c.name,
+    SUM(o.total_amount) as total_spent
+FROM customers c
+JOIN orders o ON c.id = o.customer_id
+GROUP BY c.id, c.name
+ORDER BY total_spent DESC;
+
+-- المنتجات الأكثر مبيعاً
+SELECT 
+    p.name,
+    COUNT(oi.product_id) as times_sold
+FROM products p
+JOIN order_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name
+ORDER BY times_sold DESC;
+
+-- إجمالي المبيعات اليومية
+SELECT 
+    DATE(order_date) as sale_date,
+    COUNT(*) as orders_count,
+    SUM(total_amount) as daily_revenue
+FROM orders
+GROUP BY DATE(order_date)
+ORDER BY sale_date DESC;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو الأمر المستخدم لإنشاء جدول جديد؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">MAKE TABLE</li>
+                        <li data-correct="true">CREATE TABLE</li>
+                        <li data-correct="false">NEW TABLE</li>
+                        <li data-correct="false">BUILD TABLE</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. أي أمر يُستخدم لاسترجاع البيانات؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">GET</li>
+                        <li data-correct="true">SELECT</li>
+                        <li data-correct="false">FETCH</li>
+                        <li data-correct="false">RETRIEVE</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هو PRIMARY KEY؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">مفتاح للأمان</li>
+                        <li data-correct="true">معرف فريد لكل سجل</li>
+                        <li data-correct="false">كلمة مرور الجدول</li>
+                        <li data-correct="false">اسم الجدول</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. أي أمر يُستخدم لحذف البيانات؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">REMOVE</li>
+                        <li data-correct="true">DELETE</li>
+                        <li data-correct="false">DROP</li>
+                        <li data-correct="false">CLEAR</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter8.html" class="nav-button">
+                    ← الفصل السابق: Python - البرمجة البسيطة
+                </a>
+                <a href="chapter10.html" class="nav-button">
+                    الفصل التالي: Git و GitHub →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // محاكاة تشغيل SQL
+        function runSQLQuery() {
+            const query = document.getElementById('sqlEditor').value.trim();
+            const result = document.getElementById('sqlResult');
+            
+            // محاكاة بسيطة لنتائج SQL
+            if (query.toLowerCase().includes('select * from students')) {
+                result.innerHTML = `
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>age</th>
+                                <th>grade</th>
+                                <th>email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>أحمد محمد</td>
+                                <td>20</td>
+                                <td>الثالث</td>
+                                <td>ahmed@email.com</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>فاطمة علي</td>
+                                <td>19</td>
+                                <td>الثاني</td>
+                                <td>fatima@email.com</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>محمد سالم</td>
+                                <td>21</td>
+                                <td>الرابع</td>
+                                <td>mohammed@email.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else if (query.toLowerCase().includes('where age > 19')) {
+                result.innerHTML = `
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>أحمد محمد</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>محمد سالم</td>
+                                <td>21</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else if (query.toLowerCase().includes('count(*)')) {
+                result.innerHTML = `
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>total_students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else if (query.toLowerCase().includes('order by age desc')) {
+                result.innerHTML = `
+                    <table class="demo-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>age</th>
+                                <th>grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3</td>
+                                <td>محمد سالم</td>
+                                <td>21</td>
+                                <td>الرابع</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>أحمد محمد</td>
+                                <td>20</td>
+                                <td>الثالث</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>فاطمة علي</td>
+                                <td>19</td>
+                                <td>الثاني</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                result.innerHTML = `
+                    <div style="padding: 2rem; text-align: center; color: #28a745;">
+                        ✅ تم تنفيذ الاستعلام بنجاح!<br>
+                        <small>(هذه محاكاة - في الواقع ستحتاج قاعدة بيانات حقيقية)</small>
+                    </div>
+                `;
+            }
+        }
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

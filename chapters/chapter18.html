@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الثامن عشر: مشاريع للمبتدئين - كتاب البرمجة</title>
+    <meta name="description" content="مشاريع عملية لتطبيق ما تعلمته في البرمجة">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .project-demo {
+            background: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .project-demo h4 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+        
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .project-header.easy { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .project-header.medium { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .project-header.hard { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .difficulty-badge {
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-badge.medium {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .difficulty-badge.hard {
+            background: #dc3545;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-features {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .interactive-builder {
+            background: white;
+            border: 2px solid #6f42c1;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .builder-button {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .builder-button:hover {
+            background: #5a2d91;
+        }
+        
+        .builder-output {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            min-height: 200px;
+            text-align: right;
+        }
+        
+        .step-by-step {
+            background: #e8f4fd;
+            border-right: 4px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .step-number {
+            background: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+        
+        .code-preview {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .project-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-right: 4px solid #fd7e14;
+        }
+        
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tip-title {
+            color: #fd7e14;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .portfolio-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .portfolio-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .project-gallery,
+            .project-tips,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter18.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الثامن عشر</div>
+            <h1 class="chapter-title">مشاريع للمبتدئين</h1>
+            <p class="chapter-description">مشاريع عملية لتطبيق ما تعلمته في البرمجة</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>تطبيق المفاهيم النظرية في مشاريع عملية</li>
+                    <li>بناء مجموعة متنوعة من المشاريع</li>
+                    <li>تعلم التخطيط وتنفيذ المشاريع</li>
+                    <li>إنشاء portfolio قوي للعرض</li>
+                    <li>اكتساب خبرة في حل المشاكل</li>
+                    <li>تطوير مهارات التفكير البرمجي</li>
+                </ul>
+            </div>
+
+            <!-- أهمية المشاريع -->
+            <div class="chapter-content fade-in">
+                <h2>🏗️ لماذا المشاريع مهمة؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">التعلم بالممارسة</h3>
+                    <p class="definition-text">
+                        المشاريع هي الجسر بين النظرية والتطبيق العملي في البرمجة
+                    </p>
+                </div>
+
+                <p>
+                    يمكنك قراءة مئات الكتب عن السباحة، لكن لن تتعلم السباحة حقاً إلا عندما تدخل الماء! 
+                    نفس الشيء مع البرمجة - المشاريع هي "الماء" الذي ستتعلم فيه البرمجة الحقيقية.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>حقيقة مهمة:</strong> أصحاب العمل يهتمون بمشاريعك أكثر من شهاداتك!
+                </div>
+
+                <h3>فوائد بناء المشاريع:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🧠 للتعلم</h4>
+                        <ul>
+                            <li>تطبيق المفاهيم النظرية</li>
+                            <li>اكتشاف نقاط الضعف</li>
+                            <li>تعلم حل المشاكل</li>
+                            <li>فهم سير العمل الحقيقي</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>💼 للمهنة</h4>
+                        <ul>
+                            <li>بناء portfolio قوي</li>
+                            <li>إثبات المهارات للموظفين</li>
+                            <li>الحصول على خبرة عملية</li>
+                            <li>بناء سمعة في المجتمع</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مشاريع المستوى الأول -->
+            <div class="chapter-content fade-in">
+                <h2>🌟 مشاريع المستوى الأول (مبتدئ)</h2>
+
+                <div class="project-gallery">
+                    <div class="project-card">
+                        <div class="project-header easy">
+                            <div class="project-icon">🧮</div>
+                            <div class="project-title">آلة حاسبة</div>
+                            <p>حاسبة بسيطة للعمليات الأساسية</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge">سهل</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>العمليات الأساسية (+، -، ×، ÷)</li>
+                                    <li>واجهة جميلة وسهلة الاستخدام</li>
+                                    <li>عرض النتائج فورياً</li>
+                                    <li>زر مسح ومسح كامل</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 2-3 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> DOM manipulation، Events، Functions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header easy">
+                            <div class="project-icon">📝</div>
+                            <div class="project-title">قائمة المهام</div>
+                            <p>تطبيق لإدارة المهام اليومية</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge">سهل</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">LocalStorage</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>إضافة وحذف المهام</li>
+                                    <li>تمييز المهام المكتملة</li>
+                                    <li>حفظ البيانات محلياً</li>
+                                    <li>تصفية المهام (كل، مكتمل، غير مكتمل)</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 3-4 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> Arrays، LocalStorage، Event handling</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header easy">
+                            <div class="project-icon">🎲</div>
+                            <div class="project-title">لعبة تخمين الرقم</div>
+                            <p>لعبة بسيطة لتخمين رقم عشوائي</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge">سهل</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>توليد رقم عشوائي</li>
+                                    <li>تلميحات (أعلى/أقل)</li>
+                                    <li>عداد المحاولات</li>
+                                    <li>نظام النقاط</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 1-2 يوم</p>
+                            <p><strong>ما ستتعلمه:</strong> Random numbers، Conditions، Loops</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header easy">
+                            <div class="project-icon">🌈</div>
+                            <div class="project-title">مولد الألوان</div>
+                            <p>تطبيق لتوليد ألوان عشوائية</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge">سهل</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>توليد ألوان عشوائية</li>
+                                    <li>عرض كود اللون (HEX، RGB)</li>
+                                    <li>نسخ الكود للحافظة</li>
+                                    <li>حفظ الألوان المفضلة</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 2-3 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> Color systems، Clipboard API، Arrays</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مشاريع المستوى الثاني -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشاريع المستوى الثاني (متوسط)</h2>
+
+                <div class="project-gallery">
+                    <div class="project-card">
+                        <div class="project-header medium">
+                            <div class="project-icon">🌤️</div>
+                            <div class="project-title">تطبيق الطقس</div>
+                            <p>عرض حالة الطقس باستخدام API</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge medium">متوسط</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Weather API</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>البحث عن المدن</li>
+                                    <li>عرض الطقس الحالي</li>
+                                    <li>توقعات 5 أيام</li>
+                                    <li>تحديد الموقع تلقائياً</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 5-7 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> APIs، Async/Await، Geolocation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header medium">
+                            <div class="project-icon">💰</div>
+                            <div class="project-title">متتبع المصروفات</div>
+                            <p>تطبيق لتتبع الدخل والمصروفات</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge medium">متوسط</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Chart.js</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>إضافة المعاملات المالية</li>
+                                    <li>تصنيف المصروفات</li>
+                                    <li>رسوم بيانية للإحصائيات</li>
+                                    <li>تصدير التقارير</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 7-10 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> Data visualization، Charts، Export data</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header medium">
+                            <div class="project-icon">🎵</div>
+                            <div class="project-title">مشغل الموسيقى</div>
+                            <p>مشغل موسيقى بسيط وأنيق</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge medium">متوسط</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Web Audio API</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>تشغيل وإيقاف الموسيقى</li>
+                                    <li>قائمة تشغيل</li>
+                                    <li>شريط التقدم</li>
+                                    <li>التحكم في الصوت</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 6-8 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> Audio API، File handling، Media controls</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header medium">
+                            <div class="project-icon">📚</div>
+                            <div class="project-title">مكتبة الكتب</div>
+                            <p>تطبيق لإدارة مجموعة الكتب</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="difficulty-badge medium">متوسط</div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">IndexedDB</span>
+                            </div>
+                            <div class="project-features">
+                                <h5>الميزات:</h5>
+                                <ul>
+                                    <li>إضافة وحذف الكتب</li>
+                                    <li>البحث والتصفية</li>
+                                    <li>تقييم الكتب</li>
+                                    <li>إحصائيات القراءة</li>
+                                </ul>
+                            </div>
+                            <p><strong>وقت التنفيذ:</strong> 8-10 أيام</p>
+                            <p><strong>ما ستتعلمه:</strong> Database، Search، Filtering، Statistics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مثال تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>🎮 مثال تفاعلي: مولد أفكار المشاريع</h2>
+
+                <div class="interactive-builder">
+                    <h3>💡 مولد أفكار المشاريع الشخصية</h3>
+                    <p>احصل على فكرة مشروع مناسبة لمستواك واهتماماتك:</p>
+                    
+                    <button class="builder-button" onclick="generateProject('beginner')">مشروع للمبتدئين</button>
+                    <button class="builder-button" onclick="generateProject('intermediate')">مشروع متوسط</button>
+                    <button class="builder-button" onclick="generateProject('creative')">مشروع إبداعي</button>
+                    <button class="builder-button" onclick="showProjectPlan()">خطة تنفيذ مشروع</button>
+                    
+                    <div class="builder-output" id="projectOutput">اختر نوع المشروع للحصول على فكرة مخصصة...</div>
+                </div>
+            </div>
+
+            <!-- خطوات تنفيذ المشروع -->
+            <div class="chapter-content fade-in">
+                <h2>📋 خطوات تنفيذ المشروع</h2>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">1</span>التخطيط والتصميم</h3>
+                    <ul>
+                        <li>حدد الهدف من المشروع</li>
+                        <li>ارسم مخطط بسيط للواجهة</li>
+                        <li>حدد الميزات الأساسية</li>
+                        <li>اختر التقنيات المناسبة</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">2</span>إعداد البيئة</h3>
+                    <ul>
+                        <li>أنشئ مجلد المشروع</li>
+                        <li>أنشئ الملفات الأساسية (HTML, CSS, JS)</li>
+                        <li>اربط الملفات ببعضها</li>
+                        <li>اختبر أن كل شيء يعمل</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">3</span>بناء الهيكل</h3>
+                    <ul>
+                        <li>اكتب HTML الأساسي</li>
+                        <li>أضف CSS للتنسيق الأولي</li>
+                        <li>تأكد من responsive design</li>
+                        <li>اختبر على أجهزة مختلفة</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">4</span>إضافة الوظائف</h3>
+                    <ul>
+                        <li>ابدأ بالوظائف الأساسية</li>
+                        <li>اختبر كل وظيفة قبل الانتقال للتالية</li>
+                        <li>أضف معالجة الأخطاء</li>
+                        <li>حسن تجربة المستخدم</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">5</span>الاختبار والتحسين</h3>
+                    <ul>
+                        <li>اختبر جميع الوظائف</li>
+                        <li>اطلب من آخرين تجربة المشروع</li>
+                        <li>أصلح الأخطاء المكتشفة</li>
+                        <li>حسن الأداء والسرعة</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">6</span>النشر والمشاركة</h3>
+                    <ul>
+                        <li>انشر المشروع على GitHub</li>
+                        <li>استضف المشروع (Netlify, Vercel)</li>
+                        <li>اكتب README شامل</li>
+                        <li>شارك المشروع مع المجتمع</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- مثال كود -->
+            <div class="chapter-content fade-in">
+                <h2>💻 مثال: بداية مشروع آلة حاسبة</h2>
+
+                <div class="project-demo">
+                    <h4>هيكل HTML الأساسي:</h4>
+                    <div class="code-preview">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;آلة حاسبة&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="calculator"&gt;
+        &lt;div class="display"&gt;
+            &lt;input type="text" id="result" readonly&gt;
+        &lt;/div&gt;
+        &lt;div class="buttons"&gt;
+            &lt;button onclick="clearDisplay()"&gt;C&lt;/button&gt;
+            &lt;button onclick="deleteLast()"&gt;⌫&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('/')"&gt;÷&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('*')"&gt;×&lt;/button&gt;
+            
+            &lt;button onclick="appendToDisplay('7')"&gt;7&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('8')"&gt;8&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('9')"&gt;9&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('-')"&gt;-&lt;/button&gt;
+            
+            &lt;button onclick="appendToDisplay('4')"&gt;4&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('5')"&gt;5&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('6')"&gt;6&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('+')"&gt;+&lt;/button&gt;
+            
+            &lt;button onclick="appendToDisplay('1')"&gt;1&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('2')"&gt;2&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('3')"&gt;3&lt;/button&gt;
+            &lt;button onclick="calculate()" rowspan="2"&gt;=&lt;/button&gt;
+            
+            &lt;button onclick="appendToDisplay('0')" colspan="2"&gt;0&lt;/button&gt;
+            &lt;button onclick="appendToDisplay('.')"&gt;.&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+                </div>
+
+                <div class="project-demo">
+                    <h4>JavaScript الأساسي:</h4>
+                    <div class="code-preview">
+// script.js
+let display = document.getElementById('result');
+
+function appendToDisplay(value) {
+    display.value += value;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = 'خطأ';
+    }
+}
+
+// إضافة دعم لوحة المفاتيح
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    
+    if (key >= '0' && key <= '9' || key === '.') {
+        appendToDisplay(key);
+    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        appendToDisplay(key);
+    } else if (key === 'Enter' || key === '=') {
+        calculate();
+    } else if (key === 'Escape' || key === 'c' || key === 'C') {
+        clearDisplay();
+    } else if (key === 'Backspace') {
+        deleteLast();
+    }
+});
+                    </div>
+                </div>
+            </div>
+
+            <!-- نصائح للمشاريع -->
+            <div class="chapter-content fade-in">
+                <h2>💡 نصائح لمشاريع ناجحة</h2>
+
+                <div class="project-tips">
+                    <div class="tip-card">
+                        <div class="tip-icon">🎯</div>
+                        <h4 class="tip-title">ابدأ بسيط</h4>
+                        <ul>
+                            <li>لا تعقد المشروع من البداية</li>
+                            <li>ركز على الوظائف الأساسية أولاً</li>
+                            <li>أضف الميزات تدريجياً</li>
+                            <li>اختبر كل إضافة جديدة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">📝</div>
+                        <h4 class="tip-title">خطط جيداً</h4>
+                        <ul>
+                            <li>ارسم مخطط للمشروع</li>
+                            <li>حدد الميزات المطلوبة</li>
+                            <li>قسم العمل لمهام صغيرة</li>
+                            <li>ضع جدول زمني واقعي</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🔍</div>
+                        <h4 class="tip-title">اختبر باستمرار</h4>
+                        <ul>
+                            <li>اختبر كل ميزة بعد إضافتها</li>
+                            <li>جرب المشروع على أجهزة مختلفة</li>
+                            <li>اطلب من آخرين تجربته</li>
+                            <li>أصلح الأخطاء فوراً</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">📚</div>
+                        <h4 class="tip-title">تعلم من الأخطاء</h4>
+                        <ul>
+                            <li>لا تخف من الأخطاء</li>
+                            <li>ابحث عن حلول للمشاكل</li>
+                            <li>اسأل في المجتمعات</li>
+                            <li>وثق ما تعلمته</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🎨</div>
+                        <h4 class="tip-title">اهتم بالتصميم</h4>
+                        <ul>
+                            <li>اجعل الواجهة بسيطة وجميلة</li>
+                            <li>استخدم ألوان متناسقة</li>
+                            <li>تأكد من responsive design</li>
+                            <li>اهتم بتجربة المستخدم</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🚀</div>
+                        <h4 class="tip-title">انشر واعرض</h4>
+                        <ul>
+                            <li>ارفع المشروع على GitHub</li>
+                            <li>استضفه على الإنترنت</li>
+                            <li>شاركه مع الأصدقاء</li>
+                            <li>أضفه لـ portfolio</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بناء Portfolio -->
+            <div class="chapter-content fade-in">
+                <h2>💼 بناء Portfolio قوي</h2>
+
+                <div class="portfolio-section">
+                    <h3>🎯 Portfolio هو بطاقة هويتك كمطور</h3>
+                    <p>مجموعة مشاريعك هي أفضل طريقة لإثبات مهاراتك</p>
+                    
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <h4>🌐 موقع شخصي</h4>
+                            <p>صفحة تعريفية بك ومهاراتك</p>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <h4>💻 3-5 مشاريع</h4>
+                            <p>مشاريع متنوعة تظهر مهارات مختلفة</p>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <h4>📝 وصف واضح</h4>
+                            <p>اشرح كل مشروع والتقنيات المستخدمة</p>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <h4>🔗 روابط مباشرة</h4>
+                            <p>رابط للمشروع المباشر وكود GitHub</p>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <h4>📱 تصميم متجاوب</h4>
+                            <p>يعمل بشكل مثالي على جميع الأجهزة</p>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <h4>📧 معلومات التواصل</h4>
+                            <p>طرق للتواصل معك للفرص</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-demo">
+                    <h4>مشاريع أساسية لـ Portfolio:</h4>
+                    <ol>
+                        <li><strong>موقع شخصي:</strong> يعرف بك ومهاراتك</li>
+                        <li><strong>تطبيق CRUD:</strong> يظهر مهارات قاعدة البيانات</li>
+                        <li><strong>تطبيق API:</strong> يظهر التعامل مع APIs</li>
+                        <li><strong>مشروع إبداعي:</strong> يظهر قدرتك على الابتكار</li>
+                        <li><strong>مشروع جماعي:</strong> يظهر قدرتك على العمل في فريق</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو أهم شيء عند بدء مشروع جديد؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">كتابة الكود فوراً</li>
+                        <li data-correct="true">التخطيط والتصميم أولاً</li>
+                        <li data-correct="false">اختيار أصعب التقنيات</li>
+                        <li data-correct="false">عدم الاختبار</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. كم مشروع يجب أن يحتوي Portfolio المبتدئ؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">مشروع واحد</li>
+                        <li data-correct="true">3-5 مشاريع</li>
+                        <li data-correct="false">10+ مشاريع</li>
+                        <li data-correct="false">لا يهم العدد</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. أين يجب نشر مشاريعك؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">على الحاسوب فقط</li>
+                        <li data-correct="true">GitHub والإنترنت</li>
+                        <li data-correct="false">في ملف Word</li>
+                        <li data-correct="false">لا تنشرها أبداً</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. ما هو أفضل مشروع للمبتدئين؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">شبكة اجتماعية كاملة</li>
+                        <li data-correct="true">آلة حاسبة أو قائمة مهام</li>
+                        <li data-correct="false">نظام إدارة شركة</li>
+                        <li data-correct="false">لعبة ثلاثية الأبعاد</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter17.html" class="nav-button">
+                    ← الفصل السابق: مصادر التعلم
+                </a>
+                <a href="chapter19.html" class="nav-button">
+                    الفصل التالي: كيف تتعلم ذاتياً؟ →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // مولد أفكار المشاريع
+        const projectIdeas = {
+            beginner: [
+                {
+                    name: "مولد كلمات المرور",
+                    description: "تطبيق لتوليد كلمات مرور قوية وآمنة",
+                    features: ["طول قابل للتخصيص", "خيارات الأحرف", "قوة كلمة المرور", "نسخ للحافظة"],
+                    tech: ["HTML", "CSS", "JavaScript"],
+                    time: "2-3 أيام"
+                },
+                {
+                    name: "ساعة رقمية",
+                    description: "ساعة رقمية مع منبه وتوقيت",
+                    features: ["عرض الوقت الحالي", "منبه", "ساعة توقيت", "تغيير الثيم"],
+                    tech: ["HTML", "CSS", "JavaScript"],
+                    time: "1-2 يوم"
+                },
+                {
+                    name: "محول العملات",
+                    description: "تطبيق لتحويل العملات باستخدام API",
+                    features: ["تحويل فوري", "عملات متعددة", "رسم بياني للأسعار", "تاريخ التحويل"],
+                    tech: ["HTML", "CSS", "JavaScript", "Currency API"],
+                    time: "3-4 أيام"
+                }
+            ],
+            intermediate: [
+                {
+                    name: "متجر إلكتروني مصغر",
+                    description: "متجر بسيط مع سلة تسوق",
+                    features: ["عرض المنتجات", "سلة التسوق", "حساب المجموع", "نظام الدفع الوهمي"],
+                    tech: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+                    time: "7-10 أيام"
+                },
+                {
+                    name: "تطبيق الملاحظات",
+                    description: "تطبيق لكتابة وتنظيم الملاحظات",
+                    features: ["إنشاء وتعديل الملاحظات", "تصنيف بالألوان", "البحث", "تصدير PDF"],
+                    tech: ["HTML", "CSS", "JavaScript", "IndexedDB"],
+                    time: "5-7 أيام"
+                },
+                {
+                    name: "لوحة تحكم إحصائيات",
+                    description: "لوحة تحكم تعرض إحصائيات وهمية",
+                    features: ["رسوم بيانية", "إحصائيات فورية", "تصفية البيانات", "تصدير التقارير"],
+                    tech: ["HTML", "CSS", "JavaScript", "Chart.js"],
+                    time: "8-12 يوم"
+                }
+            ],
+            creative: [
+                {
+                    name: "لعبة الذاكرة",
+                    description: "لعبة تحدي الذاكرة بالبطاقات",
+                    features: ["مستويات صعوبة", "نظام النقاط", "أفضل الأوقات", "تأثيرات صوتية"],
+                    tech: ["HTML", "CSS", "JavaScript", "Web Audio API"],
+                    time: "5-8 أيام"
+                },
+                {
+                    name: "مولد الاقتباسات",
+                    description: "تطبيق يعرض اقتباسات ملهمة",
+                    features: ["اقتباسات عشوائية", "مشاركة الاقتباسات", "حفظ المفضلة", "خلفيات جميلة"],
+                    tech: ["HTML", "CSS", "JavaScript", "Quotes API"],
+                    time: "3-5 أيام"
+                },
+                {
+                    name: "رسام رقمي بسيط",
+                    description: "تطبيق للرسم والتلوين",
+                    features: ["أدوات رسم متنوعة", "ألوان مختلفة", "حفظ الرسمة", "مشاركة الإبداع"],
+                    tech: ["HTML", "CSS", "JavaScript", "Canvas API"],
+                    time: "6-10 أيام"
+                }
+            ]
+        };
+        
+        function generateProject(category) {
+            const output = document.getElementById('projectOutput');
+            const projects = projectIdeas[category];
+            const randomProject = projects[Math.floor(Math.random() * projects.length)];
+            
+            output.textContent = `💡 فكرة مشروع ${category === 'beginner' ? 'للمبتدئين' : category === 'intermediate' ? 'متوسط' : 'إبداعي'}:
+
+🎯 اسم المشروع: ${randomProject.name}
+
+📝 الوصف: ${randomProject.description}
+
+✨ الميزات المقترحة:
+${randomProject.features.map(feature => `• ${feature}`).join('\n')}
+
+🛠️ التقنيات المطلوبة:
+${randomProject.tech.map(tech => `• ${tech}`).join('\n')}
+
+⏰ الوقت المتوقع: ${randomProject.time}
+
+🎯 نصائح للبدء:
+• ابدأ بالميزات الأساسية
+• صمم الواجهة أولاً على الورق
+• قسم العمل لمهام صغيرة
+• اختبر كل ميزة قبل الانتقال للتالية
+• لا تتردد في طلب المساعدة!`;
+        }
+        
+        function showProjectPlan() {
+            const output = document.getElementById('projectOutput');
+            output.textContent = `📋 خطة تنفيذ مشروع ناجح:
+
+🎯 المرحلة الأولى: التخطيط (يوم 1)
+• حدد الهدف من المشروع
+• ارسم مخطط بسيط للواجهة
+• اكتب قائمة بالميزات المطلوبة
+• اختر التقنيات المناسبة
+
+🏗️ المرحلة الثانية: البناء (أيام 2-4)
+• أنشئ هيكل HTML الأساسي
+• أضف CSS للتنسيق
+• ابدأ بـ JavaScript البسيط
+• اختبر كل جزء تضيفه
+
+⚡ المرحلة الثالثة: الوظائف (أيام 5-7)
+• أضف الوظائف الأساسية
+• تعامل مع الأخطاء المحتملة
+• حسن تجربة المستخدم
+• اختبر على أجهزة مختلفة
+
+🎨 المرحلة الرابعة: التحسين (يوم 8)
+• حسن التصميم والألوان
+• أضف تأثيرات بصرية
+• تأكد من responsive design
+• اختبر الأداء والسرعة
+
+🚀 المرحلة الخامسة: النشر (يوم 9)
+• ارفع المشروع على GitHub
+• استضف المشروع على الإنترنت
+• اكتب README شامل
+• شارك المشروع مع الأصدقاء
+
+📝 نصائح مهمة:
+• لا تستعجل - الجودة أهم من السرعة
+• اختبر باستمرار
+• اطلب آراء الآخرين
+• وثق ما تعلمته
+• احتفل بإنجازك! 🎉`;
+        }
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

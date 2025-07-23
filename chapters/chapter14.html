@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الرابع عشر: Flask - برمجة الخادم - كتاب البرمجة</title>
+    <meta name="description" content="تعلم Flask لبناء تطبيقات ويب بـ Python">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .flask-demo {
+            background: #f8f9fa;
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .flask-demo h4 {
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        
+        .flask-app {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .route-demo {
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .route-card {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: right;
+        }
+        
+        .route-method {
+            background: #007bff;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        
+        .route-method.get { background: #28a745; }
+        .route-method.post { background: #007bff; }
+        .route-method.put { background: #ffc107; color: #333; }
+        .route-method.delete { background: #dc3545; }
+        
+        .template-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .template-section {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .template-header {
+            background: #6f42c1;
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .template-content {
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            background: #2d3748;
+            color: #e2e8f0;
+            min-height: 200px;
+        }
+        
+        .form-demo {
+            background: #e8f4fd;
+            border-right: 4px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .database-integration {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .project-structure {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        
+        .folder-icon {
+            color: #4fc3f7;
+            margin-left: 0.5rem;
+        }
+        
+        .file-icon {
+            color: #ffd700;
+            margin-left: 0.5rem;
+        }
+        
+        .python-icon {
+            color: #3776ab;
+            margin-left: 0.5rem;
+        }
+        
+        .html-icon {
+            color: #e34c26;
+            margin-left: 0.5rem;
+        }
+        
+        .interactive-flask {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .flask-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .flask-button:hover {
+            background: #218838;
+        }
+        
+        .flask-output {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            min-height: 100px;
+            text-align: right;
+        }
+        
+        .deployment-steps {
+            background: #d4edda;
+            border-right: 4px solid #28a745;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .step-number {
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .template-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter14.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الرابع عشر</div>
+            <h1 class="chapter-title">Flask - برمجة الخادم</h1>
+            <p class="chapter-description">تعلم Flask لبناء تطبيقات ويب بـ Python</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو Flask ولماذا نستخدمه</li>
+                    <li>تعلم إنشاء تطبيق Flask بسيط</li>
+                    <li>إتقان Routes والـ URL handling</li>
+                    <li>تعلم Templates وعرض HTML</li>
+                    <li>التعامل مع Forms والبيانات</li>
+                    <li>ربط Flask بقاعدة البيانات</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة Flask -->
+            <div class="chapter-content fade-in">
+                <h2>🌶️ ما هو Flask؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">Flask</h3>
+                    <p class="definition-text">
+                        إطار عمل (Framework) بسيط ومرن لبناء تطبيقات الويب بـ Python
+                    </p>
+                </div>
+
+                <p>
+                    Flask هو أحد أشهر أطر العمل في Python! يُطلق عليه "micro-framework" لأنه بسيط وخفيف، 
+                    لكن قوي بما يكفي لبناء تطبيقات معقدة. مثل السكين السويسري للمطورين!
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>لماذا Flask؟</strong> لأنه بسيط للمبتدئين، قوي للمحترفين، ومرن لأي نوع من التطبيقات!
+                </div>
+
+                <h3>مميزات Flask:</h3>
+                <ul>
+                    <li><strong>بساطة:</strong> سهل التعلم والاستخدام</li>
+                    <li><strong>مرونة:</strong> يمكن تخصيصه لأي احتياج</li>
+                    <li><strong>Python:</strong> يستخدم لغة Python المحبوبة</li>
+                    <li><strong>مجتمع كبير:</strong> دعم ومكتبات كثيرة</li>
+                    <li><strong>سرعة التطوير:</strong> بناء تطبيقات سريعاً</li>
+                </ul>
+
+                <h3>Flask vs Django:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🌶️ Flask</h4>
+                        <ul>
+                            <li>بسيط ومرن</li>
+                            <li>مناسب للمشاريع الصغيرة والمتوسطة</li>
+                            <li>تحكم كامل في التطبيق</li>
+                            <li>سهل التعلم</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎸 Django</h4>
+                        <ul>
+                            <li>شامل ومتكامل</li>
+                            <li>مناسب للمشاريع الكبيرة</li>
+                            <li>ميزات جاهزة كثيرة</li>
+                            <li>أكثر تعقيداً</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تثبيت Flask -->
+            <div class="chapter-content fade-in">
+                <h2>⚙️ تثبيت Flask</h2>
+
+                <div class="flask-demo">
+                    <h4>خطوات التثبيت:</h4>
+                    <div class="flask-app">
+# 1. تأكد من تثبيت Python
+python --version
+
+# 2. إنشاء مجلد المشروع
+mkdir my-flask-app
+cd my-flask-app
+
+# 3. إنشاء بيئة افتراضية (اختياري لكن مُنصح به)
+python -m venv flask-env
+
+# 4. تفعيل البيئة الافتراضية
+# Windows:
+flask-env\Scripts\activate
+# Mac/Linux:
+source flask-env/bin/activate
+
+# 5. تثبيت Flask
+pip install Flask
+
+# 6. التحقق من التثبيت
+python -c "import flask; print(flask.__version__)"
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>نصيحة:</strong> استخدم البيئة الافتراضية دائماً لتجنب تعارض المكتبات!
+                </div>
+            </div>
+
+            <!-- أول تطبيق Flask -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 أول تطبيق Flask</h2>
+
+                <div class="flask-demo">
+                    <h4>إنشاء ملف app.py:</h4>
+                    <div class="flask-app">
+# app.py
+from flask import Flask
+
+# إنشاء تطبيق Flask
+app = Flask(__name__)
+
+# أول route
+@app.route('/')
+def home():
+    return '&lt;h1&gt;مرحباً بك في Flask!&lt;/h1&gt;'
+
+@app.route('/about')
+def about():
+    return '&lt;h1&gt;عن الموقع&lt;/h1&gt;&lt;p&gt;هذا موقع بُني بـ Flask&lt;/p&gt;'
+
+# تشغيل التطبيق
+if __name__ == '__main__':
+    app.run(debug=True)
+                    </div>
+                    
+                    <h4>تشغيل التطبيق:</h4>
+                    <div class="flask-app">
+# في Terminal
+python app.py
+
+# أو
+flask run
+
+# ثم اذهب إلى: http://localhost:5000
+                    </div>
+                </div>
+
+                <div class="project-structure">
+my-flask-app/
+├── <span class="python-icon">🐍</span> app.py           # الملف الرئيسي
+├── <span class="folder-icon">📁</span> templates/      # ملفات HTML
+├── <span class="folder-icon">📁</span> static/         # CSS, JS, صور
+│   ├── <span class="folder-icon">📁</span> css/
+│   ├── <span class="folder-icon">📁</span> js/
+│   └── <span class="folder-icon">📁</span> images/
+└── <span class="file-icon">📄</span> requirements.txt # قائمة المكتبات
+                </div>
+            </div>
+
+            <!-- Routes -->
+            <div class="chapter-content fade-in">
+                <h2>🛣️ Routes في Flask</h2>
+
+                <div class="definition-box">
+                    <h3 class="definition-title">Route</h3>
+                    <p class="definition-text">
+                        مسار URL يربط عنوان معين بدالة Python محددة
+                    </p>
+                </div>
+
+                <div class="route-demo">
+                    <h3>🗺️ أمثلة على Routes</h3>
+                    
+                    <div class="route-card">
+                        <span class="route-method get">GET</span>
+                        <strong>/</strong> → الصفحة الرئيسية
+                    </div>
+                    
+                    <div class="route-card">
+                        <span class="route-method get">GET</span>
+                        <strong>/about</strong> → صفحة عن الموقع
+                    </div>
+                    
+                    <div class="route-card">
+                        <span class="route-method get">GET</span>
+                        <strong>/user/&lt;name&gt;</strong> → صفحة المستخدم
+                    </div>
+                    
+                    <div class="route-card">
+                        <span class="route-method post">POST</span>
+                        <strong>/contact</strong> → إرسال رسالة
+                    </div>
+                </div>
+
+                <h3>أمثلة متقدمة على Routes:</h3>
+                <div class="flask-demo">
+                    <div class="flask-app">
+from flask import Flask
+
+app = Flask(__name__)
+
+# Route بسيط
+@app.route('/')
+def home():
+    return 'الصفحة الرئيسية'
+
+# Route مع متغير
+@app.route('/user/&lt;name&gt;')
+def user_profile(name):
+    return f'مرحباً {name}!'
+
+# Route مع نوع محدد
+@app.route('/post/&lt;int:post_id&gt;')
+def show_post(post_id):
+    return f'المنشور رقم: {post_id}'
+
+# Route مع عدة HTTP methods
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        return 'تم إرسال الرسالة!'
+    return 'صفحة التواصل'
+
+# Route مع query parameters
+@app.route('/search')
+def search():
+    query = request.args.get('q', '')
+    return f'البحث عن: {query}'
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates -->
+            <div class="chapter-content fade-in">
+                <h2>📄 Templates في Flask</h2>
+
+                <p>Templates تسمح لك بفصل HTML عن Python وإنشاء صفحات ديناميكية:</p>
+
+                <div class="template-demo">
+                    <div class="template-section">
+                        <div class="template-header">📁 templates/base.html</div>
+                        <div class="template-content">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;{% block title %}موقعي{% endblock %}&lt;/title&gt;
+    &lt;link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav&gt;
+        &lt;a href="/"&gt;الرئيسية&lt;/a&gt;
+        &lt;a href="/about"&gt;عنا&lt;/a&gt;
+    &lt;/nav&gt;
+    
+    &lt;main&gt;
+        {% block content %}{% endblock %}
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                        </div>
+                    </div>
+                    
+                    <div class="template-section">
+                        <div class="template-header">📁 templates/home.html</div>
+                        <div class="template-content">
+{% extends "base.html" %}
+
+{% block title %}الرئيسية - موقعي{% endblock %}
+
+{% block content %}
+&lt;h1&gt;مرحباً {{ name }}!&lt;/h1&gt;
+&lt;p&gt;اليوم هو {{ date }}&lt;/p&gt;
+
+&lt;h2&gt;المنتجات:&lt;/h2&gt;
+&lt;ul&gt;
+{% for product in products %}
+    &lt;li&gt;{{ product.name }} - {{ product.price }} جنيه مصري&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+{% endblock %}
+                        </div>
+                    </div>
+                </div>
+
+                <h3>استخدام Templates في Python:</h3>
+                <div class="flask-demo">
+                    <div class="flask-app">
+from flask import Flask, render_template
+from datetime import datetime
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    products = [
+        {'name': 'لابتوب', 'price': 2500},
+        {'name': 'هاتف', 'price': 1200},
+        {'name': 'تابلت', 'price': 800}
+    ]
+    
+    return render_template('home.html', 
+                         name='أحمد',
+                         date=datetime.now().strftime('%Y-%m-%d'),
+                         products=products)
+
+@app.route('/user/&lt;name&gt;')
+def user_profile(name):
+    return render_template('profile.html', username=name)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="chapter-content fade-in">
+                <h2>📝 التعامل مع Forms</h2>
+
+                <div class="form-demo">
+                    <h4>مثال: نموذج تسجيل مستخدم جديد</h4>
+                </div>
+
+                <div class="template-demo">
+                    <div class="template-section">
+                        <div class="template-header">📁 templates/register.html</div>
+                        <div class="template-content">
+{% extends "base.html" %}
+
+{% block content %}
+&lt;h1&gt;تسجيل مستخدم جديد&lt;/h1&gt;
+
+&lt;form method="POST"&gt;
+    &lt;div&gt;
+        &lt;label for="name"&gt;الاسم:&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="email"&gt;البريد الإلكتروني:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="password"&gt;كلمة المرور:&lt;/label&gt;
+        &lt;input type="password" id="password" name="password" required&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;تسجيل&lt;/button&gt;
+&lt;/form&gt;
+
+{% if message %}
+    &lt;p class="message"&gt;{{ message }}&lt;/p&gt;
+{% endif %}
+{% endblock %}
+                        </div>
+                    </div>
+                    
+                    <div class="template-section">
+                        <div class="template-header">🐍 app.py - معالجة Form</div>
+                        <div class="template-content">
+from flask import Flask, render_template, request, redirect, url_for
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # جلب البيانات من النموذج
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        
+        # التحقق من البيانات
+        if len(name) &lt; 2:
+            return render_template('register.html', 
+                                 message='الاسم قصير جداً')
+        
+        # حفظ المستخدم (في قاعدة البيانات)
+        save_user(name, email, password)
+        
+        return redirect(url_for('success'))
+    
+    return render_template('register.html')
+
+@app.route('/success')
+def success():
+    return '&lt;h1&gt;تم التسجيل بنجاح!&lt;/h1&gt;'
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قاعدة البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>🗄️ ربط Flask بقاعدة البيانات</h2>
+
+                <div class="database-integration">
+                    <h3>🔗 Flask + SQLite</h3>
+                    <p>سنستخدم SQLite لأنها بسيطة ولا تحتاج إعداد معقد</p>
+                </div>
+
+                <div class="flask-demo">
+                    <h4>تثبيت المكتبات المطلوبة:</h4>
+                    <div class="flask-app">
+pip install Flask Flask-SQLAlchemy
+                    </div>
+                    
+                    <h4>إعداد قاعدة البيانات:</h4>
+                    <div class="flask-app">
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SECRET_KEY'] = 'your-secret-key'
+db = SQLAlchemy(app)
+
+# نموذج المستخدم
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f'&lt;User {self.name}&gt;'
+
+# إنشاء الجداول
+with app.app_context():
+    db.create_all()
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        
+        # التحقق من وجود المستخدم
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            return render_template('register.html', 
+                                 message='البريد الإلكتروني مُستخدم بالفعل')
+        
+        # إنشاء مستخدم جديد
+        new_user = User(name=name, email=email)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        return redirect(url_for('users'))
+    
+    return render_template('register.html')
+
+@app.route('/users')
+def users():
+    all_users = User.query.all()
+    return render_template('users.html', users=all_users)
+                    </div>
+                </div>
+            </div>
+
+            <!-- مثال تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>🎮 مثال تفاعلي: تطبيق المهام</h2>
+
+                <div class="interactive-flask">
+                    <h3>📋 تطبيق إدارة المهام</h3>
+                    <p>محاكاة لتطبيق Flask بسيط:</p>
+                    
+                    <input type="text" id="taskInput" placeholder="أدخل مهمة جديدة..." style="padding: 0.5rem; margin: 0.5rem; width: 300px;">
+                    <button class="flask-button" onclick="addTask()">إضافة مهمة</button>
+                    <button class="flask-button" onclick="showFlaskCode()">عرض كود Flask</button>
+                    <button class="flask-button" onclick="clearTasks()">مسح الكل</button>
+                    
+                    <div class="flask-output" id="tasksOutput">قائمة المهام ستظهر هنا...</div>
+                </div>
+            </div>
+
+            <!-- نشر التطبيق -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 نشر تطبيق Flask</h2>
+
+                <div class="deployment-steps">
+                    <h3><span class="step-number">1</span>إعداد التطبيق للنشر</h3>
+                    <div class="flask-app">
+# requirements.txt
+Flask==2.3.3
+Flask-SQLAlchemy==3.0.5
+gunicorn==21.2.0
+
+# إنشاء ملف requirements.txt
+pip freeze > requirements.txt
+                    </div>
+                </div>
+
+                <div class="deployment-steps">
+                    <h3><span class="step-number">2</span>إنشاء ملف Procfile (لـ Heroku)</h3>
+                    <div class="flask-app">
+web: gunicorn app:app
+                    </div>
+                </div>
+
+                <div class="deployment-steps">
+                    <h3><span class="step-number">3</span>خيارات النشر المجانية</h3>
+                    <ul>
+                        <li><strong>Heroku:</strong> سهل ومجاني للمشاريع الصغيرة</li>
+                        <li><strong>PythonAnywhere:</strong> مخصص لـ Python</li>
+                        <li><strong>Render:</strong> بديل حديث لـ Heroku</li>
+                        <li><strong>Railway:</strong> سريع وبسيط</li>
+                    </ul>
+                </div>
+
+                <div class="deployment-steps">
+                    <h3><span class="step-number">4</span>نشر على Heroku</h3>
+                    <div class="flask-app">
+# تثبيت Heroku CLI
+# ثم في Terminal:
+
+heroku login
+heroku create my-flask-app
+git add .
+git commit -m "Deploy Flask app"
+git push heroku main
+heroku open
+                    </div>
+                </div>
+            </div>
+
+            <!-- أفضل الممارسات -->
+            <div class="chapter-content fade-in">
+                <h2>⭐ أفضل الممارسات</h2>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🔒 الأمان</h4>
+                        <ul>
+                            <li>استخدم SECRET_KEY قوي</li>
+                            <li>تشفير كلمات المرور</li>
+                            <li>التحقق من المدخلات</li>
+                            <li>استخدم HTTPS في الإنتاج</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📁 التنظيم</h4>
+                        <ul>
+                            <li>فصل Routes في ملفات منفصلة</li>
+                            <li>استخدم Blueprints للمشاريع الكبيرة</li>
+                            <li>نظم Templates في مجلدات</li>
+                            <li>استخدم ملف config منفصل</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🧪 الاختبار</h4>
+                        <ul>
+                            <li>اكتب Unit Tests</li>
+                            <li>اختبر Routes والـ APIs</li>
+                            <li>استخدم pytest</li>
+                            <li>اختبر قاعدة البيانات</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📈 الأداء</h4>
+                        <ul>
+                            <li>استخدم Cache للبيانات</li>
+                            <li>حسن استعلامات قاعدة البيانات</li>
+                            <li>ضغط الملفات الثابتة</li>
+                            <li>استخدم CDN للصور</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو Flask؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">قاعدة بيانات</li>
+                        <li data-correct="true">إطار عمل Python للويب</li>
+                        <li data-correct="false">لغة برمجة</li>
+                        <li data-correct="false">محرر نصوص</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما هو Route في Flask؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من قواعد البيانات</li>
+                        <li data-correct="true">مسار URL يربط عنوان بدالة</li>
+                        <li data-correct="false">ملف HTML</li>
+                        <li data-correct="false">نوع من المتغيرات</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. أين نضع ملفات HTML في Flask؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">في المجلد الرئيسي</li>
+                        <li data-correct="true">في مجلد templates</li>
+                        <li data-correct="false">في مجلد static</li>
+                        <li data-correct="false">في مجلد css</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. كيف نجلب بيانات Form في Flask؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">request.get()</li>
+                        <li data-correct="true">request.form['field_name']</li>
+                        <li data-correct="false">form.get()</li>
+                        <li data-correct="false">input.value</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter13.html" class="nav-button">
+                    ← الفصل السابق: Back-End Basics
+                </a>
+                <a href="chapter15.html" class="nav-button">
+                    الفصل التالي: تطوير التطبيقات →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // محاكاة تطبيق المهام
+        let tasks = [];
+        
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const task = input.value.trim();
+            
+            if (task) {
+                tasks.push({
+                    id: Date.now(),
+                    text: task,
+                    completed: false
+                });
+                
+                input.value = '';
+                displayTasks();
+            }
+        }
+        
+        function displayTasks() {
+            const output = document.getElementById('tasksOutput');
+            
+            if (tasks.length === 0) {
+                output.textContent = 'لا توجد مهام حالياً...';
+                return;
+            }
+            
+            let html = '📋 قائمة المهام:\n\n';
+            tasks.forEach((task, index) => {
+                html += `${index + 1}. ${task.text}\n`;
+            });
+            
+            html += `\n✅ إجمالي المهام: ${tasks.length}`;
+            output.textContent = html;
+        }
+        
+        function clearTasks() {
+            tasks = [];
+            displayTasks();
+        }
+        
+        function showFlaskCode() {
+            const output = document.getElementById('tasksOutput');
+            output.textContent = `📝 كود Flask لتطبيق المهام:
+
+# app.py
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+# قائمة المهام (في الواقع ستكون في قاعدة البيانات)
+tasks = []
+
+@app.route('/')
+def index():
+    return render_template('tasks.html', tasks=tasks)
+
+@app.route('/add', methods=['POST'])
+def add_task():
+    task_text = request.form['task']
+    if task_text:
+        tasks.append({
+            'id': len(tasks) + 1,
+            'text': task_text,
+            'completed': False
+        })
+    return redirect(url_for('index'))
+
+@app.route('/delete/<int:task_id>')
+def delete_task(task_id):
+    global tasks
+    tasks = [t for t in tasks if t['id'] != task_id]
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)`;
+        }
+        
+        // إضافة مستمع للضغط على Enter
+        document.getElementById('taskInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

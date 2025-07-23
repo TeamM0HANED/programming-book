@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الثاني: لغات البرمجة وأنواعها - كتاب البرمجة</title>
+    <meta name="description" content="تصنيفات لغات البرمجة واستخدامات كل نوع">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .language-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-right: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .language-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .language-icon {
+            font-size: 2.5rem;
+        }
+        
+        .language-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .language-year {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .pros, .cons {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .pros {
+            border-right: 4px solid #28a745;
+        }
+        
+        .cons {
+            border-right: 4px solid #dc3545;
+        }
+        
+        .pros h4 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+        
+        .cons h4 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+        
+        .code-sample {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .paradigm-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .paradigm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .paradigm-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .paradigm-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter2.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الثاني</div>
+            <h1 class="chapter-title">لغات البرمجة وأنواعها</h1>
+            <p class="chapter-description">تصنيفات لغات البرمجة واستخدامات كل نوع</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم أنواع لغات البرمجة المختلفة</li>
+                    <li>التعرف على أشهر لغات البرمجة واستخداماتها</li>
+                    <li>فهم مفاهيم البرمجة المختلفة (OOP, Functional, etc.)</li>
+                    <li>معرفة كيفية اختيار اللغة المناسبة للمشروع</li>
+                    <li>مقارنة مزايا وعيوب اللغات المختلفة</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة -->
+            <div class="chapter-content fade-in">
+                <h2>🌍 عالم لغات البرمجة</h2>
+                <p>
+                    هناك المئات من لغات البرمجة في العالم، كل واحدة منها صُممت لحل مشكلات معينة أو للعمل في بيئات محددة. 
+                    تماماً مثل اللغات البشرية، كل لغة برمجة لها قواعدها وخصائصها الفريدة.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>هل تعلم؟</strong> أن هناك أكثر من 700 لغة برمجة مختلفة، لكن المبرمجين يستخدمون عادة 10-20 لغة فقط في معظم المشاريع!
+                </div>
+            </div>
+
+            <!-- تصنيفات لغات البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>📊 تصنيفات لغات البرمجة</h2>
+                
+                <h3>1. حسب مستوى التجريد</h3>
+                <div class="paradigm-grid">
+                    <div class="paradigm-card">
+                        <div class="paradigm-icon">⚡</div>
+                        <h4>لغات منخفضة المستوى</h4>
+                        <p>قريبة من لغة الآلة، سريعة جداً لكن صعبة الكتابة</p>
+                        <strong>أمثلة:</strong> Assembly, Machine Code
+                    </div>
+                    
+                    <div class="paradigm-card">
+                        <div class="paradigm-icon">⚖️</div>
+                        <h4>لغات متوسطة المستوى</h4>
+                        <p>توازن بين السرعة وسهولة الاستخدام</p>
+                        <strong>أمثلة:</strong> C, C++, Rust
+                    </div>
+                    
+                    <div class="paradigm-card">
+                        <div class="paradigm-icon">😊</div>
+                        <h4>لغات عالية المستوى</h4>
+                        <p>سهلة الفهم والكتابة، قريبة من اللغة البشرية</p>
+                        <strong>أمثلة:</strong> Python, JavaScript, Java
+                    </div>
+                </div>
+
+                <h3>2. حسب طريقة التنفيذ</h3>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>🔄 لغات مُفسرة (Interpreted)</h4>
+                        <ul>
+                            <li>تُنفذ سطر بسطر</li>
+                            <li>سهلة التطوير والاختبار</li>
+                            <li>أبطأ في التنفيذ</li>
+                            <li>تحتاج المفسر لتشغيل البرنامج</li>
+                        </ul>
+                        <strong>أمثلة:</strong> Python, JavaScript, PHP
+                    </div>
+                    
+                    <div class="cons">
+                        <h4>⚡ لغات مُجمعة (Compiled)</h4>
+                        <ul>
+                            <li>تُترجم إلى كود الآلة مسبقاً</li>
+                            <li>أسرع في التنفيذ</li>
+                            <li>لا تحتاج مترجم عند التشغيل</li>
+                            <li>أصعب في التطوير والاختبار</li>
+                        </ul>
+                        <strong>أمثلة:</strong> C, C++, Go, Rust
+                    </div>
+                </div>
+            </div>
+
+            <!-- أشهر لغات البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>🏆 أشهر لغات البرمجة</h2>
+                
+                <!-- Python -->
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">🐍</div>
+                        <div>
+                            <div class="language-name">Python</div>
+                            <div class="language-year">1991</div>
+                            <div class="difficulty-badge difficulty-easy">سهل للمبتدئين</div>
+                        </div>
+                    </div>
+                    <p><strong>الاستخدامات:</strong> الذكاء الاصطناعي، علم البيانات، تطوير الويب، الأتمتة</p>
+                    <p><strong>لماذا مشهورة؟</strong> سهلة التعلم، مكتبات ضخمة، مجتمع كبير</p>
+                    
+                    <div class="code-sample">
+print("مرحباً بالعالم!")
+name = input("ما اسمك؟ ")
+print(f"أهلاً {name}!")
+                    </div>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">🌐</div>
+                        <div>
+                            <div class="language-name">JavaScript</div>
+                            <div class="language-year">1995</div>
+                            <div class="difficulty-badge difficulty-medium">متوسط</div>
+                        </div>
+                    </div>
+                    <p><strong>الاستخدامات:</strong> تطوير الويب، تطبيقات الجوال، تطبيقات سطح المكتب</p>
+                    <p><strong>لماذا مشهورة؟</strong> لغة الويب الأساسية، تعمل في المتصفح والخادم</p>
+                    
+                    <div class="code-sample">
+console.log("مرحباً بالعالم!");
+let name = prompt("ما اسمك؟");
+alert(`أهلاً ${name}!`);
+                    </div>
+                </div>
+
+                <!-- Java -->
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">☕</div>
+                        <div>
+                            <div class="language-name">Java</div>
+                            <div class="language-year">1995</div>
+                            <div class="difficulty-badge difficulty-medium">متوسط</div>
+                        </div>
+                    </div>
+                    <p><strong>الاستخدامات:</strong> تطبيقات المؤسسات، تطبيقات Android، أنظمة كبيرة</p>
+                    <p><strong>لماذا مشهورة؟</strong> "اكتب مرة، شغل في أي مكان"، أمان عالي، أداء جيد</p>
+                    
+                    <div class="code-sample">
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("مرحباً بالعالم!");
+    }
+}
+                    </div>
+                </div>
+
+                <!-- C++ -->
+                <div class="language-card">
+                    <div class="language-header">
+                        <div class="language-icon">⚡</div>
+                        <div>
+                            <div class="language-name">C++</div>
+                            <div class="language-year">1985</div>
+                            <div class="difficulty-badge difficulty-hard">صعب</div>
+                        </div>
+                    </div>
+                    <p><strong>الاستخدامات:</strong> الألعاب، أنظمة التشغيل، البرمجيات عالية الأداء</p>
+                    <p><strong>لماذا مشهورة؟</strong> سرعة عالية جداً، تحكم كامل في الذاكرة</p>
+                    
+                    <div class="code-sample">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "مرحباً بالعالم!" &lt;&lt; endl;
+    return 0;
+}
+                    </div>
+                </div>
+            </div>
+
+            <!-- مقارنة اللغات -->
+            <div class="chapter-content fade-in">
+                <h2>⚖️ مقارنة سريعة</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>اللغة</th>
+                            <th>سهولة التعلم</th>
+                            <th>السرعة</th>
+                            <th>الاستخدام الشائع</th>
+                            <th>فرص العمل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Python</strong></td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                            <td>AI, Data Science</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JavaScript</strong></td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>Web Development</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Java</strong></td>
+                            <td>⭐⭐⭐</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>Enterprise Apps</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C++</strong></td>
+                            <td>⭐⭐</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>Games, Systems</td>
+                            <td>⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C#</strong></td>
+                            <td>⭐⭐⭐</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>Windows Apps</td>
+                            <td>⭐⭐⭐⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- كيف تختار اللغة المناسبة -->
+            <div class="chapter-content fade-in">
+                <h2>🤔 كيف تختار اللغة المناسبة؟</h2>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>🎯 حدد هدفك</h3>
+                        <ul>
+                            <li><strong>تطوير الويب:</strong> JavaScript, Python, PHP</li>
+                            <li><strong>تطبيقات الجوال:</strong> Java/Kotlin (Android), Swift (iOS)</li>
+                            <li><strong>الذكاء الاصطناعي:</strong> Python, R</li>
+                            <li><strong>الألعاب:</strong> C++, C#, JavaScript</li>
+                            <li><strong>تطبيقات سطح المكتب:</strong> C++, Java, C#</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>⏰ اعتبارات أخرى</h3>
+                        <ul>
+                            <li><strong>الوقت المتاح:</strong> Python أسرع للتعلم من C++</li>
+                            <li><strong>فرص العمل:</strong> ابحث عن الطلب في منطقتك</li>
+                            <li><strong>المجتمع:</strong> لغات بمجتمع كبير = مساعدة أكثر</li>
+                            <li><strong>المستقبل:</strong> تأكد أن اللغة لها مستقبل</li>
+                            <li><strong>الشركات:</strong> ما تستخدمه الشركات التي تريد العمل بها</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>نصيحة للمبتدئين:</strong> ابدأ بـ Python أو JavaScript. هما أسهل للتعلم ولهما استخدامات واسعة وفرص عمل ممتازة!
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. أي من هذه اللغات تُعتبر الأسهل للمبتدئين؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">C++</li>
+                        <li data-correct="true">Python</li>
+                        <li data-correct="false">Assembly</li>
+                        <li data-correct="false">Machine Code</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما هي اللغة الأساسية لتطوير الويب؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">Python</li>
+                        <li data-correct="true">JavaScript</li>
+                        <li data-correct="false">C++</li>
+                        <li data-correct="false">Java</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما الفرق بين اللغات المُفسرة والمُجمعة؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">لا يوجد فرق</li>
+                        <li data-correct="true">المُفسرة تُنفذ سطر بسطر، المُجمعة تُترجم مسبقاً</li>
+                        <li data-correct="false">المُجمعة أبطأ من المُفسرة</li>
+                        <li data-correct="false">المُفسرة تحتاج ترجمة مسبقة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter1.html" class="nav-button">
+                    ← الفصل السابق: مقدمة في البرمجة
+                </a>
+                <a href="chapter3.html" class="nav-button">
+                    الفصل التالي: كيف تعمل الحواسيب؟ →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

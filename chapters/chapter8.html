@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الثامن: Python - البرمجة البسيطة - كتاب البرمجة</title>
+    <meta name="description" content="تعلم أساسيات Python وبناء تطبيقات بسيطة">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .python-demo {
+            background: #f8f9fa;
+            border: 2px solid #3776ab;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .python-demo h4 {
+            color: #3776ab;
+            margin-bottom: 1rem;
+        }
+        
+        .python-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            border-right: 4px solid #3776ab;
+        }
+        
+        .python-syntax {
+            background: #e8f4fd;
+            border-right: 4px solid #3776ab;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .data-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .data-type-card {
+            background: white;
+            border: 2px solid #3776ab;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .data-type-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-type-name {
+            background: #3776ab;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .python-editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .editor-panel {
+            padding: 1rem;
+        }
+        
+        .editor-header {
+            background: #3776ab;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .python-input {
+            width: 100%;
+            height: 300px;
+            border: none;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        
+        .output-panel {
+            background: #f8f9fa;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .output-content {
+            padding: 1rem;
+            min-height: 300px;
+            background: #2d3748;
+            color: #e2e8f0;
+            margin: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        
+        .run-button {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .run-button:hover {
+            background: #218838;
+        }
+        
+        .project-showcase {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-header {
+            background: #3776ab;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .project-body {
+            padding: 1.5rem;
+        }
+        
+        .calculator-app {
+            background: #333;
+            border-radius: 10px;
+            padding: 1.5rem;
+            max-width: 350px;
+            margin: 2rem auto;
+        }
+        
+        .calc-display {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            min-height: 50px;
+            border: 2px solid #3776ab;
+        }
+        
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calc-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn:hover {
+            background: #777;
+        }
+        
+        .calc-btn.operator {
+            background: #3776ab;
+        }
+        
+        .calc-btn.operator:hover {
+            background: #2968a3;
+        }
+        
+        .game-area {
+            background: #f8f9fa;
+            border: 2px solid #3776ab;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .game-display {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-input {
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            border: 2px solid #3776ab;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+            width: 100px;
+            text-align: center;
+        }
+        
+        .game-button {
+            background: #3776ab;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3776ab;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .python-editor {
+                grid-template-columns: 1fr;
+            }
+            
+            .data-types-grid,
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter8.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الثامن</div>
+            <h1 class="chapter-title">Python - البرمجة البسيطة</h1>
+            <p class="chapter-description">تعلم أساسيات Python وبناء تطبيقات بسيطة</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو Python ولماذا هو مهم</li>
+                    <li>تعلم أساسيات بناء الجملة في Python</li>
+                    <li>إتقان المتغيرات وأنواع البيانات</li>
+                    <li>فهم الدوال والشروط والحلقات</li>
+                    <li>التعامل مع القوائم والقواميس</li>
+                    <li>بناء تطبيقات بسيطة بـ Python</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة Python -->
+            <div class="chapter-content fade-in">
+                <h2>🐍 ما هو Python؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">Python</h3>
+                    <p class="definition-text">
+                        لغة برمجة عالية المستوى، سهلة التعلم، قوية ومتعددة الاستخدامات
+                    </p>
+                </div>
+
+                <p>
+                    Python هي واحدة من أشهر لغات البرمجة في العالم! تُستخدم في كل شيء تقريباً: 
+                    مواقع الويب، الذكاء الاصطناعي، تحليل البيانات، الألعاب، وحتى في ناسا!
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>لماذا Python؟</strong> لأنها بسيطة مثل الإنجليزية، قوية مثل السحر، ومطلوبة في سوق العمل!
+                </div>
+
+                <h3>لماذا نتعلم Python؟</h3>
+                <ul>
+                    <li><strong>سهولة التعلم:</strong> بناء جملة بسيط وواضح</li>
+                    <li><strong>قوة الاستخدام:</strong> يمكن بناء أي شيء تقريباً</li>
+                    <li><strong>مجتمع كبير:</strong> ملايين المطورين حول العالم</li>
+                    <li><strong>مكتبات ضخمة:</strong> آلاف المكتبات الجاهزة</li>
+                    <li><strong>فرص عمل:</strong> من أكثر اللغات طلباً في السوق</li>
+                </ul>
+
+                <h3>استخدامات Python:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🌐 تطوير الويب</h4>
+                        <p>Django, Flask, FastAPI</p>
+                    </div>
+                    <div class="card">
+                        <h4>🤖 الذكاء الاصطناعي</h4>
+                        <p>TensorFlow, PyTorch, Scikit-learn</p>
+                    </div>
+                    <div class="card">
+                        <h4>📊 تحليل البيانات</h4>
+                        <p>Pandas, NumPy, Matplotlib</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎮 الألعاب</h4>
+                        <p>Pygame, Panda3D</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تثبيت Python -->
+            <div class="chapter-content fade-in">
+                <h2>⚙️ تثبيت Python</h2>
+
+                <div class="python-syntax">
+                    <h4>خطوات التثبيت:</h4>
+                    <ol>
+                        <li>اذهب إلى <a href="https://python.org" target="_blank">python.org</a></li>
+                        <li>حمل أحدث إصدار من Python</li>
+                        <li>شغل ملف التثبيت</li>
+                        <li>تأكد من تحديد "Add Python to PATH"</li>
+                        <li>اضغط Install Now</li>
+                    </ol>
+                </div>
+
+                <h3>التحقق من التثبيت:</h3>
+                <div class="python-demo">
+                    <h4>في Command Prompt أو Terminal:</h4>
+                    <div class="python-output">python --version
+Python 3.11.0
+
+python
+>>> print("مرحباً بالعالم!")
+مرحباً بالعالم!
+>>> exit()</div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>نصيحة:</strong> يمكنك أيضاً استخدام محررات أونلاين مثل replit.com أو trinket.io للتجربة السريعة!
+                </div>
+            </div>
+
+            <!-- أساسيات Python -->
+            <div class="chapter-content fade-in">
+                <h2>📝 أساسيات Python</h2>
+
+                <h3>أول برنامج Python:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>hello.py</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># هذا تعليق - لا يؤثر على البرنامج
+print("مرحباً بالعالم!")
+print("أهلاً بك في عالم Python!")
+
+# يمكنك كتابة عدة أسطر
+print("Python")
+print("سهل")
+print("وممتع!")</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">مرحباً بالعالم!
+أهلاً بك في عالم Python!
+Python
+سهل
+وممتع!</div>
+                </div>
+
+                <h3>قواعد مهمة في Python:</h3>
+                <div class="python-syntax">
+                    <ul>
+                        <li><strong>المسافات مهمة:</strong> Python يستخدم المسافات لتنظيم الكود</li>
+                        <li><strong>حساس للأحرف:</strong> <code>Name</code> مختلف عن <code>name</code></li>
+                        <li><strong>التعليقات:</strong> تبدأ بـ <code>#</code></li>
+                        <li><strong>لا نحتاج فاصلة منقوطة:</strong> كل سطر منفصل</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- المتغيرات وأنواع البيانات -->
+            <div class="chapter-content fade-in">
+                <h2>📦 المتغيرات وأنواع البيانات</h2>
+
+                <h3>إنشاء المتغيرات:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>المتغيرات</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># المتغيرات في Python بسيطة جداً
+name = "أحمد"
+age = 25
+height = 175.5
+is_student = True
+
+# طباعة المتغيرات
+print("الاسم:", name)
+print("العمر:", age)
+print("الطول:", height)
+print("طالب؟", is_student)
+
+# يمكن تغيير قيمة المتغير
+age = 26
+print("العمر الجديد:", age)</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">الاسم: أحمد
+العمر: 25
+الطول: 175.5
+طالب؟ True
+العمر الجديد: 26</div>
+                </div>
+
+                <h3>أنواع البيانات الأساسية:</h3>
+                <div class="data-types-grid">
+                    <div class="data-type-card">
+                        <div class="data-type-icon">📝</div>
+                        <div class="data-type-name">str</div>
+                        <h4>النصوص (String)</h4>
+                        <code>"مرحباً"</code><br>
+                        <code>'Python'</code>
+                    </div>
+                    
+                    <div class="data-type-card">
+                        <div class="data-type-icon">🔢</div>
+                        <div class="data-type-name">int</div>
+                        <h4>الأرقام الصحيحة</h4>
+                        <code>42</code><br>
+                        <code>-10</code>
+                    </div>
+                    
+                    <div class="data-type-card">
+                        <div class="data-type-icon">🔢</div>
+                        <div class="data-type-name">float</div>
+                        <h4>الأرقام العشرية</h4>
+                        <code>3.14</code><br>
+                        <code>-2.5</code>
+                    </div>
+                    
+                    <div class="data-type-card">
+                        <div class="data-type-icon">✅</div>
+                        <div class="data-type-name">bool</div>
+                        <h4>صحيح/خطأ</h4>
+                        <code>True</code><br>
+                        <code>False</code>
+                    </div>
+                    
+                    <div class="data-type-card">
+                        <div class="data-type-icon">📋</div>
+                        <div class="data-type-name">list</div>
+                        <h4>القوائم</h4>
+                        <code>[1, 2, 3]</code><br>
+                        <code>["أ", "ب"]</code>
+                    </div>
+                    
+                    <div class="data-type-card">
+                        <div class="data-type-icon">📚</div>
+                        <div class="data-type-name">dict</div>
+                        <h4>القواميس</h4>
+                        <code>{"name": "أحمد"}</code><br>
+                        <code>{"age": 25}</code>
+                    </div>
+                </div>
+
+                <h3>معرفة نوع البيانات:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <pre><code>name = "أحمد"
+age = 25
+height = 175.5
+is_student = True
+
+print(type(name))      # &lt;class 'str'&gt;
+print(type(age))       # &lt;class 'int'&gt;
+print(type(height))    # &lt;class 'float'&gt;
+print(type(is_student)) # &lt;class 'bool'&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- العمليات -->
+            <div class="chapter-content fade-in">
+                <h2>🧮 العمليات في Python</h2>
+
+                <h3>العمليات الحسابية:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>العمليات الحسابية</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>a = 10
+b = 3
+
+print("الجمع:", a + b)        # 13
+print("الطرح:", a - b)        # 7
+print("الضرب:", a * b)        # 30
+print("القسمة:", a / b)       # 3.333...
+print("القسمة الصحيحة:", a // b)  # 3
+print("باقي القسمة:", a % b)   # 1
+print("الأس:", a ** b)        # 1000
+
+# عمليات مختصرة
+x = 5
+x += 3  # x = x + 3
+print("x بعد الإضافة:", x)    # 8</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">الجمع: 13
+الطرح: 7
+الضرب: 30
+القسمة: 3.3333333333333335
+القسمة الصحيحة: 3
+باقي القسمة: 1
+الأس: 1000
+x بعد الإضافة: 8</div>
+                </div>
+
+                <h3>عمليات النصوص:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <pre><code>first_name = "أحمد"
+last_name = "محمد"
+
+# ربط النصوص
+full_name = first_name + " " + last_name
+print("الاسم الكامل:", full_name)
+
+# تكرار النص
+greeting = "مرحباً! " * 3
+print(greeting)
+
+# طول النص
+print("طول الاسم:", len(full_name))
+
+# تحويل لأحرف كبيرة/صغيرة
+text = "Python Programming"
+print("كبيرة:", text.upper())
+print("صغيرة:", text.lower())</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محرر Python تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>✏️ جرب Python بنفسك!</h2>
+                <p>اكتب كود Python وشاهد النتيجة (محاكاة):</p>
+
+                <div class="python-editor">
+                    <div>
+                        <div class="editor-header">
+                            <span>🐍</span> محرر Python
+                        </div>
+                        <div class="editor-panel">
+                            <textarea class="python-input" id="pythonEditor" placeholder="اكتب Python هنا...">
+# جرب هذا الكود
+name = "أحمد"
+age = 25
+
+print(f"مرحباً {name}!")
+print(f"عمرك {age} سنة")
+
+# حساب بسيط
+x = 10
+y = 5
+result = x + y
+print(f"{x} + {y} = {result}")
+
+# قائمة بسيطة
+fruits = ["تفاح", "موز", "برتقال"]
+print("الفواكه:")
+for fruit in fruits:
+    print(f"- {fruit}")
+</textarea>
+                            <button class="run-button" onclick="runPythonCode()">▶ تشغيل الكود</button>
+                        </div>
+                    </div>
+                    <div class="output-panel">
+                        <div class="editor-header">النتيجة</div>
+                        <div class="output-content" id="pythonOutput">
+اضغط "تشغيل الكود" لرؤية النتيجة...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الشروط -->
+            <div class="chapter-content fade-in">
+                <h2>🤔 الشروط في Python</h2>
+
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>if, elif, else</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>age = 18
+
+if age >= 18:
+    print("أنت بالغ")
+elif age >= 13:
+    print("أنت مراهق")
+else:
+    print("أنت طفل")
+
+# شروط متعددة
+score = 85
+
+if score >= 90:
+    grade = "ممتاز"
+elif score >= 80:
+    grade = "جيد جداً"
+elif score >= 70:
+    grade = "جيد"
+elif score >= 60:
+    grade = "مقبول"
+else:
+    grade = "راسب"
+
+print(f"درجتك: {score} - التقدير: {grade}")
+
+# العمليات المنطقية
+username = "admin"
+password = "123456"
+
+if username == "admin" and password == "123456":
+    print("تم تسجيل الدخول بنجاح!")
+else:
+    print("اسم المستخدم أو كلمة المرور خاطئة")</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">أنت بالغ
+درجتك: 85 - التقدير: جيد جداً
+تم تسجيل الدخول بنجاح!</div>
+                </div>
+            </div>
+
+            <!-- الحلقات -->
+            <div class="chapter-content fade-in">
+                <h2>🔄 الحلقات في Python</h2>
+
+                <h3>حلقة for:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>for loops</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># حلقة بسيطة
+for i in range(5):
+    print(f"الرقم: {i}")
+
+print("---")
+
+# حلقة مع قائمة
+fruits = ["تفاح", "موز", "برتقال", "عنب"]
+for fruit in fruits:
+    print(f"أحب {fruit}")
+
+print("---")
+
+# حلقة مع نص
+word = "Python"
+for letter in word:
+    print(f"الحرف: {letter}")
+
+print("---")
+
+# حلقة مع range متقدم
+for i in range(2, 10, 2):  # من 2 إلى 10 بخطوة 2
+    print(f"رقم زوجي: {i}")</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">الرقم: 0
+الرقم: 1
+الرقم: 2
+الرقم: 3
+الرقم: 4
+---
+أحب تفاح
+أحب موز
+أحب برتقال
+أحب عنب
+---
+الحرف: P
+الحرف: y
+الحرف: t
+الحرف: h
+الحرف: o
+الحرف: n
+---
+رقم زوجي: 2
+رقم زوجي: 4
+رقم زوجي: 6
+رقم زوجي: 8</div>
+                </div>
+
+                <h3>حلقة while:</h3>
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <pre><code># حلقة while بسيطة
+count = 1
+while count <= 5:
+    print(f"العد: {count}")
+    count += 1
+
+print("انتهى العد!")
+
+# مثال: تخمين الرقم
+import random
+secret_number = random.randint(1, 10)
+guess = 0
+
+print("خمن رقماً بين 1 و 10")
+while guess != secret_number:
+    guess = int(input("أدخل تخمينك: "))
+    if guess < secret_number:
+        print("الرقم أكبر!")
+    elif guess > secret_number:
+        print("الرقم أصغر!")
+    else:
+        print("مبروك! خمنت الرقم الصحيح!")</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- القوائم -->
+            <div class="chapter-content fade-in">
+                <h2>📋 القوائم (Lists)</h2>
+
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>Lists في Python</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># إنشاء قائمة
+fruits = ["تفاح", "موز", "برتقال"]
+numbers = [1, 2, 3, 4, 5]
+mixed = ["أحمد", 25, True, 3.14]
+
+print("الفواكه:", fruits)
+print("الأرقام:", numbers)
+print("مختلط:", mixed)
+
+# الوصول للعناصر
+print("أول فاكهة:", fruits[0])
+print("آخر فاكهة:", fruits[-1])
+
+# إضافة عناصر
+fruits.append("عنب")
+print("بعد الإضافة:", fruits)
+
+# إدراج في موضع معين
+fruits.insert(1, "مانجو")
+print("بعد الإدراج:", fruits)
+
+# حذف عنصر
+fruits.remove("موز")
+print("بعد الحذف:", fruits)
+
+# طول القائمة
+print("عدد الفواكه:", len(fruits))
+
+# البحث في القائمة
+if "تفاح" in fruits:
+    print("التفاح موجود في القائمة!")
+
+# ترتيب القائمة
+numbers = [5, 2, 8, 1, 9]
+numbers.sort()
+print("الأرقام مرتبة:", numbers)</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">الفواكه: ['تفاح', 'موز', 'برتقال']
+الأرقام: [1, 2, 3, 4, 5]
+مختلط: ['أحمد', 25, True, 3.14]
+أول فاكهة: تفاح
+آخر فاكهة: برتقال
+بعد الإضافة: ['تفاح', 'موز', 'برتقال', 'عنب']
+بعد الإدراج: ['تفاح', 'مانجو', 'موز', 'برتقال', 'عنب']
+بعد الحذف: ['تفاح', 'مانجو', 'برتقال', 'عنب']
+عدد الفواكه: 4
+التفاح موجود في القائمة!
+الأرقام مرتبة: [1, 2, 5, 8, 9]</div>
+                </div>
+            </div>
+
+            <!-- الدوال -->
+            <div class="chapter-content fade-in">
+                <h2>🔧 الدوال (Functions)</h2>
+
+                <div class="python-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>Functions في Python</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code># دالة بسيطة
+def greet():
+    print("مرحباً بالعالم!")
+
+# استدعاء الدالة
+greet()
+
+# دالة مع معاملات
+def greet_person(name):
+    print(f"مرحباً {name}!")
+
+greet_person("أحمد")
+greet_person("فاطمة")
+
+# دالة ترجع قيمة
+def add_numbers(a, b):
+    result = a + b
+    return result
+
+sum_result = add_numbers(5, 3)
+print(f"المجموع: {sum_result}")
+
+# دالة مع قيم افتراضية
+def introduce(name, age=25, city="الرياض"):
+    print(f"اسمي {name}, عمري {age}, أسكن في {city}")
+
+introduce("أحمد")
+introduce("سارة", 22)
+introduce("محمد", 30, "جدة")
+
+# دالة متقدمة
+def calculate_grade(score):
+    if score >= 90:
+        return "ممتاز"
+    elif score >= 80:
+        return "جيد جداً"
+    elif score >= 70:
+        return "جيد"
+    elif score >= 60:
+        return "مقبول"
+    else:
+        return "راسب"
+
+student_score = 85
+grade = calculate_grade(student_score)
+print(f"الدرجة: {student_score} - التقدير: {grade}")</code></pre>
+                    </div>
+                    <h4>النتيجة:</h4>
+                    <div class="python-output">مرحباً بالعالم!
+مرحباً أحمد!
+مرحباً فاطمة!
+المجموع: 8
+اسمي أحمد, عمري 25, أسكن في الرياض
+اسمي سارة, عمري 22, أسكن في الرياض
+اسمي محمد, عمري 30, أسكن في جدة
+الدرجة: 85 - التقدير: جيد جداً</div>
+                </div>
+            </div>
+
+            <!-- مشاريع عملية -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشاريع عملية</h2>
+
+                <div class="project-showcase">
+                    <h3>🎯 مشاريع Python للمبتدئين</h3>
+                    <p>الآن سنطبق ما تعلمناه في مشاريع حقيقية!</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🧮 آلة حاسبة</h3>
+                        </div>
+                        <div class="project-body">
+                            <div class="calculator-app">
+                                <div class="calc-display" id="pythonCalcDisplay">0</div>
+                                <div class="calc-buttons">
+                                    <button class="calc-btn" onclick="clearPythonCalc()">C</button>
+                                    <button class="calc-btn" onclick="deletePythonLast()">⌫</button>
+                                    <button class="calc-btn operator" onclick="appendPythonCalc('/')">/</button>
+                                    <button class="calc-btn operator" onclick="appendPythonCalc('*')">×</button>
+                                    
+                                    <button class="calc-btn" onclick="appendPythonCalc('7')">7</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('8')">8</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('9')">9</button>
+                                    <button class="calc-btn operator" onclick="appendPythonCalc('-')">-</button>
+                                    
+                                    <button class="calc-btn" onclick="appendPythonCalc('4')">4</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('5')">5</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('6')">6</button>
+                                    <button class="calc-btn operator" onclick="appendPythonCalc('+')">+</button>
+                                    
+                                    <button class="calc-btn" onclick="appendPythonCalc('1')">1</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('2')">2</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('3')">3</button>
+                                    <button class="calc-btn operator" onclick="calculatePythonResult()" style="grid-row: span 2;">=</button>
+                                    
+                                    <button class="calc-btn" onclick="appendPythonCalc('0')" style="grid-column: span 2;">0</button>
+                                    <button class="calc-btn" onclick="appendPythonCalc('.')">.</button>
+                                </div>
+                            </div>
+                            
+                            <div class="code-container" style="margin-top: 1rem;">
+                                <div class="code-header">
+                                    <span>calculator.py</span>
+                                    <button class="copy-btn">نسخ</button>
+                                </div>
+                                <pre><code>def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y != 0:
+        return x / y
+    else:
+        return "خطأ: لا يمكن القسمة على صفر"
+
+# البرنامج الرئيسي
+while True:
+    print("\n--- آلة حاسبة Python ---")
+    print("1. جمع")
+    print("2. طرح") 
+    print("3. ضرب")
+    print("4. قسمة")
+    print("5. خروج")
+    
+    choice = input("اختر العملية (1-5): ")
+    
+    if choice == '5':
+        print("شكراً لاستخدام الآلة الحاسبة!")
+        break
+    
+    if choice in ['1', '2', '3', '4']:
+        num1 = float(input("أدخل الرقم الأول: "))
+        num2 = float(input("أدخل الرقم الثاني: "))
+        
+        if choice == '1':
+            print(f"النتيجة: {add(num1, num2)}")
+        elif choice == '2':
+            print(f"النتيجة: {subtract(num1, num2)}")
+        elif choice == '3':
+            print(f"النتيجة: {multiply(num1, num2)}")
+        elif choice == '4':
+            print(f"النتيجة: {divide(num1, num2)}")
+    else:
+        print("اختيار غير صحيح!")</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>🎲 لعبة تخمين الرقم</h3>
+                        </div>
+                        <div class="project-body">
+                            <div class="game-area">
+                                <h4>🎯 خمن الرقم بين 1 و 100</h4>
+                                <div class="game-display" id="gameDisplay">اضغط "بدء اللعبة" للبدء!</div>
+                                <div>
+                                    <input type="number" class="game-input" id="guessInput" placeholder="تخمينك" min="1" max="100" disabled>
+                                    <button class="game-button" onclick="startGuessingGame()">بدء اللعبة</button>
+                                    <button class="game-button" onclick="makeGuess()" disabled id="guessBtn">تخمين</button>
+                                </div>
+                                <div class="game-stats">
+                                    <div class="stat-item">
+                                        <div class="stat-number" id="attemptsCount">0</div>
+                                        <div class="stat-label">المحاولات</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number" id="bestScore">-</div>
+                                        <div class="stat-label">أفضل نتيجة</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="code-container">
+                                <div class="code-header">
+                                    <span>guess_game.py</span>
+                                    <button class="copy-btn">نسخ</button>
+                                </div>
+                                <pre><code>import random
+
+def guess_number_game():
+    print("🎯 مرحباً بك في لعبة تخمين الرقم!")
+    print("سأفكر في رقم بين 1 و 100")
+    print("حاول أن تخمنه في أقل عدد من المحاولات!")
+    
+    secret_number = random.randint(1, 100)
+    attempts = 0
+    max_attempts = 7
+    
+    while attempts < max_attempts:
+        try:
+            guess = int(input(f"\nالمحاولة {attempts + 1}/{max_attempts} - أدخل تخمينك: "))
+            attempts += 1
+            
+            if guess < 1 or guess > 100:
+                print("يرجى إدخال رقم بين 1 و 100")
+                continue
+            
+            if guess == secret_number:
+                print(f"🎉 مبروك! لقد خمنت الرقم {secret_number} في {attempts} محاولة!")
+                return attempts
+            elif guess < secret_number:
+                print("📈 الرقم أكبر من تخمينك")
+            else:
+                print("📉 الرقم أصغر من تخمينك")
+                
+        except ValueError:
+            print("يرجى إدخال رقم صحيح")
+    
+    print(f"😞 انتهت المحاولات! الرقم كان {secret_number}")
+    return max_attempts
+
+# تشغيل اللعبة
+if __name__ == "__main__":
+    while True:
+        score = guess_number_game()
+        
+        play_again = input("\nهل تريد اللعب مرة أخرى؟ (y/n): ")
+        if play_again.lower() != 'y':
+            print("شكراً لك على اللعب! 👋")
+            break</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. كيف نطبع "مرحباً" في Python؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">echo "مرحباً"</li>
+                        <li data-correct="true">print("مرحباً")</li>
+                        <li data-correct="false">console.log("مرحباً")</li>
+                        <li data-correct="false">printf("مرحباً")</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. ما نوع البيانات للقيمة True؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">str</li>
+                        <li data-correct="false">int</li>
+                        <li data-correct="true">bool</li>
+                        <li data-correct="false">float</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. كيف ننشئ قائمة في Python؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="true">[1, 2, 3]</li>
+                        <li data-correct="false">{1, 2, 3}</li>
+                        <li data-correct="false">(1, 2, 3)</li>
+                        <li data-correct="false">list(1, 2, 3)</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. ما الكلمة المفتاحية لإنشاء دالة؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">function</li>
+                        <li data-correct="true">def</li>
+                        <li data-correct="false">func</li>
+                        <li data-correct="false">define</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter7.html" class="nav-button">
+                    ← الفصل السابق: مشروع ويب بسيط
+                </a>
+                <a href="chapter9.html" class="nav-button">
+                    الفصل التالي: قواعد البيانات - SQL →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // محاكاة تشغيل Python
+        function runPythonCode() {
+            const code = document.getElementById('pythonEditor').value;
+            const output = document.getElementById('pythonOutput');
+            
+            // محاكاة بسيطة لتنفيذ Python
+            let result = '';
+            
+            try {
+                // استبدال print بـ console.log للمحاكاة
+                let jsCode = code
+                    .replace(/print\((.*?)\)/g, 'console.log($1)')
+                    .replace(/f"([^"]*?)"/g, '`$1`')
+                    .replace(/{([^}]+)}/g, '${$1}');
+                
+                // إنشاء console مؤقت
+                const originalConsole = console.log;
+                console.log = function(...args) {
+                    result += args.join(' ') + '\n';
+                };
+                
+                // تنفيذ الكود (محاكاة بسيطة)
+                if (code.includes('name = "أحمد"')) {
+                    result = `مرحباً أحمد!
+عمرك 25 سنة
+10 + 5 = 15
+الفواكه:
+- تفاح
+- موز
+- برتقال`;
+                } else {
+                    result = 'تم تنفيذ الكود (محاكاة)';
+                }
+                
+                output.textContent = result;
+                console.log = originalConsole;
+                
+            } catch (error) {
+                output.textContent = 'خطأ في الكود: ' + error.message;
+            }
+        }
+        
+        // آلة حاسبة Python
+        let pythonCalcDisplay = document.getElementById('pythonCalcDisplay');
+        let pythonCurrentInput = '0';
+        let pythonShouldReset = false;
+        
+        function appendPythonCalc(value) {
+            if (pythonShouldReset) {
+                pythonCurrentInput = '';
+                pythonShouldReset = false;
+            }
+            
+            if (pythonCurrentInput === '0' && value !== '.') {
+                pythonCurrentInput = value;
+            } else {
+                pythonCurrentInput += value;
+            }
+            
+            pythonCalcDisplay.textContent = pythonCurrentInput;
+        }
+        
+        function clearPythonCalc() {
+            pythonCurrentInput = '0';
+            pythonCalcDisplay.textContent = pythonCurrentInput;
+        }
+        
+        function deletePythonLast() {
+            if (pythonCurrentInput.length > 1) {
+                pythonCurrentInput = pythonCurrentInput.slice(0, -1);
+            } else {
+                pythonCurrentInput = '0';
+            }
+            pythonCalcDisplay.textContent = pythonCurrentInput;
+        }
+        
+        function calculatePythonResult() {
+            try {
+                let result = eval(pythonCurrentInput.replace('×', '*'));
+                pythonCurrentInput = result.toString();
+                pythonCalcDisplay.textContent = pythonCurrentInput;
+                pythonShouldReset = true;
+            } catch (error) {
+                pythonCalcDisplay.textContent = 'خطأ';
+                pythonCurrentInput = '0';
+            }
+        }
+        
+        // لعبة تخمين الرقم
+        let secretNumber = 0;
+        let attempts = 0;
+        let gameActive = false;
+        let bestScore = localStorage.getItem('bestScore') || '-';
+        
+        document.getElementById('bestScore').textContent = bestScore;
+        
+        function startGuessingGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameActive = true;
+            
+            document.getElementById('gameDisplay').textContent = 'لقد اخترت رقماً! خمن ما هو...';
+            document.getElementById('guessInput').disabled = false;
+            document.getElementById('guessBtn').disabled = false;
+            document.getElementById('attemptsCount').textContent = '0';
+            
+            // تركيز على حقل الإدخال
+            document.getElementById('guessInput').focus();
+        }
+        
+        function makeGuess() {
+            if (!gameActive) return;
+            
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const display = document.getElementById('gameDisplay');
+            
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                display.textContent = 'يرجى إدخال رقم بين 1 و 100';
+                return;
+            }
+            
+            attempts++;
+            document.getElementById('attemptsCount').textContent = attempts;
+            
+            if (guess === secretNumber) {
+                display.textContent = `🎉 مبروك! الرقم كان ${secretNumber}. خمنته في ${attempts} محاولة!`;
+                gameActive = false;
+                document.getElementById('guessInput').disabled = true;
+                document.getElementById('guessBtn').disabled = true;
+                
+                // تحديث أفضل نتيجة
+                if (bestScore === '-' || attempts < parseInt(bestScore)) {
+                    bestScore = attempts;
+                    localStorage.setItem('bestScore', bestScore);
+                    document.getElementById('bestScore').textContent = bestScore;
+                }
+            } else if (guess < secretNumber) {
+                display.textContent = `📈 الرقم أكبر من ${guess}. حاول مرة أخرى!`;
+            } else {
+                display.textContent = `📉 الرقم أصغر من ${guess}. حاول مرة أخرى!`;
+            }
+            
+            // مسح حقل الإدخال
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').focus();
+        }
+        
+        // إضافة مستمع للضغط على Enter
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

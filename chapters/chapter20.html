@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل العشرون: طريقك إلى الوظيفة - كتاب البرمجة</title>
+    <meta name="description" content="دليل شامل للحصول على وظيفة في مجال البرمجة">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .career-demo {
+            background: #f8f9fa;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .career-demo h4 {
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+        
+        .career-path {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .path-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .path-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .path-header.junior { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .path-header.mid { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .path-header.senior { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .path-header.lead { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        
+        .path-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .path-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .path-content {
+            padding: 1.5rem;
+        }
+        
+        .salary-range {
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .skills-required {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .resume-builder {
+            background: white;
+            border: 2px solid #6f42c1;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .resume-button {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .resume-button:hover {
+            background: #5a2d91;
+        }
+        
+        .resume-output {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            min-height: 200px;
+            text-align: right;
+        }
+        
+        .interview-prep {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .prep-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-right: 4px solid #dc3545;
+        }
+        
+        .prep-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .prep-title {
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .job-search-tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .networking-section {
+            background: #e8f4fd;
+            border-right: 4px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .platform-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .platform-card {
+            background: white;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        .platform-card:hover {
+            border-color: #007bff;
+        }
+        
+        .platform-logo {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .platform-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .salary-calculator {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .calculator-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .input-group select,
+        .input-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .salary-result {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .career-path,
+            .interview-prep,
+            .tips-grid,
+            .platform-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-input {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter20.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل العشرون</div>
+            <h1 class="chapter-title">طريقك إلى الوظيفة</h1>
+            <p class="chapter-description">دليل شامل للحصول على وظيفة في مجال البرمجة</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم المسار المهني في البرمجة</li>
+                    <li>تعلم كيفية إعداد CV احترافي</li>
+                    <li>إتقان مهارات المقابلات التقنية</li>
+                    <li>بناء شبكة علاقات مهنية</li>
+                    <li>فهم سوق العمل والرواتب</li>
+                    <li>تطوير مهارات التفاوض</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة سوق العمل -->
+            <div class="chapter-content fade-in">
+                <h2>💼 سوق العمل في البرمجة</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">سوق العمل التقني</h3>
+                    <p class="definition-text">
+                        مجال سريع النمو مع فرص وظيفية متنوعة ورواتب مجزية
+                    </p>
+                </div>
+
+                <p>
+                    سوق العمل في البرمجة من أسرع الأسواق نمواً في العالم! الطلب على المطورين يفوق العرض، 
+                    مما يعني فرص ممتازة للمطورين الجدد والمتمرسين على حد سواء.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>إحصائية مشجعة:</strong> متوقع نمو وظائف البرمجة بنسبة 25% خلال العقد القادم!
+                </div>
+
+                <h3>لماذا البرمجة مهنة ممتازة؟</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>💰 الجانب المالي</h4>
+                        <ul>
+                            <li>رواتب عالية مقارنة بالمجالات الأخرى</li>
+                            <li>زيادات سنوية ومكافآت</li>
+                            <li>فرص عمل حر مربحة</li>
+                            <li>إمكانية العمل عن بُعد</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🚀 النمو المهني</h4>
+                        <ul>
+                            <li>تعلم مستمر وتطوير مهارات</li>
+                            <li>فرص ترقية سريعة</li>
+                            <li>إمكانية تأسيس شركة</li>
+                            <li>مجال إبداعي ومتجدد</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المسار المهني -->
+            <div class="chapter-content fade-in">
+                <h2>📈 المسار المهني في البرمجة</h2>
+
+                <div class="career-path">
+                    <div class="path-card">
+                        <div class="path-header junior">
+                            <div class="path-icon">🌱</div>
+                            <div class="path-title">Junior Developer</div>
+                            <p>المطور المبتدئ</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="salary-range">15,000 - 25,000 جنيه مصري</div>
+                            <div class="skills-required">
+                                <h5>المهارات المطلوبة:</h5>
+                                <ul>
+                                    <li>إتقان لغة برمجة واحدة</li>
+                                    <li>فهم أساسيات قواعد البيانات</li>
+                                    <li>معرفة Git والـ Version Control</li>
+                                    <li>2-3 مشاريع في Portfolio</li>
+                                </ul>
+                            </div>
+                            <h5>المسؤوليات:</h5>
+                            <ul>
+                                <li>كتابة كود بسيط تحت الإشراف</li>
+                                <li>إصلاح الأخطاء البسيطة</li>
+                                <li>التعلم من المطورين الأكبر</li>
+                                <li>المشاركة في مراجعة الكود</li>
+                            </ul>
+                            <p><strong>الخبرة:</strong> 0-2 سنة</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header mid">
+                            <div class="path-icon">🚀</div>
+                            <div class="path-title">Mid-Level Developer</div>
+                            <p>المطور متوسط الخبرة</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="salary-range">25,000 - 40,000 جنيه مصري</div>
+                            <div class="skills-required">
+                                <h5>المهارات المطلوبة:</h5>
+                                <ul>
+                                    <li>إتقان عدة تقنيات</li>
+                                    <li>فهم Architecture Patterns</li>
+                                    <li>خبرة في Testing</li>
+                                    <li>مهارات حل المشاكل المعقدة</li>
+                                </ul>
+                            </div>
+                            <h5>المسؤوليات:</h5>
+                            <ul>
+                                <li>تطوير ميزات كاملة</li>
+                                <li>مراجعة كود المطورين الجدد</li>
+                                <li>المشاركة في التصميم التقني</li>
+                                <li>تحسين الأداء والجودة</li>
+                            </ul>
+                            <p><strong>الخبرة:</strong> 2-5 سنوات</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header senior">
+                            <div class="path-icon">⭐</div>
+                            <div class="path-title">Senior Developer</div>
+                            <p>المطور الخبير</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="salary-range">40,000 - 60,000 جنيه مصري</div>
+                            <div class="skills-required">
+                                <h5>المهارات المطلوبة:</h5>
+                                <ul>
+                                    <li>خبرة عميقة في التقنيات</li>
+                                    <li>مهارات قيادة تقنية</li>
+                                    <li>فهم Business Requirements</li>
+                                    <li>خبرة في Mentoring</li>
+                                </ul>
+                            </div>
+                            <h5>المسؤوليات:</h5>
+                            <ul>
+                                <li>تصميم الأنظمة المعقدة</li>
+                                <li>قيادة المشاريع التقنية</li>
+                                <li>توجيه المطورين الجدد</li>
+                                <li>اتخاذ القرارات التقنية</li>
+                            </ul>
+                            <p><strong>الخبرة:</strong> 5-8 سنوات</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header lead">
+                            <div class="path-icon">👑</div>
+                            <div class="path-title">Tech Lead / Architect</div>
+                            <p>قائد تقني أو مهندس معماري</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="salary-range">60,000+ جنيه مصري</div>
+                            <div class="skills-required">
+                                <h5>المهارات المطلوبة:</h5>
+                                <ul>
+                                    <li>رؤية تقنية شاملة</li>
+                                    <li>مهارات قيادة الفرق</li>
+                                    <li>فهم عميق للـ Business</li>
+                                    <li>مهارات التواصل الممتازة</li>
+                                </ul>
+                            </div>
+                            <h5>المسؤوليات:</h5>
+                            <ul>
+                                <li>وضع الاستراتيجية التقنية</li>
+                                <li>قيادة فرق التطوير</li>
+                                <li>التواصل مع الإدارة</li>
+                                <li>ضمان جودة المنتج</li>
+                            </ul>
+                            <p><strong>الخبرة:</strong> 8+ سنوات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إعداد السيرة الذاتية -->
+            <div class="chapter-content fade-in">
+                <h2>📄 إعداد السيرة الذاتية (CV)</h2>
+
+                <div class="resume-builder">
+                    <h3>🎯 مولد السيرة الذاتية للمطورين</h3>
+                    <p>احصل على نموذج سيرة ذاتية مخصص لمجال البرمجة:</p>
+                    
+                    <button class="resume-button" onclick="generateResume('frontend')">Front-End Developer</button>
+                    <button class="resume-button" onclick="generateResume('backend')">Back-End Developer</button>
+                    <button class="resume-button" onclick="generateResume('fullstack')">Full-Stack Developer</button>
+                    <button class="resume-button" onclick="showResumeTemplate()">قالب عام</button>
+                    
+                    <div class="resume-output" id="resumeOutput">اختر تخصصك للحصول على نموذج سيرة ذاتية مخصص...</div>
+                </div>
+
+                <div class="career-demo">
+                    <h4>نصائح ذهبية للسيرة الذاتية:</h4>
+                    <ul>
+                        <li><strong>اجعلها مختصرة:</strong> صفحة واحدة للمبتدئين، صفحتان للخبراء</li>
+                        <li><strong>ابدأ بالمهارات:</strong> ضع المهارات التقنية في المقدمة</li>
+                        <li><strong>أضف مشاريعك:</strong> روابط مباشرة لمشاريعك وكود GitHub</li>
+                        <li><strong>استخدم أرقام:</strong> "حسنت الأداء بنسبة 30%" أفضل من "حسنت الأداء"</li>
+                        <li><strong>خصص لكل وظيفة:</strong> عدل السيرة حسب متطلبات الوظيفة</li>
+                        <li><strong>تجنب الأخطاء:</strong> راجع الإملاء والقواعد</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التحضير للمقابلات -->
+            <div class="chapter-content fade-in">
+                <h2>🎤 التحضير للمقابلات</h2>
+
+                <div class="interview-prep">
+                    <div class="prep-card">
+                        <div class="prep-icon">💻</div>
+                        <h4 class="prep-title">المقابلة التقنية</h4>
+                        <ul>
+                            <li>حل مشاكل البرمجة على السبورة</li>
+                            <li>شرح الكود والتفكير بصوت عالٍ</li>
+                            <li>مناقشة المشاريع السابقة</li>
+                            <li>أسئلة عن التقنيات المستخدمة</li>
+                        </ul>
+                        <h5>كيف تتحضر:</h5>
+                        <ul>
+                            <li>تدرب على LeetCode</li>
+                            <li>راجع مشاريعك جيداً</li>
+                            <li>تدرب على الشرح</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prep-card">
+                        <div class="prep-icon">🗣️</div>
+                        <h4 class="prep-title">المقابلة السلوكية</h4>
+                        <ul>
+                            <li>أسئلة عن الشخصية والسلوك</li>
+                            <li>مواقف من العمل السابق</li>
+                            <li>كيفية التعامل مع التحديات</li>
+                            <li>أهدافك المهنية</li>
+                        </ul>
+                        <h5>كيف تتحضر:</h5>
+                        <ul>
+                            <li>حضر قصص من تجاربك</li>
+                            <li>استخدم طريقة STAR</li>
+                            <li>تدرب مع أصدقاء</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prep-card">
+                        <div class="prep-icon">🏢</div>
+                        <h4 class="prep-title">مقابلة الثقافة</h4>
+                        <ul>
+                            <li>التوافق مع ثقافة الشركة</li>
+                            <li>القيم والمبادئ</li>
+                            <li>طريقة العمل في الفريق</li>
+                            <li>الرؤية المستقبلية</li>
+                        </ul>
+                        <h5>كيف تتحضر:</h5>
+                        <ul>
+                            <li>ابحث عن الشركة جيداً</li>
+                            <li>اقرأ عن قيمها ورؤيتها</li>
+                            <li>حضر أسئلة ذكية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prep-card">
+                        <div class="prep-icon">💼</div>
+                        <h4 class="prep-title">مقابلة الإدارة</h4>
+                        <ul>
+                            <li>مناقشة الراتب والمزايا</li>
+                            <li>توقعات الأداء</li>
+                            <li>فرص النمو والتطوير</li>
+                            <li>بيئة العمل</li>
+                        </ul>
+                        <h5>كيف تتحضر:</h5>
+                        <ul>
+                            <li>ابحث عن متوسط الرواتب</li>
+                            <li>حدد أولوياتك</li>
+                            <li>كن مرناً في التفاوض</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="career-demo">
+                    <h4>أسئلة شائعة في المقابلات:</h4>
+                    <ol>
+                        <li><strong>"حدثني عن نفسك"</strong> - ركز على الجانب المهني</li>
+                        <li><strong>"لماذا تريد العمل هنا؟"</strong> - أظهر معرفتك بالشركة</li>
+                        <li><strong>"ما نقاط قوتك وضعفك؟"</strong> - كن صادقاً ومتوازناً</li>
+                        <li><strong>"اشرح مشروعك المفضل"</strong> - حضر قصة مفصلة</li>
+                        <li><strong>"كيف تتعامل مع الضغط؟"</strong> - أعط أمثلة عملية</li>
+                        <li><strong>"أين ترى نفسك خلال 5 سنوات؟"</strong> - أظهر طموحك</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- البحث عن الوظائف -->
+            <div class="chapter-content fade-in">
+                <h2>🔍 البحث عن الوظائف</h2>
+
+                <div class="job-search-tips">
+                    <h3>🎯 استراتيجيات البحث الفعال</h3>
+                    <p>البحث عن وظيفة هو وظيفة بحد ذاتها!</p>
+                    
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <h4>📱 المنصات الرقمية</h4>
+                            <p>استخدم مواقع التوظيف المتخصصة</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <h4>🤝 الشبكة المهنية</h4>
+                            <p>80% من الوظائف تأتي عبر العلاقات</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <h4>🎯 التقديم المباشر</h4>
+                            <p>تواصل مباشرة مع الشركات</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <h4>📈 بناء السمعة</h4>
+                            <p>شارك في المجتمع التقني</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <h4>🔄 التحديث المستمر</h4>
+                            <p>حدث مهاراتك باستمرار</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <h4>💪 الصبر والمثابرة</h4>
+                            <p>لا تستسلم بعد أول رفض</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-cards">
+                    <div class="platform-card">
+                        <div class="platform-logo">💼</div>
+                        <div class="platform-name">LinkedIn</div>
+                        <p>الشبكة المهنية الأولى عالمياً</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-logo">🇪🇬</div>
+                        <div class="platform-name">بيت.كوم</div>
+                        <p>أكبر موقع توظيف في المنطقة</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+
+                    <div class="platform-card">
+                        <div class="platform-logo">🌟</div>
+                        <div class="platform-name">وظف</div>
+                        <p>منصة التوظيف المصرية</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-logo">💻</div>
+                        <div class="platform-name">Stack Overflow Jobs</div>
+                        <p>وظائف تقنية متخصصة</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-logo">🚀</div>
+                        <div class="platform-name">AngelList</div>
+                        <p>وظائف في الشركات الناشئة</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-logo">🌐</div>
+                        <div class="platform-name">Remote.co</div>
+                        <p>وظائف العمل عن بُعد</p>
+                        <p><strong>مجاني</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بناء الشبكة المهنية -->
+            <div class="chapter-content fade-in">
+                <h2>🤝 بناء الشبكة المهنية</h2>
+
+                <div class="networking-section">
+                    <h3>🌐 أهمية الشبكة المهنية</h3>
+                    <p>
+                        "ليس ما تعرفه، بل من تعرف" - هذه المقولة صحيحة جداً في عالم التقنية. 
+                        الشبكة المهنية القوية تفتح أبواب فرص لا تُعلن عنها علناً.
+                    </p>
+                    
+                    <h4>كيف تبني شبكة مهنية قوية:</h4>
+                    <ul>
+                        <li><strong>احضر المؤتمرات والفعاليات:</strong> تواصل مع مطورين آخرين</li>
+                        <li><strong>شارك في المجتمعات:</strong> انضم لمجموعات المطورين</li>
+                        <li><strong>ساعد الآخرين:</strong> أجب على أسئلة في Stack Overflow</li>
+                        <li><strong>شارك معرفتك:</strong> اكتب مقالات أو اعمل فيديوهات</li>
+                        <li><strong>تواصل مع زملاء الدراسة:</strong> حافظ على العلاقات</li>
+                        <li><strong>كن نشطاً على LinkedIn:</strong> شارك وتفاعل مع المحتوى</li>
+                    </ul>
+                </div>
+
+                <div class="career-demo">
+                    <h4>نصائح للتواصل الفعال:</h4>
+                    <ul>
+                        <li><strong>كن مفيداً أولاً:</strong> قدم قيمة قبل أن تطلب شيئاً</li>
+                        <li><strong>اتبع القاعدة الذهبية:</strong> عامل الآخرين كما تحب أن يعاملوك</li>
+                        <li><strong>كن صادقاً:</strong> لا تدعي معرفة أشياء لا تعرفها</li>
+                        <li><strong>استمع أكثر مما تتكلم:</strong> تعلم من خبرات الآخرين</li>
+                        <li><strong>تابع التواصل:</strong> لا تنس الناس بعد اللقاء الأول</li>
+                        <li><strong>كن مهنياً:</strong> حافظ على الاحترام في جميع التفاعلات</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- حاسبة الراتب -->
+            <div class="chapter-content fade-in">
+                <h2>💰 حاسبة الراتب المتوقع</h2>
+
+                <div class="salary-calculator">
+                    <h3>📊 احسب راتبك المتوقع</h3>
+                    <p>استخدم هذه الحاسبة لتقدير الراتب المناسب لمهاراتك وخبرتك:</p>
+                    
+                    <div class="calculator-input">
+                        <div class="input-group">
+                            <label for="experience">سنوات الخبرة:</label>
+                            <select id="experience">
+                                <option value="0">مبتدئ (0-1 سنة)</option>
+                                <option value="2">متوسط (2-4 سنوات)</option>
+                                <option value="5">خبير (5-7 سنوات)</option>
+                                <option value="8">خبير جداً (8+ سنوات)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="specialization">التخصص:</label>
+                            <select id="specialization">
+                                <option value="frontend">Front-End Developer</option>
+                                <option value="backend">Back-End Developer</option>
+                                <option value="fullstack">Full-Stack Developer</option>
+                                <option value="mobile">Mobile Developer</option>
+                                <option value="devops">DevOps Engineer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="city">المدينة:</label>
+                            <select id="city">
+                                <option value="cairo">القاهرة</option>
+                                <option value="alexandria">الإسكندرية</option>
+                                <option value="giza">الجيزة</option>
+                                <option value="other">مدن أخرى</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="company-size">حجم الشركة:</label>
+                            <select id="company-size">
+                                <option value="startup">شركة ناشئة</option>
+                                <option value="medium">شركة متوسطة</option>
+                                <option value="large">شركة كبيرة</option>
+                                <option value="enterprise">شركة عملاقة</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="resume-button" onclick="calculateSalary()">احسب الراتب المتوقع</button>
+                    
+                    <div class="salary-result" id="salaryResult" style="display: none;">
+                        <h4>💰 الراتب المتوقع</h4>
+                        <p id="salaryRange"></p>
+                        <p id="salaryAdvice"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو أهم شيء في السيرة الذاتية للمطور؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">الصورة الشخصية</li>
+                        <li data-correct="true">المشاريع والمهارات التقنية</li>
+                        <li data-correct="false">الهوايات الشخصية</li>
+                        <li data-correct="false">عدد صفحات السيرة</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. كم نسبة الوظائف التي تأتي عبر الشبكة المهنية؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">20%</li>
+                        <li data-correct="false">50%</li>
+                        <li data-correct="true">80%</li>
+                        <li data-correct="false">100%</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هي طريقة STAR في المقابلات؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من البرمجة</li>
+                        <li data-correct="true">طريقة لتنظيم الإجابات (Situation, Task, Action, Result)</li>
+                        <li data-correct="false">نوع من الشركات</li>
+                        <li data-correct="false">منصة توظيف</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. متى يجب أن تبدأ بناء شبكتك المهنية؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">بعد التخرج</li>
+                        <li data-correct="false">عند البحث عن وظيفة</li>
+                        <li data-correct="true">من بداية رحلة التعلم</li>
+                        <li data-correct="false">بعد الحصول على وظيفة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter19.html" class="nav-button">
+                    ← الفصل السابق: كيف تتعلم ذاتياً؟
+                </a>
+                <a href="chapter21.html" class="nav-button">
+                    الفصل التالي: مستقبل البرمجة →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // مولد السيرة الذاتية
+        function generateResume(type) {
+            const output = document.getElementById('resumeOutput');
+            
+            const resumes = {
+                frontend: `📄 نموذج سيرة ذاتية - Front-End Developer:
+
+👤 [اسمك الكامل]
+📧 البريد الإلكتروني | 📱 رقم الهاتف
+🌐 LinkedIn | 🐙 GitHub | 💼 Portfolio
+
+🎯 الملخص المهني:
+مطور واجهات أمامية شغوف بإنشاء تجارب مستخدم استثنائية. خبرة في React وJavaScript الحديث مع التركيز على الأداء والتصميم المتجاوب.
+
+💻 المهارات التقنية:
+• اللغات: HTML5, CSS3, JavaScript (ES6+), TypeScript
+• المكتبات: React, Vue.js, jQuery
+• الأدوات: Webpack, Vite, Git, VS Code
+• التصميم: Responsive Design, CSS Grid, Flexbox
+• الاختبار: Jest, Cypress
+
+🚀 المشاريع:
+1. تطبيق إدارة المهام - React, LocalStorage
+   - واجهة مستخدم حديثة ومتجاوبة
+   - إدارة حالة متقدمة مع Context API
+   🔗 [رابط المشروع] | 📁 [GitHub]
+
+2. موقع تجارة إلكترونية - Vue.js, API Integration
+   - تكامل مع APIs خارجية
+   - نظام دفع وهمي
+   🔗 [رابط المشروع] | 📁 [GitHub]
+
+🎓 التعليم:
+• [الشهادة/الدورة] - [المؤسسة] - [السنة]
+• شهادات أونلاين في React وJavaScript
+
+🌟 الإنجازات:
+• ساهمت في مشروع مفتوح المصدر بـ 50+ commits
+• حسنت أداء موقع بنسبة 40%`,
+
+                backend: `📄 نموذج سيرة ذاتية - Back-End Developer:
+
+👤 [اسمك الكامل]
+📧 البريد الإلكتروني | 📱 رقم الهاتف
+🌐 LinkedIn | 🐙 GitHub
+
+🎯 الملخص المهني:
+مطور خلفي متخصص في بناء APIs قوية وقابلة للتوسع. خبرة في Python وNode.js مع التركيز على الأمان والأداء.
+
+💻 المهارات التقنية:
+• اللغات: Python, JavaScript, SQL
+• الأطر: Django, Flask, Express.js
+• قواعد البيانات: PostgreSQL, MongoDB, Redis
+• الأدوات: Docker, Git, Postman
+• السحابة: AWS, Heroku
+• الاختبار: pytest, Jest
+
+🚀 المشاريع:
+1. API إدارة المستخدمين - Django REST Framework
+   - نظام مصادقة JWT
+   - وثائق API شاملة
+   🔗 [رابط API] | 📁 [GitHub]
+
+2. نظام إدارة المحتوى - Node.js, MongoDB
+   - CRUD operations كاملة
+   - نظام صلاحيات متقدم
+   🔗 [رابط المشروع] | 📁 [GitHub]
+
+🎓 التعليم:
+• [الشهادة/الدورة] - [المؤسسة] - [السنة]
+• شهادات في AWS وDocker
+
+🌟 الإنجازات:
+• بنيت API يخدم 10,000+ مستخدم يومياً
+• حسنت أداء قاعدة البيانات بنسبة 60%`,
+
+                fullstack: `📄 نموذج سيرة ذاتية - Full-Stack Developer:
+
+👤 [اسمك الكامل]
+📧 البريد الإلكتروني | 📱 رقم الهاتف
+🌐 LinkedIn | 🐙 GitHub | 💼 Portfolio
+
+🎯 الملخص المهني:
+مطور متكامل مع خبرة في تطوير تطبيقات ويب كاملة من الواجهة إلى الخادم. متخصص في JavaScript ecosystem مع فهم عميق لـ UX/UI.
+
+💻 المهارات التقنية:
+• Front-End: React, Vue.js, HTML5, CSS3, JavaScript
+• Back-End: Node.js, Express, Python, Django
+• قواعد البيانات: MongoDB, PostgreSQL, MySQL
+• الأدوات: Git, Docker, Webpack, VS Code
+• السحابة: AWS, Netlify, Heroku
+• الاختبار: Jest, Cypress, pytest
+
+🚀 المشاريع:
+1. منصة تعلم إلكتروني - MERN Stack
+   - نظام مستخدمين متكامل
+   - رفع ومشاهدة الفيديوهات
+   - نظام دفع حقيقي
+   🔗 [رابط المنصة] | 📁 [GitHub]
+
+2. تطبيق شبكة اجتماعية - Vue.js + Django
+   - منشورات وتعليقات فورية
+   - نظام إشعارات
+   - رسائل خاصة
+   🔗 [رابط التطبيق] | 📁 [GitHub]
+
+🎓 التعليم:
+• [الشهادة/الدورة] - [المؤسسة] - [السنة]
+• شهادات متعددة في Full-Stack Development
+
+🌟 الإنجازات:
+• طورت 5+ تطبيقات ويب كاملة
+• قدت فريق من 3 مطورين في مشروع تخرج`
+            };
+            
+            output.textContent = resumes[type] || 'نموذج غير متوفر';
+        }
+        
+        function showResumeTemplate() {
+            const output = document.getElementById('resumeOutput');
+            output.textContent = `📋 قالب عام للسيرة الذاتية:
+
+📝 العناصر الأساسية:
+1. المعلومات الشخصية
+2. الملخص المهني (2-3 أسطر)
+3. المهارات التقنية
+4. المشاريع (الأهم!)
+5. الخبرة العملية (إن وجدت)
+6. التعليم والشهادات
+7. الإنجازات
+
+💡 نصائح مهمة:
+• استخدم تنسيق نظيف وبسيط
+• ركز على النتائج والأرقام
+• أضف روابط مباشرة لمشاريعك
+• خصص السيرة لكل وظيفة
+• تجنب المعلومات الشخصية غير المهمة
+• استخدم كلمات مفتاحية من إعلان الوظيفة
+
+📏 الطول المناسب:
+• مبتدئ: صفحة واحدة
+• خبرة متوسطة: صفحة إلى صفحتين
+• خبير: صفحتان كحد أقصى
+
+🎨 التصميم:
+• خط واضح ومقروء
+• استخدام الألوان بحذر
+• مساحات بيضاء كافية
+• تنظيم منطقي للمعلومات`;
+        }
+        
+        // حاسبة الراتب
+        function calculateSalary() {
+            const experience = parseInt(document.getElementById('experience').value);
+            const specialization = document.getElementById('specialization').value;
+            const city = document.getElementById('city').value;
+            const companySize = document.getElementById('company-size').value;
+            
+            // قاعدة بيانات الرواتب (تقديرية بالجنيه المصري)
+            const baseSalaries = {
+                frontend: { 0: 15000, 2: 25000, 5: 40000, 8: 60000 },
+                backend: { 0: 18000, 2: 28000, 5: 45000, 8: 65000 },
+                fullstack: { 0: 20000, 2: 32000, 5: 50000, 8: 75000 },
+                mobile: { 0: 19000, 2: 30000, 5: 47000, 8: 70000 },
+                devops: { 0: 22000, 2: 35000, 5: 55000, 8: 80000 }
+            };
+            
+            // معاملات التعديل
+            const cityMultiplier = {
+                cairo: 1.2,
+                alexandria: 1.1,
+                giza: 1.0,
+                other: 0.9
+            };
+            
+            const companySizeMultiplier = {
+                startup: 0.8,
+                medium: 1.0,
+                large: 1.2,
+                enterprise: 1.4
+            };
+            
+            const baseSalary = baseSalaries[specialization][experience];
+            const adjustedSalary = baseSalary * cityMultiplier[city] * companySizeMultiplier[companySize];
+            
+            const minSalary = Math.round(adjustedSalary * 0.8);
+            const maxSalary = Math.round(adjustedSalary * 1.2);
+            
+            document.getElementById('salaryRange').textContent =
+                `${minSalary.toLocaleString()} - ${maxSalary.toLocaleString()} جنيه مصري شهرياً`;
+            
+            let advice = '';
+            if (experience === 0) {
+                advice = 'كمبتدئ، ركز على التعلم والخبرة أكثر من الراتب. ابدأ بأي فرصة جيدة!';
+            } else if (experience >= 5) {
+                advice = 'مع خبرتك، يمكنك التفاوض على راتب أعلى ومزايا إضافية.';
+            } else {
+                advice = 'راتب جيد لمستوى خبرتك. ركز على تطوير مهاراتك للحصول على زيادات.';
+            }
+            
+            document.getElementById('salaryAdvice').textContent = advice;
+            document.getElementById('salaryResult').style.display = 'block';
+        }
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

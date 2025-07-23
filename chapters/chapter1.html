@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الأول: مقدمة في البرمجة - كتاب البرمجة</title>
+    <meta name="description" content="تعريف البرمجة، مجالاتها، وأهميتها في العصر الحديث">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .chapter-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .learning-objectives {
+            background: #e3f2fd;
+            border-right: 4px solid #2196f3;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .objectives-title {
+            color: #1976d2;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .definition-box {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .definition-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .definition-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .example-box {
+            background: #fff3e0;
+            border-right: 4px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .example-title {
+            color: #f57c00;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem 0 1.5rem 3rem;
+            border-right: 2px solid #667eea;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 2rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+        
+        .timeline-year {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quiz-section {
+            background: #e8f5e8;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .quiz-title {
+            color: #2e7d32;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .quiz-question {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz-options li {
+            background: #f8f9fa;
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-options li:hover {
+            background: #e9ecef;
+        }
+        
+        .quiz-options li.correct {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .quiz-options li.wrong {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter1.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الأول</div>
+            <h1 class="chapter-title">مقدمة في البرمجة</h1>
+            <p class="chapter-description">تعريف البرمجة، مجالاتها، وأهميتها في العصر الحديث</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم تعريف البرمجة وأهميتها</li>
+                    <li>التعرف على مجالات البرمجة المختلفة</li>
+                    <li>فهم كيف تؤثر البرمجة على حياتنا اليومية</li>
+                    <li>معرفة الفرص الوظيفية في مجال البرمجة</li>
+                    <li>تحديد المسار المناسب لك في البرمجة</li>
+                </ul>
+            </div>
+
+            <!-- تعريف البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>🤔 ما هي البرمجة؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">تعريف البرمجة</h3>
+                    <p class="definition-text">
+                        البرمجة هي عملية إنشاء مجموعة من التعليمات والأوامر التي تخبر الحاسوب كيف يؤدي مهمة معينة. 
+                        هي لغة التواصل بينك وبين الحاسوب لحل المشكلات وإنجاز المهام.
+                    </p>
+                </div>
+
+                <p>
+                    تخيل أنك تريد أن تعلم صديقك كيف يطبخ وجبة معينة. ستعطيه خطوات واضحة ومرتبة:
+                    أولاً افعل هذا، ثم افعل ذلك، وإذا حدث كذا فافعل كذا. هذا بالضبط ما نفعله في البرمجة، 
+                    لكن بدلاً من صديقك، نعطي هذه التعليمات للحاسوب.
+                </p>
+
+                <div class="example-box">
+                    <h4 class="example-title">💡 مثال بسيط</h4>
+                    <p>
+                        عندما تضغط على زر "إعجاب" في فيسبوك، هناك برنامج يتلقى هذا الأمر ويقوم بـ:
+                    </p>
+                    <ol>
+                        <li>التحقق من أنك مسجل دخول</li>
+                        <li>إضافة إعجابك إلى قاعدة البيانات</li>
+                        <li>تحديث العدد على الشاشة</li>
+                        <li>إرسال إشعار لصاحب المنشور</li>
+                    </ol>
+                    <p>كل هذا يحدث في أجزاء من الثانية بفضل البرمجة!</p>
+                </div>
+            </div>
+
+            <!-- تاريخ البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>📚 تاريخ البرمجة</h2>
+                <p>
+                    البرمجة ليست شيئاً جديداً، بل لها تاريخ طويل وثري. دعنا نتعرف على أهم المحطات:
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1843</div>
+                        <h4>أول برنامج في التاريخ</h4>
+                        <p>آدا لوفليس كتبت أول خوارزمية مصممة للمعالجة بواسطة آلة تشارلز بابيج التحليلية.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1940s</div>
+                        <h4>أول حاسوب إلكتروني</h4>
+                        <p>ظهور أول حواسيب إلكترونية مثل ENIAC، وبداية البرمجة الحديثة.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1950s</div>
+                        <h4>أول لغات البرمجة</h4>
+                        <p>ظهور لغات مثل FORTRAN و COBOL، مما جعل البرمجة أسهل وأكثر قابلية للقراءة.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1970s</div>
+                        <h4>لغة C</h4>
+                        <p>ظهور لغة C التي أثرت على معظم لغات البرمجة الحديثة.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1990s</div>
+                        <h4>الإنترنت والويب</h4>
+                        <p>ظهور الإنترنت وبداية برمجة المواقع مع HTML و JavaScript.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2000s</div>
+                        <h4>عصر التطبيقات</h4>
+                        <p>انتشار الهواتف الذكية وبداية عصر تطبيقات الجوال.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">اليوم</div>
+                        <h4>الذكاء الاصطناعي</h4>
+                        <p>عصر الذكاء الاصطناعي والتعلم الآلي وإنترنت الأشياء.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مجالات البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>🌐 مجالات البرمجة</h2>
+                <p>البرمجة مجال واسع جداً، وهناك تخصصات مختلفة يمكنك الاختيار من بينها:</p>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>🌍 تطوير الويب</h3>
+                        <p>إنشاء المواقع والتطبيقات التي تعمل في المتصفح</p>
+                        <ul>
+                            <li>مواقع الشركات</li>
+                            <li>متاجر إلكترونية</li>
+                            <li>شبكات اجتماعية</li>
+                            <li>تطبيقات ويب تفاعلية</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>📱 تطوير التطبيقات</h3>
+                        <p>إنشاء تطبيقات للهواتف الذكية والأجهزة اللوحية</p>
+                        <ul>
+                            <li>تطبيقات iOS</li>
+                            <li>تطبيقات Android</li>
+                            <li>تطبيقات متعددة المنصات</li>
+                            <li>ألعاب الجوال</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>🖥️ برمجة سطح المكتب</h3>
+                        <p>إنشاء برامج تعمل على أنظمة التشغيل المختلفة</p>
+                        <ul>
+                            <li>برامج الأعمال</li>
+                            <li>أدوات الإنتاجية</li>
+                            <li>برامج التصميم</li>
+                            <li>الألعاب</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>🤖 الذكاء الاصطناعي</h3>
+                        <p>تطوير أنظمة ذكية قادرة على التعلم واتخاذ القرارات</p>
+                        <ul>
+                            <li>التعلم الآلي</li>
+                            <li>معالجة اللغات الطبيعية</li>
+                            <li>الرؤية الحاسوبية</li>
+                            <li>الروبوتات</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>🔒 الأمن السيبراني</h3>
+                        <p>حماية الأنظمة والبيانات من التهديدات الإلكترونية</p>
+                        <ul>
+                            <li>اختبار الاختراق</li>
+                            <li>تحليل البرمجيات الخبيثة</li>
+                            <li>أمن الشبكات</li>
+                            <li>التشفير</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 علم البيانات</h3>
+                        <p>تحليل البيانات الضخمة واستخراج المعلومات المفيدة</p>
+                        <ul>
+                            <li>تحليل البيانات</li>
+                            <li>التصور البياني</li>
+                            <li>النمذجة الإحصائية</li>
+                            <li>التنبؤات</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أهمية البرمجة -->
+            <div class="chapter-content fade-in">
+                <h2>⭐ لماذا تتعلم البرمجة؟</h2>
+                
+                <div class="alert alert-info">
+                    <strong>هل تعلم؟</strong> أن 65% من الأطفال الذين يدخلون المدرسة الابتدائية اليوم سيعملون في وظائف لم تُخترع بعد، ومعظمها سيتطلب مهارات تقنية!
+                </div>
+
+                <h3>🚀 الفرص الوظيفية</h3>
+                <p>مجال البرمجة يوفر فرص عمل ممتازة:</p>
+                <ul>
+                    <li><strong>رواتب عالية:</strong> متوسط راتب المبرمج أعلى من معظم المهن الأخرى</li>
+                    <li><strong>طلب متزايد:</strong> الحاجة للمبرمجين تزداد كل عام</li>
+                    <li><strong>مرونة في العمل:</strong> إمكانية العمل من المنزل أو من أي مكان</li>
+                    <li><strong>إبداع وابتكار:</strong> فرصة لبناء أشياء جديدة ومفيدة</li>
+                    <li><strong>أمان وظيفي:</strong> صعوبة الاستغناء عن المبرمجين المهرة</li>
+                </ul>
+
+                <h3>🧠 تطوير مهارات التفكير</h3>
+                <p>البرمجة تساعدك على تطوير:</p>
+                <ul>
+                    <li><strong>التفكير المنطقي:</strong> تعلم كيفية تحليل المشكلات وحلها خطوة بخطوة</li>
+                    <li><strong>الصبر والمثابرة:</strong> التعامل مع الأخطاء وإصلاحها</li>
+                    <li><strong>الإبداع:</strong> إيجاد حلول مبتكرة للمشكلات</li>
+                    <li><strong>الدقة:</strong> الانتباه للتفاصيل الصغيرة</li>
+                    <li><strong>التعلم المستمر:</strong> مواكبة التطورات التقنية</li>
+                </ul>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو التعريف الأفضل للبرمجة؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">استخدام الحاسوب لتصفح الإنترنت</li>
+                        <li data-correct="true">إنشاء تعليمات للحاسوب لحل المشكلات</li>
+                        <li data-correct="false">تصليح الحواسيب المعطلة</li>
+                        <li data-correct="false">تصميم واجهات المواقع فقط</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. أي من هذه ليس من مجالات البرمجة؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">تطوير الويب</li>
+                        <li data-correct="false">الذكاء الاصطناعي</li>
+                        <li data-correct="true">الطبخ والطعام</li>
+                        <li data-correct="false">تطوير التطبيقات</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. متى كُتب أول برنامج في التاريخ؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="true">1843</li>
+                        <li data-correct="false">1950</li>
+                        <li data-correct="false">1970</li>
+                        <li data-correct="false">1990</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="../toc.html" class="nav-button">
+                    ← العودة لجدول المحتويات
+                </a>
+                <a href="chapter2.html" class="nav-button">
+                    الفصل التالي: لغات البرمجة وأنواعها →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                // إزالة الفئات السابقة
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                // إضافة الفئة المناسبة
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    // إظهار الإجابة الصحيحة
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

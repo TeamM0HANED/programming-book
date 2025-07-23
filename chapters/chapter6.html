@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل السادس: JavaScript - التفاعل - كتاب البرمجة</title>
+    <meta name="description" content="أساسيات JavaScript وإضافة التفاعل للمواقع">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .js-demo {
+            background: #f8f9fa;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .js-demo h4 {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-result {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .interactive-demo {
+            background: #e3f2fd;
+            border-right: 4px solid #2196f3;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .console-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+        
+        .variable-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .variable-card {
+            background: white;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .variable-type {
+            background: #ffc107;
+            color: #333;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .function-demo {
+            background: #f0f8ff;
+            border: 1px solid #4169e1;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .event-demo {
+            background: #fff5f5;
+            border: 1px solid #e53e3e;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .js-editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .editor-panel {
+            padding: 1rem;
+        }
+        
+        .editor-header {
+            background: #ffc107;
+            color: #333;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+        }
+        
+        .js-input {
+            width: 100%;
+            height: 200px;
+            border: none;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        
+        .output-panel {
+            background: #f8f9fa;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .output-content {
+            padding: 1rem;
+            min-height: 200px;
+            background: white;
+            margin: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        
+        .calculator {
+            background: #333;
+            border-radius: 10px;
+            padding: 1rem;
+            max-width: 300px;
+            margin: 2rem auto;
+        }
+        
+        .calc-display {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            min-height: 50px;
+        }
+        
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calc-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn:hover {
+            background: #777;
+        }
+        
+        .calc-btn.operator {
+            background: #ff9500;
+        }
+        
+        .calc-btn.operator:hover {
+            background: #ffad33;
+        }
+        
+        .calc-btn.equals {
+            background: #ff9500;
+            grid-column: span 2;
+        }
+        
+        .calc-btn.zero {
+            grid-column: span 2;
+        }
+        
+        .todo-app {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .todo-header {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .todo-input-section {
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .todo-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .todo-add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .todo-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            gap: 0.5rem;
+        }
+        
+        .todo-item.completed {
+            background: #f8f9fa;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .todo-checkbox {
+            margin-left: 0.5rem;
+        }
+        
+        .todo-text {
+            flex: 1;
+        }
+        
+        .todo-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .js-editor {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter6.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل السادس</div>
+            <h1 class="chapter-title">JavaScript - التفاعل</h1>
+            <p class="chapter-description">أساسيات JavaScript وإضافة التفاعل للمواقع</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو JavaScript ولماذا نحتاجه</li>
+                    <li>تعلم المتغيرات وأنواع البيانات</li>
+                    <li>إتقان الدوال والشروط والحلقات</li>
+                    <li>التعامل مع DOM وتغيير محتوى الصفحة</li>
+                    <li>إضافة الأحداث والتفاعل</li>
+                    <li>بناء تطبيقات تفاعلية بسيطة</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة JavaScript -->
+            <div class="chapter-content fade-in">
+                <h2>⚡ ما هو JavaScript؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">JavaScript</h3>
+                    <p class="definition-text">
+                        لغة برمجة تُستخدم لإضافة التفاعل والحركة والذكاء لصفحات الويب
+                    </p>
+                </div>
+
+                <p>
+                    إذا كان HTML هو الهيكل العظمي و CSS هو الجلد والملابس، فإن JavaScript هو الدماغ والعضلات! 
+                    JavaScript يجعل موقعك حياً ومتفاعلاً.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>تشبيه مفيد:</strong> تخيل موقع الويب كسيارة - HTML هو الهيكل، CSS هو الطلاء والتصميم، و JavaScript هو المحرك الذي يجعلها تتحرك!
+                </div>
+
+                <h3>ماذا يمكن لـ JavaScript أن يفعل؟</h3>
+                <ul>
+                    <li><strong>تغيير المحتوى:</strong> إضافة أو حذف أو تعديل النصوص والصور</li>
+                    <li><strong>التفاعل مع المستخدم:</strong> الاستجابة للنقرات والكتابة</li>
+                    <li><strong>التحقق من البيانات:</strong> فحص النماذج قبل الإرسال</li>
+                    <li><strong>الحركة والتأثيرات:</strong> إنشاء رسوم متحركة</li>
+                    <li><strong>التواصل مع الخادم:</strong> جلب البيانات دون إعادة تحميل الصفحة</li>
+                </ul>
+            </div>
+
+            <!-- إضافة JavaScript -->
+            <div class="chapter-content fade-in">
+                <h2>🔗 إضافة JavaScript للصفحة</h2>
+
+                <h3>1. JavaScript داخلي</h3>
+                <div class="js-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>JavaScript داخلي</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;script&gt;
+    alert("مرحباً بالعالم!");
+    console.log("هذا سيظهر في Console");
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+
+                <h3>2. JavaScript خارجي</h3>
+                <div class="js-demo">
+                    <h4>ملف HTML:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>ربط ملف JavaScript</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+                    </div>
+                    
+                    <h4>ملف script.js:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>script.js</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>alert("مرحباً من ملف خارجي!");
+console.log("JavaScript يعمل!");</code></pre>
+                    </div>
+                </div>
+
+                <h3>3. JavaScript مضمن</h3>
+                <div class="js-demo">
+                    <h4>الكود:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>JavaScript مضمن</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>&lt;button onclick="alert('تم النقر!')"&gt;انقر هنا&lt;/button&gt;</code></pre>
+                    </div>
+                    <div class="demo-result">
+                        <button onclick="alert('تم النقر!')">انقر هنا</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المتغيرات -->
+            <div class="chapter-content fade-in">
+                <h2>📦 المتغيرات (Variables)</h2>
+                <p>المتغيرات هي صناديق لحفظ البيانات:</p>
+
+                <h3>إعلان المتغيرات:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>أنواع المتغيرات</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// let - للمتغيرات القابلة للتغيير
+let userName = "أحمد";
+let age = 25;
+
+// const - للثوابت
+const PI = 3.14159;
+const siteName = "موقعي";
+
+// var - الطريقة القديمة (تجنبها)
+var oldVariable = "قديم";</code></pre>
+                </div>
+
+                <h3>أنواع البيانات:</h3>
+                <div class="variable-demo">
+                    <div class="variable-card">
+                        <div class="variable-type">String</div>
+                        <h4>النصوص</h4>
+                        <code>"مرحباً بالعالم"</code>
+                    </div>
+                    <div class="variable-card">
+                        <div class="variable-type">Number</div>
+                        <h4>الأرقام</h4>
+                        <code>42, 3.14, -10</code>
+                    </div>
+                    <div class="variable-card">
+                        <div class="variable-type">Boolean</div>
+                        <h4>صحيح/خطأ</h4>
+                        <code>true, false</code>
+                    </div>
+                    <div class="variable-card">
+                        <div class="variable-type">Array</div>
+                        <h4>المصفوفات</h4>
+                        <code>[1, 2, 3, 4]</code>
+                    </div>
+                    <div class="variable-card">
+                        <div class="variable-type">Object</div>
+                        <h4>الكائنات</h4>
+                        <code>{name: "أحمد"}</code>
+                    </div>
+                    <div class="variable-card">
+                        <div class="variable-type">Undefined</div>
+                        <h4>غير معرف</h4>
+                        <code>undefined</code>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>جرب بنفسك:</h4>
+                    <button onclick="demonstrateVariables()">عرض أمثلة المتغيرات</button>
+                    <div id="variableOutput" class="console-output"></div>
+                </div>
+            </div>
+
+            <!-- العمليات -->
+            <div class="chapter-content fade-in">
+                <h2>🧮 العمليات (Operations)</h2>
+
+                <h3>العمليات الحسابية:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>العمليات الحسابية</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>let a = 10;
+let b = 3;
+
+console.log(a + b);  // الجمع: 13
+console.log(a - b);  // الطرح: 7
+console.log(a * b);  // الضرب: 30
+console.log(a / b);  // القسمة: 3.333...
+console.log(a % b);  // باقي القسمة: 1
+console.log(a ** b); // الأس: 1000</code></pre>
+                </div>
+
+                <h3>عمليات المقارنة:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>المقارنات</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>let x = 5;
+let y = "5";
+
+console.log(x == y);   // true (مقارنة القيمة فقط)
+console.log(x === y);  // false (مقارنة القيمة والنوع)
+console.log(x != y);   // false
+console.log(x !== y);  // true
+console.log(x > 3);    // true
+console.log(x <= 5);   // true</code></pre>
+                </div>
+
+                <h3>العمليات المنطقية:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>العمليات المنطقية</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>let isAdult = true;
+let hasLicense = false;
+
+console.log(isAdult && hasLicense); // AND: false
+console.log(isAdult || hasLicense); // OR: true
+console.log(!isAdult);              // NOT: false</code></pre>
+                </div>
+            </div>
+
+            <!-- الدوال -->
+            <div class="chapter-content fade-in">
+                <h2>🔧 الدوال (Functions)</h2>
+                <p>الدوال هي قطع من الكود يمكن إعادة استخدامها:</p>
+
+                <h3>إنشاء دالة:</h3>
+                <div class="function-demo">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>دالة بسيطة</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code>// دالة بدون معاملات
+function sayHello() {
+    alert("مرحباً!");
+}
+
+// دالة مع معاملات
+function greet(name) {
+    return "مرحباً " + name + "!";
+}
+
+// دالة مع معاملات متعددة
+function add(a, b) {
+    return a + b;
+}
+
+// استخدام الدوال
+sayHello();
+let message = greet("أحمد");
+let sum = add(5, 3);</code></pre>
+                    </div>
+                    <button onclick="demonstrateFunctions()">جرب الدوال</button>
+                    <div id="functionOutput" class="console-output"></div>
+                </div>
+
+                <h3>الدوال السهمية (Arrow Functions):</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Arrow Functions</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// الطريقة التقليدية
+function multiply(a, b) {
+    return a * b;
+}
+
+// الدالة السهمية
+const multiply = (a, b) => {
+    return a * b;
+}
+
+// دالة سهمية مختصرة
+const multiply = (a, b) => a * b;
+
+// دالة سهمية بمعامل واحد
+const square = x => x * x;</code></pre>
+                </div>
+            </div>
+
+            <!-- الشروط -->
+            <div class="chapter-content fade-in">
+                <h2>🤔 الشروط (Conditions)</h2>
+
+                <h3>if...else:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>الشروط</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>let age = 18;
+
+if (age >= 18) {
+    console.log("بالغ");
+} else if (age >= 13) {
+    console.log("مراهق");
+} else {
+    console.log("طفل");
+}
+
+// الشرط المختصر (Ternary)
+let status = age >= 18 ? "بالغ" : "قاصر";
+
+// Switch
+let day = "الاثنين";
+switch (day) {
+    case "السبت":
+    case "الأحد":
+        console.log("عطلة");
+        break;
+    case "الاثنين":
+        console.log("بداية الأسبوع");
+        break;
+    default:
+        console.log("يوم عادي");
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>اختبار العمر:</h4>
+                    <input type="number" id="ageInput" placeholder="أدخل عمرك" min="1" max="100">
+                    <button onclick="checkAge()">فحص العمر</button>
+                    <div id="ageResult" class="console-output"></div>
+                </div>
+            </div>
+
+            <!-- الحلقات -->
+            <div class="chapter-content fade-in">
+                <h2>🔄 الحلقات (Loops)</h2>
+
+                <h3>أنواع الحلقات:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>الحلقات</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// for loop
+for (let i = 1; i <= 5; i++) {
+    console.log("الرقم: " + i);
+}
+
+// while loop
+let count = 1;
+while (count <= 5) {
+    console.log("العد: " + count);
+    count++;
+}
+
+// for...of (للمصفوفات)
+let fruits = ["تفاح", "موز", "برتقال"];
+for (let fruit of fruits) {
+    console.log(fruit);
+}
+
+// for...in (للكائنات)
+let person = {name: "أحمد", age: 25, city: "الرياض"};
+for (let key in person) {
+    console.log(key + ": " + person[key]);
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h4>جدول الضرب:</h4>
+                    <input type="number" id="multiplyInput" placeholder="أدخل رقم" min="1" max="12">
+                    <button onclick="showMultiplicationTable()">عرض جدول الضرب</button>
+                    <div id="multiplyResult" class="console-output"></div>
+                </div>
+            </div>
+
+            <!-- محرر JavaScript تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>✏️ جرب JavaScript بنفسك!</h2>
+                <p>اكتب كود JavaScript وشاهد النتيجة:</p>
+
+                <div class="js-editor">
+                    <div>
+                        <div class="editor-header">محرر JavaScript</div>
+                        <div class="editor-panel">
+                            <textarea class="js-input" id="jsEditor" placeholder="اكتب JavaScript هنا...">
+// جرب هذا الكود
+let name = "أحمد";
+let age = 25;
+
+console.log("الاسم: " + name);
+console.log("العمر: " + age);
+
+// دالة بسيطة
+function calculateAge(birthYear) {
+    let currentYear = new Date().getFullYear();
+    return currentYear - birthYear;
+}
+
+let myAge = calculateAge(1998);
+console.log("عمري المحسوب: " + myAge);
+
+// حلقة بسيطة
+for (let i = 1; i <= 5; i++) {
+    console.log("الرقم: " + i);
+}</textarea>
+                        </div>
+                        <button onclick="runJavaScript()" style="width: 100%; background: #28a745; color: white; border: none; padding: 0.8rem; margin-top: 0.5rem; border-radius: 5px; cursor: pointer;">تشغيل الكود</button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="editor-header">النتيجة</div>
+                        <div class="output-content" id="jsOutput">
+اضغط "تشغيل الكود" لرؤية النتيجة...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التعامل مع DOM -->
+            <div class="chapter-content fade-in">
+                <h2>🌐 التعامل مع DOM</h2>
+                <p>DOM (Document Object Model) يتيح لك تغيير محتوى الصفحة:</p>
+
+                <h3>اختيار العناصر:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>اختيار العناصر</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// اختيار بالـ ID
+let element = document.getElementById("myElement");
+
+// اختيار بالفئة
+let elements = document.getElementsByClassName("myClass");
+
+// اختيار بالعنصر
+let paragraphs = document.getElementsByTagName("p");
+
+// اختيار بـ CSS Selector
+let element = document.querySelector("#myElement");
+let elements = document.querySelectorAll(".myClass");</code></pre>
+                </div>
+
+                <h3>تغيير المحتوى:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>تغيير المحتوى</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// تغيير النص
+element.textContent = "نص جديد";
+element.innerHTML = "&lt;strong&gt;نص غامق&lt;/strong&gt;";
+
+// تغيير الخصائص
+element.style.color = "red";
+element.style.fontSize = "20px";
+
+// إضافة/إزالة فئات
+element.classList.add("newClass");
+element.classList.remove("oldClass");
+element.classList.toggle("activeClass");</code></pre>
+                </div>
+
+                <div class="event-demo">
+                    <h4>مثال تفاعلي:</h4>
+                    <p id="demoText">هذا نص يمكن تغييره</p>
+                    <button onclick="changeText()">غير النص</button>
+                    <button onclick="changeColor()">غير اللون</button>
+                    <button onclick="changeSize()">غير الحجم</button>
+                </div>
+            </div>
+
+            <!-- الأحداث -->
+            <div class="chapter-content fade-in">
+                <h2>🎯 الأحداث (Events)</h2>
+
+                <h3>أنواع الأحداث:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>الأحداث</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>// النقر
+button.addEventListener("click", function() {
+    alert("تم النقر!");
+});
+
+// تحميل الصفحة
+window.addEventListener("load", function() {
+    console.log("تم تحميل الصفحة");
+});
+
+// الكتابة في حقل النص
+input.addEventListener("input", function() {
+    console.log("تم تغيير النص");
+});
+
+// تمرير الماوس
+element.addEventListener("mouseover", function() {
+    this.style.backgroundColor = "yellow";
+});
+
+element.addEventListener("mouseout", function() {
+    this.style.backgroundColor = "";
+});</code></pre>
+                </div>
+
+                <div class="event-demo">
+                    <h4>جرب الأحداث:</h4>
+                    <button id="eventBtn" onmouseover="this.style.background='#ff6b6b'" onmouseout="this.style.background='#4ecdc4'" onclick="this.textContent='تم النقر!'" style="background: #4ecdc4; color: white; border: none; padding: 1rem; border-radius: 5px; cursor: pointer;">مرر الماوس وانقر</button>
+                </div>
+            </div>
+
+            <!-- مشاريع عملية -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 مشاريع عملية</h2>
+
+                <h3>1. آلة حاسبة بسيطة:</h3>
+                <div class="calculator">
+                    <div class="calc-display" id="calcDisplay">0</div>
+                    <div class="calc-buttons">
+                        <button class="calc-btn" onclick="clearCalculator()">C</button>
+                        <button class="calc-btn" onclick="deleteLast()">⌫</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('/')">/</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('*')">×</button>
+                        
+                        <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+                        <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+                        <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
+                        
+                        <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+                        <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+                        <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+                        <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
+                        
+                        <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+                        <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+                        <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+                        <button class="calc-btn equals" onclick="calculateResult()" rowspan="2">=</button>
+                        
+                        <button class="calc-btn zero" onclick="appendToDisplay('0')">0</button>
+                        <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+                    </div>
+                </div>
+
+                <h3>2. تطبيق قائمة المهام:</h3>
+                <div class="todo-app">
+                    <div class="todo-header">
+                        <h3>📝 قائمة المهام</h3>
+                    </div>
+                    <div class="todo-input-section">
+                        <input type="text" class="todo-input" id="todoInput" placeholder="أضف مهمة جديدة..." onkeypress="if(event.key==='Enter') addTodo()">
+                        <button class="todo-add-btn" onclick="addTodo()">إضافة</button>
+                    </div>
+                    <div class="todo-list" id="todoList">
+                        <!-- المهام ستظهر هنا -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو الفرق بين let و const؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">لا يوجد فرق</li>
+                        <li data-correct="true">let قابل للتغيير، const ثابت</li>
+                        <li data-correct="false">const أسرع من let</li>
+                        <li data-correct="false">let للنصوص، const للأرقام</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. كيف نختار عنصر له id="myButton"؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="true">document.getElementById("myButton")</li>
+                        <li data-correct="false">document.getClass("myButton")</li>
+                        <li data-correct="false">document.select("myButton")</li>
+                        <li data-correct="false">getElementById("myButton")</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هو DOM؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من أنواع البيانات</li>
+                        <li data-correct="true">Document Object Model</li>
+                        <li data-correct="false">لغة برمجة جديدة</li>
+                        <li data-correct="false">نوع من أنواع الدوال</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. كيف نضيف مستمع حدث للنقر؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">element.click(function)</li>
+                        <li data-correct="true">element.addEventListener("click", function)</li>
+                        <li data-correct="false">element.onClick(function)</li>
+                        <li data-correct="false">element.addClick(function)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter5.html" class="nav-button">
+                    ← الفصل السابق: CSS - تنسيق وتصميم
+                </a>
+                <a href="chapter7.html" class="nav-button">
+                    الفصل التالي: مشروع ويب بسيط →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // دوال تفاعلية للفصل
+        
+        // عرض أمثلة المتغيرات
+        function demonstrateVariables() {
+            const output = document.getElementById('variableOutput');
+            let result = '';
+            
+            let name = "أحمد";
+            let age = 25;
+            let isStudent = true;
+            let grades = [85, 90, 78, 92];
+            let person = {name: "سارة", age: 22};
+            
+            result += `اسم (String): ${name}\n`;
+            result += `عمر (Number): ${age}\n`;
+            result += `طالب (Boolean): ${isStudent}\n`;
+            result += `درجات (Array): [${grades.join(', ')}]\n`;
+            result += `شخص (Object): ${JSON.stringify(person)}\n`;
+            result += `نوع البيانات للاسم: ${typeof name}\n`;
+            result += `نوع البيانات للعمر: ${typeof age}`;
+            
+            output.textContent = result;
+        }
+        
+        // عرض أمثلة الدوال
+        function demonstrateFunctions() {
+            const output = document.getElementById('functionOutput');
+            let result = '';
+            
+            function greet(name) {
+                return "مرحباً " + name + "!";
+            }
+            
+            function add(a, b) {
+                return a + b;
+            }
+            
+            const multiply = (a, b) => a * b;
+            
+            result += greet("أحمد") + '\n';
+            result += `5 + 3 = ${add(5, 3)}\n`;
+            result += `4 × 6 = ${multiply(4, 6)}\n`;
+            
+            output.textContent = result;
+        }
+        
+        // فحص العمر
+        function checkAge() {
+            const age = parseInt(document.getElementById('ageInput').value);
+            const output = document.getElementById('ageResult');
+            
+            if (isNaN(age)) {
+                output.textContent = "يرجى إدخال عمر صحيح";
+                return;
+            }
+            
+            let status;
+            if (age >= 18) {
+                status = "بالغ";
+            } else if (age >= 13) {
+                status = "مراهق";
+            } else {
+                status = "طفل";
+            }
+            
+            output.textContent = `العمر: ${age} - الحالة: ${status}`;
+        }
+        
+        // عرض جدول الضرب
+        function showMultiplicationTable() {
+            const num = parseInt(document.getElementById('multiplyInput').value);
+            const output = document.getElementById('multiplyResult');
+            
+            if (isNaN(num)) {
+                output.textContent = "يرجى إدخال رقم صحيح";
+                return;
+            }
+            
+            let result = `جدول ضرب ${num}:\n`;
+            for (let i = 1; i <= 10; i++) {
+                result += `${num} × ${i} = ${num * i}\n`;
+            }
+            
+            output.textContent = result;
+        }
+        
+        // تشغيل JavaScript
+        function runJavaScript() {
+            const code = document.getElementById('jsEditor').value;
+            const output = document.getElementById('jsOutput');
+            
+            // إنشاء console مؤقت
+            let consoleOutput = '';
+            const originalConsole = console.log;
+            console.log = function(...args) {
+                consoleOutput += args.join(' ') + '\n';
+            };
+            
+            try {
+                eval(code);
+                output.textContent = consoleOutput || 'تم تنفيذ الكود بنجاح (لا توجد مخرجات)';
+            } catch (error) {
+                output.textContent = 'خطأ: ' + error.message;
+            }
+            
+            // استعادة console الأصلي
+            console.log = originalConsole;
+        }
+        
+        // تغيير النص
+        function changeText() {
+            const element = document.getElementById('demoText');
+            const texts = ['نص جديد!', 'تم التغيير!', 'JavaScript رائع!', 'هذا نص يمكن تغييره'];
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            element.textContent = randomText;
+        }
+        
+        // تغيير اللون
+        function changeColor() {
+            const element = document.getElementById('demoText');
+            const colors = ['red', 'blue', 'green', 'purple', 'orange'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            element.style.color = randomColor;
+        }
+        
+        // تغيير الحجم
+        function changeSize() {
+            const element = document.getElementById('demoText');
+            const sizes = ['16px', '20px', '24px', '28px', '32px'];
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            element.style.fontSize = randomSize;
+        }
+        
+        // آلة حاسبة
+        let calcDisplay = document.getElementById('calcDisplay');
+        let currentInput = '0';
+        let shouldResetDisplay = false;
+        
+        function appendToDisplay(value) {
+            if (shouldResetDisplay) {
+                currentInput = '';
+                shouldResetDisplay = false;
+            }
+            
+            if (currentInput === '0' && value !== '.') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            
+            calcDisplay.textContent = currentInput;
+        }
+        
+        function clearCalculator() {
+            currentInput = '0';
+            calcDisplay.textContent = currentInput;
+        }
+        
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            calcDisplay.textContent = currentInput;
+        }
+        
+        function calculateResult() {
+            try {
+                let result = eval(currentInput.replace('×', '*'));
+                currentInput = result.toString();
+                calcDisplay.textContent = currentInput;
+                shouldResetDisplay = true;
+            } catch (error) {
+                calcDisplay.textContent = 'خطأ';
+                currentInput = '0';
+            }
+        }
+        
+        // تطبيق المهام
+        let todos = [];
+        
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            
+            if (text === '') return;
+            
+            const todo = {
+                id: Date.now(),
+                text: text,
+                completed: false
+            };
+            
+            todos.push(todo);
+            input.value = '';
+            renderTodos();
+        }
+        
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.completed = !todo.completed;
+                renderTodos();
+            }
+        }
+        
+        function deleteTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            renderTodos();
+        }
+        
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            
+            if (todos.length === 0) {
+                todoList.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;">لا توجد مهام</div>';
+                return;
+            }
+            
+            todoList.innerHTML = todos.map(todo => `
+                <div class="todo-item ${todo.completed ? 'completed' : ''}">
+                    <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} 
+                           onchange="toggleTodo(${todo.id})">
+                    <span class="todo-text">${todo.text}</span>
+                    <button class="todo-delete" onclick="deleteTodo(${todo.id})">حذف</button>
+                </div>
+            `).join('');
+        }
+        
+        // تهيئة تطبيق المهام
+        renderTodos();
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

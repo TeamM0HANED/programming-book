@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل الحادي عشر: VS Code - محرر المطورين - كتاب البرمجة</title>
+    <meta name="description" content="تعلم استخدام VS Code أفضل محرر للمطورين">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .vscode-demo {
+            background: #f8f9fa;
+            border: 2px solid #007acc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .vscode-demo h4 {
+            color: #007acc;
+            margin-bottom: 1rem;
+        }
+        
+        .vscode-interface {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .vscode-titlebar {
+            background: #323233;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .vscode-controls {
+            display: flex;
+            gap: 0.3rem;
+        }
+        
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .close { background: #ff5f57; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #28ca42; }
+        
+        .vscode-body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 400px;
+        }
+        
+        .vscode-sidebar {
+            background: #252526;
+            padding: 1rem;
+            border-left: 1px solid #3e3e42;
+        }
+        
+        .vscode-editor {
+            background: #1e1e1e;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .file-tree {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .file-tree li {
+            padding: 0.3rem 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .file-tree li:hover {
+            background: #2a2d2e;
+            border-radius: 3px;
+        }
+        
+        .file-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .folder-icon { color: #dcb67a; }
+        .html-icon { color: #e34c26; }
+        .css-icon { color: #1572b6; }
+        .js-icon { color: #f7df1e; }
+        
+        .code-line {
+            display: flex;
+            align-items: center;
+        }
+        
+        .line-number {
+            color: #858585;
+            margin-left: 1rem;
+            min-width: 30px;
+            text-align: left;
+        }
+        
+        .code-content {
+            flex: 1;
+            padding-right: 1rem;
+        }
+        
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .tag { color: #4ec9b0; }
+        .attribute { color: #9cdcfe; }
+        
+        .extension-card {
+            background: white;
+            border: 2px solid #007acc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: transform 0.3s;
+        }
+        
+        .extension-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .extension-icon {
+            width: 50px;
+            height: 50px;
+            background: #007acc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .extension-name {
+            font-weight: 600;
+            color: #007acc;
+            margin-bottom: 0.5rem;
+        }
+        
+        .extension-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .shortcut-table th {
+            background: #007acc;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+        }
+        
+        .shortcut-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .shortcut-key {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 0.2rem 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tips-section {
+            background: #e8f4fd;
+            border-right: 4px solid #007acc;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .workflow-demo {
+            background: linear-gradient(135deg, #007acc 0%, #0056b3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .vscode-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .vscode-sidebar {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter11.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل الحادي عشر</div>
+            <h1 class="chapter-title">VS Code - محرر المطورين</h1>
+            <p class="chapter-description">تعلم استخدام VS Code أفضل محرر للمطورين</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>فهم ما هو VS Code ولماذا هو الأفضل</li>
+                    <li>تعلم تثبيت وإعداد VS Code</li>
+                    <li>إتقان الواجهة والميزات الأساسية</li>
+                    <li>تعلم الاختصارات المهمة</li>
+                    <li>تثبيت وإدارة الإضافات</li>
+                    <li>تحسين سير العمل والإنتاجية</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة VS Code -->
+            <div class="chapter-content fade-in">
+                <h2>💻 ما هو VS Code؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">Visual Studio Code</h3>
+                    <p class="definition-text">
+                        محرر نصوص مجاني ومفتوح المصدر من Microsoft، مصمم خصيصاً للمطورين
+                    </p>
+                </div>
+
+                <p>
+                    VS Code هو أشهر محرر نصوص في العالم! يستخدمه ملايين المطورين لأنه سريع، 
+                    قوي، ومليء بالميزات التي تجعل البرمجة أسهل وأمتع.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>حقيقة مثيرة:</strong> VS Code هو المحرر الأكثر شعبية بين المطورين حسب استطلاع Stack Overflow لعدة سنوات متتالية!
+                </div>
+
+                <h3>لماذا VS Code؟</h3>
+                <ul>
+                    <li><strong>مجاني تماماً:</strong> لا تدفع أي شيء</li>
+                    <li><strong>سريع وخفيف:</strong> يعمل بسلاسة حتى على الأجهزة القديمة</li>
+                    <li><strong>آلاف الإضافات:</strong> لكل لغة برمجة وأداة</li>
+                    <li><strong>Git مدمج:</strong> إدارة الكود بسهولة</li>
+                    <li><strong>IntelliSense:</strong> اقتراحات ذكية أثناء الكتابة</li>
+                    <li><strong>متعدد المنصات:</strong> Windows, Mac, Linux</li>
+                </ul>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h4>سرعة فائقة</h4>
+                        <p>يفتح في ثوانٍ ويعمل بسلاسة مع المشاريع الكبيرة</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🧩</div>
+                        <h4>إضافات لا محدودة</h4>
+                        <p>آلاف الإضافات لكل احتياج برمجي</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h4>قابل للتخصيص</h4>
+                        <p>غير الألوان والخطوط والواجهة كما تشاء</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تثبيت VS Code -->
+            <div class="chapter-content fade-in">
+                <h2>⚙️ تثبيت VS Code</h2>
+
+                <div class="vscode-demo">
+                    <h4>خطوات التثبيت:</h4>
+                    <ol>
+                        <li>اذهب إلى <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></li>
+                        <li>اضغط "Download for Windows/Mac/Linux"</li>
+                        <li>شغل ملف التثبيت</li>
+                        <li>اتبع التعليمات (اختر الإعدادات الافتراضية)</li>
+                        <li>أعد تشغيل الجهاز إذا طُلب منك</li>
+                    </ol>
+                </div>
+
+                <div class="tips-section">
+                    <h4>💡 نصائح التثبيت:</h4>
+                    <ul>
+                        <li>✅ اختر "Add to PATH" أثناء التثبيت</li>
+                        <li>✅ اختر "Register Code as an editor for supported file types"</li>
+                        <li>✅ اختر "Add 'Open with Code' action to Windows Explorer"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- واجهة VS Code -->
+            <div class="chapter-content fade-in">
+                <h2>🖥️ واجهة VS Code</h2>
+                <p>دعنا نتعرف على أجزاء واجهة VS Code:</p>
+
+                <div class="vscode-interface">
+                    <div class="vscode-titlebar">
+                        <div class="vscode-controls">
+                            <div class="control-btn close"></div>
+                            <div class="control-btn minimize"></div>
+                            <div class="control-btn maximize"></div>
+                        </div>
+                        <span style="margin-right: auto;">📁 my-project - Visual Studio Code</span>
+                    </div>
+                    
+                    <div class="vscode-body">
+                        <div class="vscode-sidebar">
+                            <h4 style="color: #cccccc; margin-bottom: 1rem;">📁 EXPLORER</h4>
+                            <ul class="file-tree">
+                                <li>
+                                    <span class="file-icon folder-icon">📁</span>
+                                    <span>my-project</span>
+                                </li>
+                                <li style="margin-right: 1rem;">
+                                    <span class="file-icon html-icon">📄</span>
+                                    <span>index.html</span>
+                                </li>
+                                <li style="margin-right: 1rem;">
+                                    <span class="file-icon css-icon">📄</span>
+                                    <span>style.css</span>
+                                </li>
+                                <li style="margin-right: 1rem;">
+                                    <span class="file-icon js-icon">📄</span>
+                                    <span>script.js</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vscode-editor">
+                            <div class="code-line">
+                                <span class="line-number">1</span>
+                                <span class="code-content">
+                                    <span class="comment">// مرحباً بك في VS Code!</span>
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">2</span>
+                                <span class="code-content">
+                                    <span class="keyword">function</span> <span class="tag">sayHello</span>() {
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">3</span>
+                                <span class="code-content">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">console</span>.<span class="tag">log</span>(<span class="string">"مرحباً بالعالم!"</span>);
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">4</span>
+                                <span class="code-content">}</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">5</span>
+                                <span class="code-content"></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">6</span>
+                                <span class="code-content">
+                                    <span class="tag">sayHello</span>();
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>أجزاء الواجهة:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📁 Explorer</h4>
+                        <p>عرض ملفات ومجلدات المشروع</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 Search</h4>
+                        <p>البحث والاستبدال في الملفات</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌿 Source Control</h4>
+                        <p>إدارة Git والتحكم بالإصدارات</p>
+                    </div>
+                    <div class="card">
+                        <h4>🐛 Run and Debug</h4>
+                        <p>تشغيل وتصحيح الأخطاء</p>
+                    </div>
+                    <div class="card">
+                        <h4>🧩 Extensions</h4>
+                        <p>تثبيت وإدارة الإضافات</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚙️ Settings</h4>
+                        <p>إعدادات وتخصيص المحرر</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الاختصارات المهمة -->
+            <div class="chapter-content fade-in">
+                <h2>⌨️ الاختصارات المهمة</h2>
+                <p>هذه أهم الاختصارات التي ستوفر عليك ساعات من الوقت:</p>
+
+                <table class="shortcut-table">
+                    <thead>
+                        <tr>
+                            <th>الوظيفة</th>
+                            <th>Windows/Linux</th>
+                            <th>Mac</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>فتح ملف</td>
+                            <td><span class="shortcut-key">Ctrl + O</span></td>
+                            <td><span class="shortcut-key">Cmd + O</span></td>
+                        </tr>
+                        <tr>
+                            <td>حفظ الملف</td>
+                            <td><span class="shortcut-key">Ctrl + S</span></td>
+                            <td><span class="shortcut-key">Cmd + S</span></td>
+                        </tr>
+                        <tr>
+                            <td>البحث في الملف</td>
+                            <td><span class="shortcut-key">Ctrl + F</span></td>
+                            <td><span class="shortcut-key">Cmd + F</span></td>
+                        </tr>
+                        <tr>
+                            <td>البحث في المشروع</td>
+                            <td><span class="shortcut-key">Ctrl + Shift + F</span></td>
+                            <td><span class="shortcut-key">Cmd + Shift + F</span></td>
+                        </tr>
+                        <tr>
+                            <td>فتح Terminal</td>
+                            <td><span class="shortcut-key">Ctrl + `</span></td>
+                            <td><span class="shortcut-key">Cmd + `</span></td>
+                        </tr>
+                        <tr>
+                            <td>Command Palette</td>
+                            <td><span class="shortcut-key">Ctrl + Shift + P</span></td>
+                            <td><span class="shortcut-key">Cmd + Shift + P</span></td>
+                        </tr>
+                        <tr>
+                            <td>تعليق السطر</td>
+                            <td><span class="shortcut-key">Ctrl + /</span></td>
+                            <td><span class="shortcut-key">Cmd + /</span></td>
+                        </tr>
+                        <tr>
+                            <td>نسخ السطر</td>
+                            <td><span class="shortcut-key">Shift + Alt + ↓</span></td>
+                            <td><span class="shortcut-key">Shift + Option + ↓</span></td>
+                        </tr>
+                        <tr>
+                            <td>حذف السطر</td>
+                            <td><span class="shortcut-key">Ctrl + Shift + K</span></td>
+                            <td><span class="shortcut-key">Cmd + Shift + K</span></td>
+                        </tr>
+                        <tr>
+                            <td>تحديد متعدد</td>
+                            <td><span class="shortcut-key">Ctrl + D</span></td>
+                            <td><span class="shortcut-key">Cmd + D</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- الإضافات المهمة -->
+            <div class="chapter-content fade-in">
+                <h2>🧩 الإضافات المهمة</h2>
+                <p>هذه أهم الإضافات التي يحتاجها كل مطور:</p>
+
+                <div class="grid-2">
+                    <div class="extension-card">
+                        <div class="extension-icon">🌈</div>
+                        <div class="extension-name">Prettier</div>
+                        <div class="extension-description">تنسيق الكود تلقائياً ليصبح جميلاً ومنظماً</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🔍</div>
+                        <div class="extension-name">ESLint</div>
+                        <div class="extension-description">اكتشاف الأخطاء في JavaScript قبل تشغيل الكود</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🎨</div>
+                        <div class="extension-name">Live Server</div>
+                        <div class="extension-description">تشغيل موقعك محلياً مع إعادة تحميل تلقائية</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🌙</div>
+                        <div class="extension-name">One Dark Pro</div>
+                        <div class="extension-description">ثيم داكن جميل ومريح للعينين</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">📁</div>
+                        <div class="extension-name">Material Icon Theme</div>
+                        <div class="extension-description">أيقونات جميلة للملفات والمجلدات</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🔧</div>
+                        <div class="extension-name">Auto Rename Tag</div>
+                        <div class="extension-description">تغيير تاج HTML تلقائياً عند تعديل الآخر</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🌐</div>
+                        <div class="extension-name">HTML CSS Support</div>
+                        <div class="extension-description">اقتراحات ذكية لـ CSS في ملفات HTML</div>
+                    </div>
+                    
+                    <div class="extension-card">
+                        <div class="extension-icon">🐍</div>
+                        <div class="extension-name">Python</div>
+                        <div class="extension-description">دعم كامل للغة Python مع IntelliSense</div>
+                    </div>
+                </div>
+
+                <h3>كيفية تثبيت الإضافات:</h3>
+                <div class="vscode-demo">
+                    <ol>
+                        <li>اضغط على أيقونة Extensions في الشريط الجانبي</li>
+                        <li>ابحث عن اسم الإضافة</li>
+                        <li>اضغط "Install"</li>
+                        <li>أعد تشغيل VS Code إذا طُلب منك</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- ميزات متقدمة -->
+            <div class="chapter-content fade-in">
+                <h2>🚀 ميزات متقدمة</h2>
+
+                <h3>1. IntelliSense - الاقتراحات الذكية</h3>
+                <div class="vscode-demo">
+                    <p>VS Code يقترح عليك الكود أثناء الكتابة:</p>
+                    <ul>
+                        <li>أسماء المتغيرات والدوال</li>
+                        <li>خصائص CSS</li>
+                        <li>تاجات HTML</li>
+                        <li>مكتبات JavaScript</li>
+                    </ul>
+                </div>
+
+                <h3>2. Multi-cursor - التحديد المتعدد</h3>
+                <div class="vscode-demo">
+                    <p>حدد عدة أماكن واكتب فيها جميعاً:</p>
+                    <ul>
+                        <li><strong>Alt + Click:</strong> إضافة cursor جديد</li>
+                        <li><strong>Ctrl + D:</strong> تحديد الكلمة التالية المشابهة</li>
+                        <li><strong>Ctrl + Shift + L:</strong> تحديد جميع الكلمات المشابهة</li>
+                    </ul>
+                </div>
+
+                <h3>3. Emmet - كتابة HTML/CSS سريعة</h3>
+                <div class="vscode-demo">
+                    <h4>أمثلة Emmet:</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span>Emmet Shortcuts</span>
+                            <button class="copy-btn">نسخ</button>
+                        </div>
+                        <pre><code><!-- اكتب هذا -->
+div.container>h1+p*3
+
+<!-- واضغط Tab للحصول على -->
+&lt;div class="container"&gt;
+    &lt;h1&gt;&lt;/h1&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+<!-- أو اكتب -->
+ul>li.item$*5
+
+<!-- للحصول على -->
+&lt;ul&gt;
+    &lt;li class="item1"&gt;&lt;/li&gt;
+    &lt;li class="item2"&gt;&lt;/li&gt;
+    &lt;li class="item3"&gt;&lt;/li&gt;
+    &lt;li class="item4"&gt;&lt;/li&gt;
+    &lt;li class="item5"&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    </div>
+                </div>
+
+                <h3>4. Git Integration - دمج Git</h3>
+                <div class="vscode-demo">
+                    <p>VS Code يدعم Git بشكل كامل:</p>
+                    <ul>
+                        <li>رؤية التغييرات في الملفات</li>
+                        <li>عمل commit مباشرة</li>
+                        <li>إدارة الفروع (branches)</li>
+                        <li>حل التعارضات (conflicts)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- سير العمل -->
+            <div class="chapter-content fade-in">
+                <h2>⚡ تحسين سير العمل</h2>
+
+                <div class="workflow-demo">
+                    <h3>🎯 سير عمل مطور محترف</h3>
+                    <p>كيف تستخدم VS Code بكفاءة عالية</p>
+                </div>
+
+                <h3>1. إعداد المشروع:</h3>
+                <div class="vscode-demo">
+                    <ol>
+                        <li>افتح مجلد المشروع: <code>File > Open Folder</code></li>
+                        <li>ثبت الإضافات المطلوبة</li>
+                        <li>اضبط إعدادات المشروع في <code>.vscode/settings.json</code></li>
+                        <li>أنشئ ملف <code>.gitignore</code></li>
+                    </ol>
+                </div>
+
+                <h3>2. الكتابة الفعالة:</h3>
+                <div class="tips-section">
+                    <ul>
+                        <li>استخدم Emmet لكتابة HTML/CSS سريعة</li>
+                        <li>استفد من IntelliSense والاقتراحات</li>
+                        <li>استخدم Snippets للكود المتكرر</li>
+                        <li>استخدم Multi-cursor للتعديل المتعدد</li>
+                    </ul>
+                </div>
+
+                <h3>3. التنظيم والبحث:</h3>
+                <div class="tips-section">
+                    <ul>
+                        <li>استخدم Command Palette للوصول السريع</li>
+                        <li>استخدم Quick Open لفتح الملفات سريعاً</li>
+                        <li>نظم الملفات في مجلدات منطقية</li>
+                        <li>استخدم البحث المتقدم في المشروع</li>
+                    </ul>
+                </div>
+
+                <h3>4. التصحيح والاختبار:</h3>
+                <div class="tips-section">
+                    <ul>
+                        <li>استخدم Live Server لمعاينة المواقع</li>
+                        <li>استخدم Debugger المدمج</li>
+                        <li>استفد من Terminal المدمج</li>
+                        <li>استخدم Extensions للغات المختلفة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- إعدادات مفيدة -->
+            <div class="chapter-content fade-in">
+                <h2>⚙️ إعدادات مفيدة</h2>
+
+                <h3>إعدادات أساسية مهمة:</h3>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>settings.json</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <pre><code>{
+    // حفظ تلقائي
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    
+    // تنسيق تلقائي عند الحفظ
+    "editor.formatOnSave": true,
+    
+    // إظهار المسافات والتابات
+    "editor.renderWhitespace": "selection",
+    
+    // حجم التاب
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    
+    // إظهار أرقام الأسطر
+    "editor.lineNumbers": "on",
+    
+    // تفعيل Emmet لجميع الملفات
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    
+    // إعدادات Terminal
+    "terminal.integrated.fontSize": 14,
+    
+    // إعدادات الخط
+    "editor.fontFamily": "Fira Code, Consolas, monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    
+    // إعدادات الثيم
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "material-icon-theme"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو الاختصار لفتح Command Palette؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">Ctrl + P</li>
+                        <li data-correct="true">Ctrl + Shift + P</li>
+                        <li data-correct="false">Ctrl + Alt + P</li>
+                        <li data-correct="false">Ctrl + F</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. أي إضافة تُستخدم لتنسيق الكود تلقائياً؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">ESLint</li>
+                        <li data-correct="true">Prettier</li>
+                        <li data-correct="false">Live Server</li>
+                        <li data-correct="false">Auto Rename Tag</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. ما هو IntelliSense؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">نوع من الإضافات</li>
+                        <li data-correct="true">نظام الاقتراحات الذكية</li>
+                        <li data-correct="false">أداة تصحيح الأخطاء</li>
+                        <li data-correct="false">نوع من الثيمات</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. كيف تفتح Terminal في VS Code؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">Ctrl + T</li>
+                        <li data-correct="true">Ctrl + `</li>
+                        <li data-correct="false">Ctrl + Shift + T</li>
+                        <li data-correct="false">Alt + T</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter10.html" class="nav-button">
+                    ← الفصل السابق: Git و GitHub
+                </a>
+                <a href="chapter12.html" class="nav-button">
+                    الفصل التالي: Debugging - حل المشكلات →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

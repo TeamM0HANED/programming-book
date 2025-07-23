@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفصل السابع عشر: مصادر التعلم - كتاب البرمجة</title>
+    <meta name="description" content="أفضل المصادر لتعلم البرمجة والتطوير">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="../img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .resource-demo {
+            background: #f8f9fa;
+            border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .resource-demo h4 {
+            color: #17a2b8;
+            margin-bottom: 1rem;
+        }
+        
+        .learning-paths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .path-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .path-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .path-header.frontend { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .path-header.backend { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .path-header.fullstack { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .path-header.mobile { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .path-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .path-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .path-content {
+            padding: 1.5rem;
+        }
+        
+        .difficulty-tag {
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-tag.intermediate {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .difficulty-tag.advanced {
+            background: #dc3545;
+        }
+        
+        .resource-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-right: 4px solid #007bff;
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-title {
+            color: #007bff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resource-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .resource-name {
+            font-weight: 500;
+        }
+        
+        .resource-type {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+        
+        .resource-type.free {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .resource-type.paid {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .interactive-finder {
+            background: white;
+            border: 2px solid #fd7e14;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .finder-button {
+            background: #fd7e14;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .finder-button:hover {
+            background: #e8690b;
+        }
+        
+        .finder-output {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            min-height: 150px;
+            text-align: right;
+        }
+        
+        .study-plan {
+            background: #e8f4fd;
+            border-right: 4px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+        }
+        
+        .week-plan {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .week-title {
+            background: #007bff;
+            color: white;
+            padding: 0.5rem 1rem;
+            margin: -1rem -1rem 1rem -1rem;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+        }
+        
+        .communities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .community-card {
+            background: white;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        .community-card:hover {
+            border-color: #007bff;
+        }
+        
+        .community-logo {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .community-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .learning-paths,
+            .resource-categories,
+            .communities {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="../index.html">الرئيسية</a></li>
+                <li><a href="../toc.html">جدول المحتويات</a></li>
+                <li><a href="../about.html">عن الكتاب</a></li>
+                <li><a href="chapter17.html">الفصل الحالي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس الفصل -->
+    <section class="chapter-header">
+        <div class="container">
+            <div class="chapter-number">الفصل السابع عشر</div>
+            <h1 class="chapter-title">مصادر التعلم</h1>
+            <p class="chapter-description">أفضل المصادر لتعلم البرمجة والتطوير</p>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <section class="main-content">
+        <div class="container">
+            <!-- أهداف التعلم -->
+            <div class="learning-objectives fade-in">
+                <h3 class="objectives-title">🎯 أهداف التعلم</h3>
+                <ul class="custom-list">
+                    <li>اكتشاف أفضل مصادر التعلم المجانية والمدفوعة</li>
+                    <li>تعلم كيفية اختيار المسار التعليمي المناسب</li>
+                    <li>التعرف على المجتمعات والمنتديات المفيدة</li>
+                    <li>إنشاء خطة تعلم شخصية فعالة</li>
+                    <li>تعلم كيفية البقاء محدثاً مع التقنيات الجديدة</li>
+                    <li>بناء شبكة علاقات مهنية في مجال البرمجة</li>
+                </ul>
+            </div>
+
+            <!-- مقدمة مصادر التعلم -->
+            <div class="chapter-content fade-in">
+                <h2>📖 لماذا مصادر التعلم مهمة؟</h2>
+                
+                <div class="definition-box">
+                    <h3 class="definition-title">التعلم المستمر</h3>
+                    <p class="definition-text">
+                        في عالم البرمجة، التعلم لا يتوقف أبداً. التقنيات تتطور باستمرار!
+                    </p>
+                </div>
+
+                <p>
+                    البرمجة مجال يتطور بسرعة البرق! ما تعلمته اليوم قد يصبح قديماً خلال سنوات قليلة. 
+                    لذلك، معرفة أفضل مصادر التعلم أهم من حفظ كود معين.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>حقيقة مهمة:</strong> أفضل المطورين في العالم يقضون 20% من وقتهم في التعلم والقراءة!
+                </div>
+
+                <h3>أنواع مصادر التعلم:</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📚 مصادر رسمية</h4>
+                        <ul>
+                            <li>الوثائق الرسمية للغات</li>
+                            <li>كورسات الجامعات</li>
+                            <li>شهادات معتمدة</li>
+                            <li>كتب المؤلفين المشهورين</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 مصادر المجتمع</h4>
+                        <ul>
+                            <li>مقالات المطورين</li>
+                            <li>فيديوهات YouTube</li>
+                            <li>منتديات النقاش</li>
+                            <li>مشاريع مفتوحة المصدر</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مسارات التعلم -->
+            <div class="chapter-content fade-in">
+                <h2>🛣️ مسارات التعلم</h2>
+
+                <div class="learning-paths">
+                    <div class="path-card">
+                        <div class="path-header frontend">
+                            <div class="path-icon">🎨</div>
+                            <div class="path-title">Front-End Developer</div>
+                            <p>تطوير واجهات المستخدم</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="difficulty-tag">مبتدئ</div>
+                            <h5>المهارات المطلوبة:</h5>
+                            <ul>
+                                <li>HTML & CSS</li>
+                                <li>JavaScript</li>
+                                <li>React أو Vue.js</li>
+                                <li>Responsive Design</li>
+                                <li>Git & GitHub</li>
+                            </ul>
+                            <h5>مدة التعلم:</h5>
+                            <p>6-12 شهر للأساسيات</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header backend">
+                            <div class="path-icon">⚙️</div>
+                            <div class="path-title">Back-End Developer</div>
+                            <p>تطوير منطق الخادم</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="difficulty-tag intermediate">متوسط</div>
+                            <h5>المهارات المطلوبة:</h5>
+                            <ul>
+                                <li>Python أو Node.js</li>
+                                <li>قواعد البيانات</li>
+                                <li>APIs & REST</li>
+                                <li>أمان التطبيقات</li>
+                                <li>Cloud Services</li>
+                            </ul>
+                            <h5>مدة التعلم:</h5>
+                            <p>8-15 شهر للإتقان</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header fullstack">
+                            <div class="path-icon">🔄</div>
+                            <div class="path-title">Full-Stack Developer</div>
+                            <p>تطوير شامل</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="difficulty-tag advanced">متقدم</div>
+                            <h5>المهارات المطلوبة:</h5>
+                            <ul>
+                                <li>Front-End + Back-End</li>
+                                <li>DevOps أساسيات</li>
+                                <li>إدارة المشاريع</li>
+                                <li>UI/UX أساسيات</li>
+                                <li>Testing</li>
+                            </ul>
+                            <h5>مدة التعلم:</h5>
+                            <p>12-24 شهر للاحتراف</p>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-header mobile">
+                            <div class="path-icon">📱</div>
+                            <div class="path-title">Mobile Developer</div>
+                            <p>تطوير تطبيقات الهاتف</p>
+                        </div>
+                        <div class="path-content">
+                            <div class="difficulty-tag intermediate">متوسط</div>
+                            <h5>المهارات المطلوبة:</h5>
+                            <ul>
+                                <li>React Native أو Flutter</li>
+                                <li>Native Development</li>
+                                <li>Mobile UI/UX</li>
+                                <li>App Store Optimization</li>
+                                <li>Push Notifications</li>
+                            </ul>
+                            <h5>مدة التعلم:</h5>
+                            <p>10-18 شهر للاحتراف</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مصادر التعلم بالفئات -->
+            <div class="chapter-content fade-in">
+                <h2>📚 مصادر التعلم بالفئات</h2>
+
+                <div class="resource-categories">
+                    <div class="category-card">
+                        <div class="category-icon">🎥</div>
+                        <h4 class="category-title">منصات الفيديو</h4>
+                        <ul class="resource-list">
+                            <li>
+                                <span class="resource-name">YouTube</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Udemy</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Coursera</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">edX</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Pluralsight</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">💻</div>
+                        <h4 class="category-title">منصات تفاعلية</h4>
+                        <ul class="resource-list">
+                            <li>
+                                <span class="resource-name">freeCodeCamp</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Codecademy</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">LeetCode</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">HackerRank</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Codewars</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">📖</div>
+                        <h4 class="category-title">الوثائق والمراجع</h4>
+                        <ul class="resource-list">
+                            <li>
+                                <span class="resource-name">MDN Web Docs</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">W3Schools</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Stack Overflow</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">GitHub</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">Dev.to</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">🇸🇦</div>
+                        <h4 class="category-title">مصادر عربية</h4>
+                        <ul class="resource-list">
+                            <li>
+                                <span class="resource-name">أكاديمية حسوب</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">رواق</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">إدراك</span>
+                                <span class="resource-type free">مجاني</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">معهد خبراء البرمجة</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                            <li>
+                                <span class="resource-name">منصة برمج</span>
+                                <span class="resource-type paid">مدفوع</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مثال تفاعلي -->
+            <div class="chapter-content fade-in">
+                <h2>🎮 مثال تفاعلي: مكتشف المصادر</h2>
+
+                <div class="interactive-finder">
+                    <h3>🔍 اكتشف المصادر المناسبة لك</h3>
+                    <p>اختر مستواك واهتمامك للحصول على توصيات مخصصة:</p>
+                    
+                    <button class="finder-button" onclick="findResources('beginner', 'web')">مبتدئ - تطوير ويب</button>
+                    <button class="finder-button" onclick="findResources('intermediate', 'mobile')">متوسط - تطبيقات هاتف</button>
+                    <button class="finder-button" onclick="findResources('advanced', 'ai')">متقدم - ذكاء اصطناعي</button>
+                    <button class="finder-button" onclick="showStudyPlan()">خطة دراسية</button>
+                    
+                    <div class="finder-output" id="resourceOutput">اختر مستواك ومجال اهتمامك للحصول على توصيات مخصصة...</div>
+                </div>
+            </div>
+
+            <!-- خطة الدراسة -->
+            <div class="chapter-content fade-in">
+                <h2>📅 كيفية إنشاء خطة دراسية</h2>
+
+                <div class="study-plan">
+                    <h3>📋 مثال: خطة تعلم Front-End (12 أسبوع)</h3>
+                    
+                    <div class="week-plan">
+                        <div class="week-title">الأسابيع 1-3: أساسيات HTML & CSS</div>
+                        <ul>
+                            <li><strong>الأسبوع 1:</strong> HTML الأساسي، العناصر، الهيكل</li>
+                            <li><strong>الأسبوع 2:</strong> CSS الأساسي، التنسيق، الألوان</li>
+                            <li><strong>الأسبوع 3:</strong> Flexbox, Grid, Responsive Design</li>
+                            <li><strong>مشروع:</strong> صفحة شخصية بسيطة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="week-plan">
+                        <div class="week-title">الأسابيع 4-6: JavaScript الأساسي</div>
+                        <ul>
+                            <li><strong>الأسبوع 4:</strong> المتغيرات، الدوال، الشروط</li>
+                            <li><strong>الأسبوع 5:</strong> DOM Manipulation، Events</li>
+                            <li><strong>الأسبوع 6:</strong> Arrays، Objects، Loops</li>
+                            <li><strong>مشروع:</strong> آلة حاسبة تفاعلية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="week-plan">
+                        <div class="week-title">الأسابيع 7-9: JavaScript المتقدم</div>
+                        <ul>
+                            <li><strong>الأسبوع 7:</strong> Async/Await، Fetch API</li>
+                            <li><strong>الأسبوع 8:</strong> ES6+، Modules</li>
+                            <li><strong>الأسبوع 9:</strong> Local Storage، JSON</li>
+                            <li><strong>مشروع:</strong> تطبيق طقس بـ API</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="week-plan">
+                        <div class="week-title">الأسابيع 10-12: React الأساسي</div>
+                        <ul>
+                            <li><strong>الأسبوع 10:</strong> Components، Props، State</li>
+                            <li><strong>الأسبوع 11:</strong> Hooks، useEffect</li>
+                            <li><strong>الأسبوع 12:</strong> Routing، State Management</li>
+                            <li><strong>مشروع نهائي:</strong> تطبيق إدارة مهام</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="resource-demo">
+                    <h4>نصائح لخطة دراسية ناجحة:</h4>
+                    <ul>
+                        <li><strong>كن واقعياً:</strong> لا تضع أهدافاً مستحيلة</li>
+                        <li><strong>التدرج:</strong> ابدأ بالأساسيات ثم تقدم</li>
+                        <li><strong>الممارسة:</strong> اكتب كود كل يوم</li>
+                        <li><strong>المشاريع:</strong> طبق ما تعلمته في مشاريع</li>
+                        <li><strong>المراجعة:</strong> راجع ما تعلمته أسبوعياً</li>
+                        <li><strong>المرونة:</strong> عدل الخطة حسب تقدمك</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- المجتمعات -->
+            <div class="chapter-content fade-in">
+                <h2>👥 المجتمعات والمنتديات</h2>
+
+                <div class="communities">
+                    <div class="community-card">
+                        <div class="community-logo">💬</div>
+                        <div class="community-name">Stack Overflow</div>
+                        <p>أسئلة وأجوبة برمجية</p>
+                        <p><strong>عالمي</strong></p>
+                    </div>
+                    
+                    <div class="community-card">
+                        <div class="community-logo">🐙</div>
+                        <div class="community-name">GitHub</div>
+                        <p>مشاريع مفتوحة المصدر</p>
+                        <p><strong>عالمي</strong></p>
+                    </div>
+                    
+                    <div class="community-card">
+                        <div class="community-logo">💼</div>
+                        <div class="community-name">LinkedIn</div>
+                        <p>شبكة مهنية</p>
+                        <p><strong>عالمي</strong></p>
+                    </div>
+                    
+                    <div class="community-card">
+                        <div class="community-logo">🗨️</div>
+                        <div class="community-name">Discord</div>
+                        <p>مجتمعات المطورين</p>
+                        <p><strong>عالمي</strong></p>
+                    </div>
+                    
+                    <div class="community-card">
+                        <div class="community-logo">🇸🇦</div>
+                        <div class="community-name">مجتمع حسوب</div>
+                        <p>مجتمع عربي للمطورين</p>
+                        <p><strong>عربي</strong></p>
+                    </div>
+                    
+                    <div class="community-card">
+                        <div class="community-logo">📱</div>
+                        <div class="community-name">Telegram</div>
+                        <p>مجموعات البرمجة</p>
+                        <p><strong>عربي/عالمي</strong></p>
+                    </div>
+                </div>
+
+                <div class="resource-demo">
+                    <h4>كيفية الاستفادة من المجتمعات:</h4>
+                    <ul>
+                        <li><strong>اطرح أسئلة ذكية:</strong> ابحث أولاً، ثم اسأل</li>
+                        <li><strong>ساعد الآخرين:</strong> أجب على أسئلة المبتدئين</li>
+                        <li><strong>شارك مشاريعك:</strong> احصل على تغذية راجعة</li>
+                        <li><strong>تابع الخبراء:</strong> تعلم من تجاربهم</li>
+                        <li><strong>شارك في المناقشات:</strong> وسع شبكة علاقاتك</li>
+                        <li><strong>احترم القوانين:</strong> كل مجتمع له قواعده</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- البقاء محدثاً -->
+            <div class="chapter-content fade-in">
+                <h2>🔄 كيف تبقى محدثاً؟</h2>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📰 مصادر الأخبار التقنية</h4>
+                        <ul>
+                            <li><strong>Hacker News:</strong> أخبار التقنية</li>
+                            <li><strong>TechCrunch:</strong> أخبار الشركات</li>
+                            <li><strong>Dev.to:</strong> مقالات المطورين</li>
+                            <li><strong>Medium:</strong> مقالات متنوعة</li>
+                            <li><strong>Reddit:</strong> مناقشات المجتمع</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📧 النشرات البريدية</h4>
+                        <ul>
+                            <li><strong>JavaScript Weekly:</strong> أخبار JS</li>
+                            <li><strong>CSS-Tricks:</strong> نصائح CSS</li>
+                            <li><strong>Smashing Magazine:</strong> تصميم وتطوير</li>
+                            <li><strong>A List Apart:</strong> معايير الويب</li>
+                            <li><strong>Frontend Focus:</strong> تطوير الواجهات</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="resource-demo">
+                    <h4>استراتيجية التعلم المستمر:</h4>
+                    <ol>
+                        <li><strong>خصص وقت يومي:</strong> 30 دقيقة للقراءة</li>
+                        <li><strong>اتبع خبراء المجال:</strong> على Twitter وLinkedIn</li>
+                        <li><strong>جرب تقنيات جديدة:</strong> في مشاريع صغيرة</li>
+                        <li><strong>احضر المؤتمرات:</strong> أونلاين أو حضورياً</li>
+                        <li><strong>اقرأ الكود:</strong> من مشاريع مفتوحة المصدر</li>
+                        <li><strong>علم الآخرين:</strong> أفضل طريقة للتعلم</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- اختبار سريع -->
+            <div class="quiz-section fade-in">
+                <h3 class="quiz-title">🧠 اختبر فهمك</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">1. ما هو أفضل مصدر للوثائق الرسمية لـ JavaScript؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">W3Schools</li>
+                        <li data-correct="true">MDN Web Docs</li>
+                        <li data-correct="false">Stack Overflow</li>
+                        <li data-correct="false">YouTube</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">2. كم من الوقت يجب تخصيصه للتعلم يومياً؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">5 دقائق</li>
+                        <li data-correct="true">30 دقيقة على الأقل</li>
+                        <li data-correct="false">5 ساعات</li>
+                        <li data-correct="false">لا يهم الوقت</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">3. أي منصة مناسبة للتدرب على حل المشاكل البرمجية؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">YouTube</li>
+                        <li data-correct="true">LeetCode</li>
+                        <li data-correct="false">Instagram</li>
+                        <li data-correct="false">Facebook</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">4. ما هي أفضل طريقة للبقاء محدثاً مع التقنيات الجديدة؟</p>
+                    <ul class="quiz-options">
+                        <li data-correct="false">تجاهل التحديثات</li>
+                        <li data-correct="true">متابعة النشرات البريدية والمجتمعات</li>
+                        <li data-correct="false">الاعتماد على مصدر واحد فقط</li>
+                        <li data-correct="false">التعلم مرة واحدة فقط</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- التنقل بين الفصول -->
+            <div class="chapter-navigation">
+                <a href="chapter16.html" class="nav-button">
+                    ← الفصل السابق: استضافة موقعك
+                </a>
+                <a href="chapter18.html" class="nav-button">
+                    الفصل التالي: مشاريع للمبتدئين →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/interactive.js"></script>
+    <script>
+        // مكتشف المصادر
+        function findResources(level, field) {
+            const output = document.getElementById('resourceOutput');
+            
+            const resources = {
+                'beginner-web': {
+                    title: 'مصادر للمبتدئين في تطوير الويب',
+                    resources: [
+                        '📚 freeCodeCamp - مجاني وشامل',
+                        '🎥 قناة Traversy Media على YouTube',
+                        '📖 MDN Web Docs للمراجع',
+                        '💻 Codecademy للتدريب التفاعلي',
+                        '🇪🇬 أكاديمية حسوب بالعربية'
+                    ],
+                    plan: 'ابدأ بـ HTML/CSS ثم JavaScript ثم React'
+                },
+                'intermediate-mobile': {
+                    title: 'مصادر للمستوى المتوسط في تطبيقات الهاتف',
+                    resources: [
+                        '📱 React Native Documentation',
+                        '🎯 Flutter.dev للتعلم',
+                        '🎥 قناة The Net Ninja',
+                        '💡 Expo.dev للبدء السريع',
+                        '📚 كورسات Udemy المتخصصة'
+                    ],
+                    plan: 'تعلم React أولاً ثم React Native أو ابدأ بـ Flutter'
+                },
+                'advanced-ai': {
+                    title: 'مصادر للمستوى المتقدم في الذكاء الاصطناعي',
+                    resources: [
+                        '🧠 Coursera - Machine Learning by Andrew Ng',
+                        '🐍 Kaggle Learn للتدريب العملي',
+                        '📊 Fast.ai للتعلم العميق',
+                        '📚 Papers With Code للأبحاث',
+                        '💻 Google Colab للتجريب'
+                    ],
+                    plan: 'أتقن Python والرياضيات أولاً ثم ادخل في ML'
+                }
+            };
+            
+            const key = `${level}-${field}`;
+            const data = resources[key];
+            
+            if (data) {
+                output.textContent = `🎯 ${data.title}:
+
+📋 المصادر الموصى بها:
+${data.resources.map(resource => `• ${resource}`).join('\n')}
+
+🗺️ خطة التعلم:
+${data.plan}
+
+⏰ نصائح إضافية:
+• خصص ساعة يومياً للتعلم
+• طبق ما تتعلمه في مشاريع صغيرة
+• انضم لمجتمعات المطورين
+• لا تتردد في طرح الأسئلة
+• احتفظ بسجل لتقدمك`;
+            } else {
+                output.textContent = 'عذراً، لم أجد مصادر لهذا التخصص بعد. جرب خيارات أخرى!';
+            }
+        }
+        
+        function showStudyPlan() {
+            const output = document.getElementById('resourceOutput');
+            output.textContent = `📅 كيفية إنشاء خطة دراسية فعالة:
+
+🎯 1. حدد هدفك:
+• ما المجال الذي تريد التخصص فيه؟
+• ما المستوى الذي تريد الوصول إليه؟
+• كم من الوقت لديك؟
+
+📊 2. قيم مستواك الحالي:
+• ما المهارات التي تملكها؟
+• ما نقاط القوة والضعف؟
+• اعمل اختبار تقييم أولي
+
+📋 3. قسم التعلم لمراحل:
+• مرحلة الأساسيات (1-3 أشهر)
+• مرحلة التطبيق (3-6 أشهر)
+• مرحلة التخصص (6+ أشهر)
+
+⏰ 4. ضع جدول زمني:
+• كم ساعة يومياً؟
+• أي أيام الأسبوع؟
+• متى المراجعة؟
+
+🎯 5. حدد معالم النجاح:
+• مشاريع تطبيقية
+• اختبارات دورية
+• مراجعة أسبوعية للتقدم
+
+🔄 6. كن مرناً:
+• عدل الخطة حسب تقدمك
+• لا تتردد في تغيير المسار
+• الأهم هو الاستمرارية`;
+        }
+
+        // إضافة تفاعل للاختبار
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const siblings = this.parentNode.querySelectorAll('li');
+                
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('correct', 'wrong');
+                });
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    siblings.forEach(sibling => {
+                        if (sibling.getAttribute('data-correct') === 'true') {
+                            sibling.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
