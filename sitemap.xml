@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- الصفحة الرئيسية -->
+    <url>
+        <loc>https://programming-book.example.com/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- جدول المحتويات -->
+    <url>
+        <loc>https://programming-book.example.com/toc.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- عن الكتاب -->
+    <url>
+        <loc>https://programming-book.example.com/about.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- الفصل الأول: مقدمة في البرمجة -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter1.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثاني: لغات البرمجة وأنواعها -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter2.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثالث: كيف تعمل الحواسيب؟ -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter3.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الرابع: HTML -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter4.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الخامس: CSS -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter5.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل السادس: JavaScript -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter6.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل السابع: مشروع ويب بسيط -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter7.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثامن: Python -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter8.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل التاسع: قواعد البيانات -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter9.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل العاشر: Git و GitHub -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter10.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الحادي عشر: VS Code -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter11.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثاني عشر: Debugging -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter12.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثالث عشر: Back-End Basics -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter13.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الرابع عشر: PHP أو Flask -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter14.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الخامس عشر: تطوير التطبيقات -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter15.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل السادس عشر: استضافة موقعك -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter16.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل السابع عشر: مصادر التعلم -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter17.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الثامن عشر: مشاريع للمبتدئين -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter18.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل التاسع عشر: كيف تتعلم ذاتياً؟ -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter19.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل العشرون: طريقك إلى الوظيفة -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter20.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- الفصل الحادي والعشرون: الخاتمة -->
+    <url>
+        <loc>https://programming-book.example.com/chapters/chapter21.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- صفحة عدم الاتصال -->
+    <url>
+        <loc>https://programming-book.example.com/offline.html</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+</urlset>

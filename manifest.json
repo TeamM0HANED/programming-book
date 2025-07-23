@@ -1,0 +1,97 @@
+{
+  "name": "كتاب البرمجة - دليلك الشامل لتعلم البرمجة والويب",
+  "short_name": "كتاب البرمجة",
+  "description": "كتاب شامل لتعلم البرمجة والويب من الصفر حتى الاحتراف باللغة العربية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "books", "programming"],
+  "icons": [
+    {
+      "src": "img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "الصفحة الرئيسية على سطح المكتب"
+    },
+    {
+      "src": "assets/screenshots/mobile-toc.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "جدول المحتويات على الجوال"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "جدول المحتويات",
+      "short_name": "المحتويات",
+      "description": "عرض جميع فصول الكتاب",
+      "url": "/toc.html",
+      "icons": [
+        {
+          "src": "assets/icons/toc-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "ابدأ التعلم",
+      "short_name": "ابدأ",
+      "description": "انتقل مباشرة للفصل الأول",
+      "url": "/chapters/chapter1.html",
+      "icons": [
+        {
+          "src": "assets/icons/start-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "عن الكتاب",
+      "short_name": "عن الكتاب",
+      "description": "معلومات عن الكتاب والمؤلف",
+      "url": "/about.html",
+      "icons": [
+        {
+          "src": "assets/icons/about-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://programming-book.example.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "existing-client-navigate"
+}

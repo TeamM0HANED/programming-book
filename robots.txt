@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+
+# السماح لجميع محركات البحث بفهرسة الموقع
+Allow: /index.html
+Allow: /toc.html
+Allow: /about.html
+Allow: /chapters/
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+# منع فهرسة ملفات النظام
+Disallow: /sw.js
+Disallow: /manifest.json
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /node_modules/
+
+# السماح بفهرسة ملفات CSS و JS للمعاينة
+Allow: /css/*.css
+Allow: /js/*.js
+
+# خريطة الموقع
+Sitemap: https://programming-book.example.com/sitemap.xml
+
+# تعليمات خاصة لمحركات البحث العربية
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# تأخير الزحف لتجنب الحمل الزائد
+Crawl-delay: 1
+
+# معلومات إضافية
+# هذا موقع تعليمي مجاني لتعلم البرمجة باللغة العربية
+# جميع المحتويات متاحة للفهرسة والمشاركة

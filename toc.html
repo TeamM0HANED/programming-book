@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول المحتويات - كتاب البرمجة</title>
+    <meta name="description" content="جدول محتويات كتاب البرمجة - 21 فصل شامل لتعلم البرمجة والويب">
+
+    <!-- الأيقونة -->
+    <link rel="icon" href="img/79e9c955-e6c8-4357-8e0e-adc41899ca84 (1).png" type="image/png">
+
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- خطوط Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .toc-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .toc-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .toc-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .progress-section {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .overall-progress {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .progress-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .chapter-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .chapter-card:hover::before {
+            left: 100%;
+        }
+        
+        .chapter-status {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .status-not-started {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .status-in-progress {
+            background: #ffc107;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background: #28a745;
+            color: white;
+        }
+        
+        .chapter-difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .difficulty-beginner {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .chapter-tags {
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin: 0.2rem;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .toc-title {
+                font-size: 2rem;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <h1>📚 كتاب البرمجة</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="toc.html">جدول المحتويات</a></li>
+                <li><a href="about.html">عن الكتاب</a></li>
+                <li><a href="chapters/chapter1.html">ابدأ التعلم</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- رأس جدول المحتويات -->
+    <section class="toc-header">
+        <div class="container">
+            <h1 class="toc-title">📖 جدول المحتويات</h1>
+            <p class="toc-subtitle">21 فصل شامل لتعلم البرمجة والويب من الصفر حتى الاحتراف</p>
+        </div>
+    </section>
+
+
+
+    <!-- قسم الفلترة -->
+    <section class="main-content">
+        <div class="container">
+            <div class="filter-section">
+                <h3 class="text-center">فلترة الفصول</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">جميع الفصول</button>
+                    <button class="filter-btn" data-filter="beginner">مبتدئ</button>
+                    <button class="filter-btn" data-filter="intermediate">متوسط</button>
+                    <button class="filter-btn" data-filter="advanced">متقدم</button>
+                    <button class="filter-btn" data-filter="web">تطوير الويب</button>
+                    <button class="filter-btn" data-filter="programming">البرمجة</button>
+                </div>
+            </div>
+
+
+
+            <!-- شبكة الفصول -->
+            <div class="toc-grid" id="chaptersGrid">
+                <!-- الفصل 1 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-number">1</div>
+                    <h3 class="chapter-title">مقدمة في البرمجة</h3>
+                    <p class="chapter-description">تعريف البرمجة، مجالاتها، وأهميتها في العصر الحديث</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">أساسيات</span>
+                        <span class="tag">مفاهيم</span>
+                    </div>
+                    <a href="chapters/chapter1.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 2 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-number">2</div>
+                    <h3 class="chapter-title">لغات البرمجة وأنواعها</h3>
+                    <p class="chapter-description">تصنيفات لغات البرمجة واستخدامات كل نوع</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">لغات البرمجة</span>
+                        <span class="tag">تصنيفات</span>
+                    </div>
+                    <a href="chapters/chapter2.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 3 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-status status-not-started">3</div>
+                    <div class="chapter-number">3</div>
+                    <h3 class="chapter-title">كيف تعمل الحواسيب؟</h3>
+                    <p class="chapter-description">فهم الهاردوير والسوفتوير وكيفية تفاعلهما</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">هاردوير</span>
+                        <span class="tag">سوفتوير</span>
+                    </div>
+                    <a href="chapters/chapter3.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 4 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="web">
+                    <div class="chapter-status status-not-started">4</div>
+                    <div class="chapter-number">4</div>
+                    <h3 class="chapter-title">HTML - هيكل الويب</h3>
+                    <p class="chapter-description">تعلم HTML من الأساسيات حتى المشاريع العملية</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">ويب</span>
+                        <span class="tag">مشاريع</span>
+                    </div>
+                    <a href="chapters/chapter4.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 5 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="web">
+                    <div class="chapter-status status-completed">5</div>
+                    <div class="chapter-number">5</div>
+                    <h3 class="chapter-title">CSS - تنسيق وتصميم</h3>
+                    <p class="chapter-description">إتقان CSS لتصميم مواقع جميلة ومتجاوبة</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">CSS</span>
+                        <span class="tag">تصميم</span>
+                        <span class="tag">متجاوب</span>
+                    </div>
+                    <a href="chapters/chapter5.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 6 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="web">
+                    <div class="chapter-status status-completed">6</div>
+                    <div class="chapter-number">6</div>
+                    <h3 class="chapter-title">JavaScript - التفاعل</h3>
+                    <p class="chapter-description">أساسيات JavaScript وإضافة التفاعل للمواقع</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">تفاعل</span>
+                        <span class="tag">برمجة</span>
+                    </div>
+                    <a href="chapters/chapter6.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 7 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="web">
+                    <div class="chapter-status status-completed">7</div>
+                    <div class="chapter-number">7</div>
+                    <h3 class="chapter-title">مشروع ويب بسيط</h3>
+                    <p class="chapter-description">بناء موقع ويب كامل باستخدام HTML, CSS, JavaScript</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">مشروع</span>
+                        <span class="tag">تطبيقي</span>
+                        <span class="tag">ويب</span>
+                    </div>
+                    <a href="chapters/chapter7.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 8 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-status status-completed">8</div>
+                    <div class="chapter-number">8</div>
+                    <h3 class="chapter-title">Python - البرمجة البسيطة</h3>
+                    <p class="chapter-description">تعلم Python من الصفر مع أمثلة عملية</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">أساسيات</span>
+                        <span class="tag">أمثلة</span>
+                    </div>
+                    <a href="chapters/chapter8.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 9 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="programming">
+                    <div class="chapter-status status-completed">9</div>
+                    <div class="chapter-number">9</div>
+                    <h3 class="chapter-title">قواعد البيانات</h3>
+                    <p class="chapter-description">SQL ومفاهيم قواعد البيانات الأساسية</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">SQL</span>
+                        <span class="tag">قواعد البيانات</span>
+                        <span class="tag">تخزين</span>
+                    </div>
+                    <a href="chapters/chapter9.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 10 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-number">10</div>
+                    <h3 class="chapter-title">Git و GitHub</h3>
+                    <p class="chapter-description">التحكم بالإصدار وإدارة المشاريع</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">إصدار</span>
+                    </div>
+                    <a href="chapters/chapter10.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 11 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="programming">
+                    <div class="chapter-status status-not-started">11</div>
+                    <div class="chapter-number">11</div>
+                    <h3 class="chapter-title">مشروعك الأول</h3>
+                    <p class="chapter-description">بناء تطبيق ويب كامل خطوة بخطوة</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">مشروع</span>
+                        <span class="tag">تطبيق ويب</span>
+                        <span class="tag">عملي</span>
+                    </div>
+                    <a href="chapters/chapter11.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 12 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="programming">
+                    <div class="chapter-status status-not-started">12</div>
+                    <div class="chapter-number">12</div>
+                    <h3 class="chapter-title">قواعد البيانات</h3>
+                    <p class="chapter-description">تخزين واسترجاع البيانات</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">قواعد البيانات</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">تخزين</span>
+                    </div>
+                    <a href="chapters/chapter12.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 13 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="web">
+                    <div class="chapter-status status-not-started">13</div>
+                    <div class="chapter-number">13</div>
+                    <h3 class="chapter-title">APIs والتكامل</h3>
+                    <p class="chapter-description">التواصل بين التطبيقات</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">APIs</span>
+                        <span class="tag">تكامل</span>
+                        <span class="tag">REST</span>
+                    </div>
+                    <a href="chapters/chapter13.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 14 -->
+                <div class="chapter-card fade-in" data-difficulty="advanced" data-category="web">
+                    <div class="chapter-status status-not-started">14</div>
+                    <div class="chapter-number">14</div>
+                    <h3 class="chapter-title">الأمان في البرمجة</h3>
+                    <p class="chapter-description">حماية تطبيقاتك من الثغرات</p>
+                    <span class="chapter-difficulty difficulty-advanced">متقدم</span>
+                    <div class="chapter-tags">
+                        <span class="tag">أمان</span>
+                        <span class="tag">حماية</span>
+                        <span class="tag">ثغرات</span>
+                    </div>
+                    <a href="chapters/chapter14.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 15 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="web">
+                    <div class="chapter-status status-not-started">15</div>
+                    <div class="chapter-number">15</div>
+                    <h3 class="chapter-title">اختبار البرمجيات</h3>
+                    <p class="chapter-description">ضمان جودة الكود</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">اختبار</span>
+                        <span class="tag">جودة</span>
+                        <span class="tag">Testing</span>
+                    </div>
+                    <a href="chapters/chapter15.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 16 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-status status-not-started">16</div>
+                    <div class="chapter-number">16</div>
+                    <h3 class="chapter-title">أدوات التطوير</h3>
+                    <p class="chapter-description">أدوات ومحررات لتسهيل البرمجة</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">أدوات</span>
+                        <span class="tag">محررات</span>
+                        <span class="tag">VS Code</span>
+                    </div>
+                    <a href="chapters/chapter16.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 17 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-status status-not-started">17</div>
+                    <div class="chapter-number">17</div>
+                    <h3 class="chapter-title">مصادر التعلم</h3>
+                    <p class="chapter-description">أفضل المواقع والكورسات لتطوير مهاراتك</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">مصادر</span>
+                        <span class="tag">كورسات</span>
+                        <span class="tag">تعلم</span>
+                    </div>
+                    <a href="chapters/chapter17.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 18 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="programming">
+                    <div class="chapter-status status-not-started">18</div>
+                    <div class="chapter-number">18</div>
+                    <h3 class="chapter-title">مشاريع للمبتدئين</h3>
+                    <p class="chapter-description">أفكار مشاريع عملية لبناء خبرتك</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">مشاريع</span>
+                        <span class="tag">أفكار</span>
+                        <span class="tag">عملي</span>
+                    </div>
+                    <a href="chapters/chapter18.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 19 -->
+                <div class="chapter-card fade-in" data-difficulty="beginner" data-category="programming">
+                    <div class="chapter-status status-not-started">19</div>
+                    <div class="chapter-number">19</div>
+                    <h3 class="chapter-title">كيف تتعلم ذاتياً؟</h3>
+                    <p class="chapter-description">نصائح وخطط للتعلم الذاتي الفعال</p>
+                    <span class="chapter-difficulty difficulty-beginner">مبتدئ</span>
+                    <div class="chapter-tags">
+                        <span class="tag">تعلم ذاتي</span>
+                        <span class="tag">نصائح</span>
+                        <span class="tag">خطط</span>
+                    </div>
+                    <a href="chapters/chapter19.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 20 -->
+                <div class="chapter-card fade-in" data-difficulty="advanced" data-category="programming">
+                    <div class="chapter-number">20</div>
+                    <h3 class="chapter-title">طريقك إلى الوظيفة</h3>
+                    <p class="chapter-description">بناء البورتفوليو والاستعداد للمقابلات</p>
+                    <span class="chapter-difficulty difficulty-advanced">متقدم</span>
+                    <div class="chapter-tags">
+                        <span class="tag">وظيفة</span>
+                        <span class="tag">بورتفوليو</span>
+                        <span class="tag">مقابلات</span>
+                    </div>
+                    <a href="chapters/chapter20.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+
+                <!-- الفصل 21 -->
+                <div class="chapter-card fade-in" data-difficulty="intermediate" data-category="programming">
+                    <div class="chapter-status status-not-started">21</div>
+                    <div class="chapter-number">21</div>
+                    <h3 class="chapter-title">مستقبل البرمجة</h3>
+                    <p class="chapter-description">نظرة على مستقبل البرمجة والتقنيات الناشئة</p>
+                    <span class="chapter-difficulty difficulty-intermediate">متوسط</span>
+                    <div class="chapter-tags">
+                        <span class="tag">مستقبل</span>
+                        <span class="tag">تقنيات ناشئة</span>
+                        <span class="tag">ذكاء اصطناعي</span>
+                    </div>
+                    <a href="chapters/chapter21.html" class="btn btn-primary mt-2">ابدأ القراءة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 كتاب البرمجة. صنع بواسطة Team_Mohaned - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ملفات JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+
+        // فلترة الفصول
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة الفئة النشطة من جميع الأزرار
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                const chapters = document.querySelectorAll('.chapter-card');
+
+                chapters.forEach(chapter => {
+                    if (filter === 'all') {
+                        chapter.style.display = 'block';
+                    } else {
+                        const difficulty = chapter.getAttribute('data-difficulty');
+                        const category = chapter.getAttribute('data-category');
+
+                        if (difficulty === filter || category === filter) {
+                            chapter.style.display = 'block';
+                        } else {
+                            chapter.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
